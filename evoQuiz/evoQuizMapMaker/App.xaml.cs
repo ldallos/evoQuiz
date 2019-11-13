@@ -1,4 +1,4 @@
-﻿using evoQuiz.ViewModel;
+﻿using evoQuizMapMaker.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace evoQuiz
+namespace evoQuizMapMaker
 {
     /// <summary>
     /// Interaction logic for App.xaml

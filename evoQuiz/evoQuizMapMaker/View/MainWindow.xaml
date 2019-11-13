@@ -1,0 +1,54 @@
+﻿<Window x:Class="evoQuizMapMaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:evoQuizMapMaker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Column="0">
+            <Grid>
+                <ItemsControl ItemsSource="{Binding Path=Tiles}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}"></UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
+                            Width="25" Height="25"
+                            Background="{Binding TileColor}"
+                            Command="{Binding SetTileCommand}"
+                            />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </ScrollViewer>
+      
+        
+        <StackPanel Background="LightBlue" Grid.Column="1">
+            <TextBlock>Map Width:</TextBlock>
+            <TextBox Text="{Binding Path=MapSizeX}"></TextBox>
+
+            <TextBlock>Map Height:</TextBlock>
+            <TextBox Text="{Binding Path=MapSizeY}"></TextBox>
+
+            <StackPanel Margin="0,20,0,0">
+                <RadioButton GroupName="Obs" Content="Wall" IsChecked="{Binding Path=IsWall}" />
+                <RadioButton GroupName="Obs" Content="Enemy" IsChecked="{Binding Path=IsEnemy}" />
+                <RadioButton GroupName="Obs" Content="Trap" IsChecked="{Binding Path=IsTrap}" />
+            </StackPanel>
+
+            <Button Margin="5,20,5,5" Height="20" Command="{Binding SaveMapCommand}">Save</Button>
+        </StackPanel>
+    </Grid>
+</Window>
