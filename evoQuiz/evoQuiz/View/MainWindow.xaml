@@ -8,7 +8,7 @@
         Title="evoQuiz" Height="450" Width="800">
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid>
+          
                 <ItemsControl ItemsSource="{Binding Path=Tiles}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -18,12 +18,12 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
-                            Width="50" Height="50"    
+                            Width="{Binding Path=TileWidth}" Height="{Binding Path=TileHeight}"    
                             />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </Grid>
+            
         </ScrollViewer>
     </Grid>
 </Window>

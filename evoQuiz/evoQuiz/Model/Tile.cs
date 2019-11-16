@@ -11,7 +11,7 @@ namespace evoQuiz.Model
         public int PositionX { get; set; }
         public int PositionY { get; set; }
         public Obstacle myObstacle { get; set; }
-
+        public int Size { get; set; }
         public Tile(int x, int y)
         {
             PositionX = x;

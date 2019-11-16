@@ -4,51 +4,87 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evoQuizMapMaker"
+        xmlns:l="clr-namespace:evoQuizMapMaker.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+    </Window.Resources>    
     
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Column="0">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New" Command="{Binding NewMapCommand}"/>
+                    <MenuItem Header="_Open" />
+                    <MenuItem Header="_Save" Command="{Binding SaveMapCommand}"/>
+                </MenuItem>
+            </Menu>
+
             <Grid>
-                <ItemsControl ItemsSource="{Binding Path=Tiles}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}"></UniformGrid>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
-                            Width="25" Height="25"
-                            Background="{Binding TileColor}"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Grid.Column="0">
+                    <Grid>
+                        <ItemsControl ItemsSource="{Binding Path=Tiles}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}" Height="{Binding Path=MapHeight}" Width="{Binding Path=MapWidth, Mode=OneWay}"></UniformGrid>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
+                            Width="{Binding Path=Size}" Height="{Binding Path=Size}"  
+                            Background="{Binding Path=TileColor}"
                             Command="{Binding SetTileCommand}"
                             />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </ScrollViewer>
+
+
+                <StackPanel Background="LightBlue" Grid.Column="1">
+                    <StackPanel Margin="0,20,0,0">
+                        <StackPanel.Resources>
+                            <l:EnumBooleanConverter x:Key="enumBooleanConverter" />
+                        </StackPanel.Resources>
+
+                        <RadioButton GroupName="Obs" Content="Wall" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=WallMode}" />
+                        <RadioButton GroupName="Obs" Content="Enemy" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=EnemyMode}" />
+                        <RadioButton GroupName="Obs" Content="Trap" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=TrapMode}" />
+                    </StackPanel>
+                </StackPanel>
             </Grid>
-        </ScrollViewer>
-      
-        
-        <StackPanel Background="LightBlue" Grid.Column="1">
-            <TextBlock>Map Width:</TextBlock>
-            <TextBox Text="{Binding Path=MapSizeX}"></TextBox>
+        </DockPanel>
 
-            <TextBlock>Map Height:</TextBlock>
-            <TextBox Text="{Binding Path=MapSizeY}"></TextBox>
+        <Grid Background="LightBlue" Width="200" Height="100" Visibility ="{Binding Path=NewMapControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}" >
+          
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Margin="0,20,0,0">
-                <RadioButton GroupName="Obs" Content="Wall" IsChecked="{Binding Path=IsWall}" />
-                <RadioButton GroupName="Obs" Content="Enemy" IsChecked="{Binding Path=IsEnemy}" />
-                <RadioButton GroupName="Obs" Content="Trap" IsChecked="{Binding Path=IsTrap}" />
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15">Create New Map</TextBlock>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                <TextBox Width="80" Text="{Binding Path=MapSizeX}"></TextBox>
+                <TextBlock FontSize="20" Padding="5" VerticalAlignment="Center">X</TextBlock>
+                <TextBox Width="80" Text="{Binding Path=MapSizeY}"></TextBox>
             </StackPanel>
 
-            <Button Margin="5,20,5,5" Height="20" Command="{Binding SaveMapCommand}">Save</Button>
-        </StackPanel>
-    </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                <Button Margin="0,5,20,5"  Width="50" Command="{Binding CreateMapCommand}" >Create</Button>
+                <Button Margin="20,5,0,5" Width="50" Command="{Binding CancelMapCommand}" >Cancel</Button>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>    
 </Window>

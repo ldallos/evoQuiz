@@ -11,6 +11,14 @@ namespace evoQuiz.Model
         public List<Tile> Tiles { get; set; } = new List<Tile>();
         public int SizeX { get; set; }
         public int SizeY { get; set; }
+
+        private int myTileSize;
+        public int TileSize
+        {
+            get { return myTileSize; }
+            set { myTileSize = value; Tiles.ForEach(x=>x.Size = TileSize); }
+        }
+
         public Map(int x, int y)
         {
             SizeX = x;
