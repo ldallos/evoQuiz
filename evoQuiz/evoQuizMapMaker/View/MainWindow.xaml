@@ -33,7 +33,7 @@
                         <ItemsControl ItemsSource="{Binding Path=Tiles}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}" Height="{Binding Path=MapHeight}" Width="{Binding Path=MapWidth, Mode=OneWay}"></UniformGrid>
+                                    <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}" Height="{Binding Path=MapHeight}" Width="{Binding Path=MapWidth}"></UniformGrid>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>

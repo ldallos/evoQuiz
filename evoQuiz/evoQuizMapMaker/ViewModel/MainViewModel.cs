@@ -17,8 +17,8 @@ namespace evoQuizMapMaker.ViewModel
     {
         public ObservableCollection<TileViewModel> Tiles { get; set; }
         public evoQuiz.Model.Map myMap { get; set; } = new evoQuiz.Model.Map();
-        public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; } }
-        public int MapSizeY { get { return myMap.SizeY; } set { myMap.SizeY = value; } }
+        public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
+        public int MapSizeY { get { return myMap.SizeY; } set { myMap.SizeY = value; OnPropertyChanged("MapSizeY"); } }
 
         private int _myMapWidth;
         public int MapWidth { get { return _myMapWidth; } set { _myMapWidth = value; OnPropertyChanged("MapWidth"); } }
@@ -63,14 +63,6 @@ namespace evoQuizMapMaker.ViewModel
             NewMapControlVisible = false;
             Tiles = new ObservableCollection<TileViewModel>();
 
-            //myMap = new evoQuiz.Model.Map(10, 10);
-            //myMap.TileSize = 20;
-            //Tiles.Clear();
-            //foreach (var tile in myMap.Tiles)
-            //{
-            //    Tiles.Add(new TileViewModel(tile));
-            //}
-
             SaveMapCommand = new RelayCommand(SaveMap);
             NewMapCommand = new RelayCommand(NewMap);
             CancelMapCommand = new RelayCommand(CancelMap);
@@ -94,7 +86,7 @@ namespace evoQuizMapMaker.ViewModel
 
         private void CreateMap()
         {
-            myMap = new evoQuiz.Model.Map(MapSizeX, MapSizeX);
+            myMap = new evoQuiz.Model.Map(MapSizeX, MapSizeY);
             myMap.TileSize = 20;
             MapWidth = MapSizeX * myMap.TileSize;
             MapHeight = MapSizeY * myMap.TileSize;
