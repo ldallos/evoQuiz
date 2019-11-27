@@ -8,21 +8,23 @@
         Title="evoQuiz" Height="450" Width="800">
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-          
+
+            <Grid>
                 <ItemsControl ItemsSource="{Binding Path=Tiles}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}"></UniformGrid>
+                            <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}" Height="{Binding Path=MapHeight}" Width="{Binding Path=MapWidth}"></UniformGrid>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
-                            Width="{Binding Path=TileWidth}" Height="{Binding Path=TileHeight}"    
+                            Width="{Binding Path=Size}" Height="{Binding Path=Size}"  
                             />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+            </Grid>
             
         </ScrollViewer>
     </Grid>

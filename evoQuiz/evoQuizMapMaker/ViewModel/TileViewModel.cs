@@ -16,12 +16,12 @@ namespace evoQuizMapMaker.ViewModel
         public evoQuiz.Model.Tile myTile { get; set; }
         public int PosX { get { return myTile.PositionX; } }
         public int PosY { get { return myTile.PositionY; } }
-        public int Size { get { return myTile.Size; } }
+        public int Size { get { return Parent.MapScale; } }
         public ICommand SetTileCommand { get; set; }
+        public MainViewModel Parent { get; set; }
 
         private Brush _myTileColor;
         public Brush TileColor { get { return _myTileColor; } set { _myTileColor = value; OnPropertyChanged("TileColor"); } }
-        public Helper.Mode myMode { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -40,7 +40,7 @@ namespace evoQuizMapMaker.ViewModel
 
         private void SetTile()
         {
-            switch (myMode)
+            switch (Parent.PlacementMode)
             {
                 case Helper.Mode.WallMode:
                     TileColor = Brushes.Black;

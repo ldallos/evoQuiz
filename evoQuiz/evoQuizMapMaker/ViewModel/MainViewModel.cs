@@ -26,23 +26,13 @@ namespace evoQuizMapMaker.ViewModel
         private int _myMapHeight;
         public int MapHeight { get { return _myMapHeight; } set { _myMapHeight = value; OnPropertyChanged("MapHeight"); } }
 
+        public int MapScale { get; set; } = 20;
+
         public ICommand SaveMapCommand { get; set; }
         public ICommand NewMapCommand { get; set; }
         public ICommand CancelMapCommand { get; set; }
         public ICommand CreateMapCommand { get; set; }
-
-        private Helper.Mode _myPlacementMode;
-        public Helper.Mode PlacementMode { get { return _myPlacementMode; }
-            set
-            {
-                _myPlacementMode = value;
-
-                foreach (var tileView in Tiles)
-                {
-                    tileView.myMode = PlacementMode;
-                }
-            }
-        }
+        public Helper.Mode PlacementMode { get; set; }
 
         private bool _myNewMapControlVisible;
         public bool NewMapControlVisible { get { return _myNewMapControlVisible; } set { _myNewMapControlVisible = value; OnPropertyChanged("NewMapControlVisible"); } }
@@ -86,14 +76,13 @@ namespace evoQuizMapMaker.ViewModel
 
         private void CreateMap()
         {
-            myMap = new evoQuiz.Model.Map(MapSizeX, MapSizeY);
-            myMap.TileSize = 20;
-            MapWidth = MapSizeX * myMap.TileSize;
-            MapHeight = MapSizeY * myMap.TileSize;
+            myMap = new evoQuiz.Model.Map(MapSizeX, MapSizeY);   
+            MapWidth = MapSizeX * MapScale;
+            MapHeight = MapSizeY * MapScale;
             Tiles.Clear();
             foreach (var tile in myMap.Tiles)
             {
-                Tiles.Add(new TileViewModel(tile));
+                Tiles.Add(new TileViewModel(tile) { Parent = this });
             }
 
             NewMapControlVisible = false;
