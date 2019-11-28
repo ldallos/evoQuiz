@@ -3,8 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:evoQuizMapMaker"
         xmlns:l="clr-namespace:evoQuizMapMaker.Converter"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -38,11 +40,20 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
+                                    
+                                    <Grid Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
                             Width="{Binding Path=Size}" Height="{Binding Path=Size}"  
-                            Background="{Binding Path=TileColor}"
-                            Command="{Binding SetTileCommand}"
-                            />
+                            Background="{Binding Path=TileColor}">
+                                        
+                                        <Border Background="Transparent" BorderBrush="Black" BorderThickness="1">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                    <command:EventToCommand Command="{Binding SetTileCommand}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Border>
+                                    </Grid>
+
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

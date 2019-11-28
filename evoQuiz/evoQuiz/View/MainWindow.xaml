@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:evoQuiz"
         mc:Ignorable="d"
         Title="evoQuiz" Height="450" Width="800">
     <Grid>
@@ -13,14 +12,15 @@
                 <ItemsControl ItemsSource="{Binding Path=Tiles}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}" Height="{Binding Path=MapHeight}" Width="{Binding Path=MapWidth}"></UniformGrid>
+                            <UniformGrid Columns="{Binding Path=MapSizeX}" Rows="{Binding Path=MapSizeY}" Height="{Binding Path=MapHeight}" Width="{Binding Path=MapWidth}" Background="Gray"></UniformGrid>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
-                            Width="{Binding Path=Size}" Height="{Binding Path=Size}"  
-                            />
+                            <Grid Width="{Binding Path=Size}" Height="{Binding Path=Size}" Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}">
+                                <Image Source="{Binding Path=TileSkin}"></Image>
+                                
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

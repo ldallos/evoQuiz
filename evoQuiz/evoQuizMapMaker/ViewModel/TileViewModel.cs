@@ -54,6 +54,14 @@ namespace evoQuizMapMaker.ViewModel
                     TileColor = Brushes.Blue;
                     myTile.myObstacle = new evoQuiz.Model.Trap();
                     break;
+                case Helper.Mode.StartTileMode:
+                    TileColor = Brushes.Yellow;
+                    
+                    break;
+                case Helper.Mode.EreaserMode:
+                    TileColor = null;
+                    myTile.myObstacle = null;
+                    break;
                 default:
                     break;
             }
