@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using evoQuiz.Model;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,16 @@ namespace evoQuizMapMaker.ViewModel
 {
     class TileViewModel : INotifyPropertyChanged
     {
-        public evoQuiz.Model.Tile myTile { get; set; }
-        public int PosX { get { return myTile.PositionX; } }
-        public int PosY { get { return myTile.PositionY; } }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
         public int Size { get { return Parent.MapScale; } }
         public ICommand SetTileCommand { get; set; }
         public MainViewModel Parent { get; set; }
 
         private Brush _myTileColor;
         public Brush TileColor { get { return _myTileColor; } set { _myTileColor = value; OnPropertyChanged("TileColor"); } }
+
+        public TileElement myTileElement;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -32,9 +34,10 @@ namespace evoQuizMapMaker.ViewModel
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
-        public TileViewModel(evoQuiz.Model.Tile tile)
+        public TileViewModel(int x, int y)
         {
-            myTile = tile;
+            PosX = x;
+            PosY = y;
             SetTileCommand = new RelayCommand(SetTile);
         }
 
@@ -44,23 +47,36 @@ namespace evoQuizMapMaker.ViewModel
             {
                 case Helper.Mode.WallMode:
                     TileColor = Brushes.Black;
-                    myTile.myObstacle = new evoQuiz.Model.Wall();
+                    myTileElement = new Wall(PosX, PosY);
                     break;
                 case Helper.Mode.TrapMode:
                     TileColor = Brushes.Red;
-                    myTile.myObstacle = new evoQuiz.Model.Enemy();
+                    myTileElement = new Trap(PosX, PosY);
                     break;
                 case Helper.Mode.EnemyMode:
                     TileColor = Brushes.Blue;
-                    myTile.myObstacle = new evoQuiz.Model.Trap();
+                    myTileElement = new Enemy(PosX, PosY);
                     break;
-                case Helper.Mode.StartTileMode:
+                case Helper.Mode.PlayerMode:
                     TileColor = Brushes.Yellow;
+
+                    if (Parent.Tiles.Where(y => y.myTileElement != null).All(x => x.myTileElement.GetType() != typeof(Player)))
+                    {
+                        myTileElement = new Player(PosX, PosY);
+                    }
+                    else
+                    {
+                        TileViewModel prevTileVM = Parent.Tiles.Where(y => y.myTileElement != null).Where(x => x.myTileElement.GetType() == typeof(Player)).FirstOrDefault();
+                        prevTileVM.myTileElement = null;
+                        prevTileVM.TileColor = null;
+                        myTileElement = new Player(PosX, PosY);
+                    }
                     
                     break;
                 case Helper.Mode.EreaserMode:
                     TileColor = null;
-                    myTile.myObstacle = null;
+                    myTileElement= null;
+                    
                     break;
                 default:
                     break;

@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using evoQuiz;
+using evoQuiz.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -32,6 +34,7 @@ namespace evoQuizMapMaker.ViewModel
         public ICommand NewMapCommand { get; set; }
         public ICommand CancelMapCommand { get; set; }
         public ICommand CreateMapCommand { get; set; }
+        public ICommand OpenMapCommand { get; set; }
         public Helper.Mode PlacementMode { get; set; }
 
         private bool _myNewMapControlVisible;
@@ -57,10 +60,15 @@ namespace evoQuizMapMaker.ViewModel
             NewMapCommand = new RelayCommand(NewMap);
             CancelMapCommand = new RelayCommand(CancelMap);
             CreateMapCommand = new RelayCommand(CreateMap);
+            OpenMapCommand = new RelayCommand(OpenMap);
         }
 
         private void SaveMap()
         {
+            foreach (var tile in Tiles)
+            {
+                myMap.TileElements.Add(tile.myTileElement);
+            }
             ser.SerializeMap("map.xml", myMap);
         }
 
@@ -80,12 +88,55 @@ namespace evoQuizMapMaker.ViewModel
             MapWidth = MapSizeX * MapScale;
             MapHeight = MapSizeY * MapScale;
             Tiles.Clear();
-            foreach (var tile in myMap.Tiles)
+
+            for (int i = 0; i < myMap.SizeX; i++)
             {
-                Tiles.Add(new TileViewModel(tile) { Parent = this });
+                for (int j = 0; j < myMap.SizeY; j++)
+                {
+                    Tiles.Add(new TileViewModel(i,j) { Parent = this });
+                }
             }
 
             NewMapControlVisible = false;
+        }
+
+        private void OpenMap()
+        {
+            myMap = ser.DeserializeMap("map.xml");
+            MapWidth = MapSizeX * MapScale;
+            MapHeight = MapSizeY * MapScale;
+            Tiles.Clear();
+
+            for (int i = 0; i < myMap.SizeX; i++)
+            {
+                for (int j = 0; j < myMap.SizeY; j++)
+                {
+                    Tiles.Add(new TileViewModel(i, j) { Parent = this });
+                }
+            }
+
+            //foreach (var element in myMap.TileElements.Where(x=>x != null))
+            //{
+            //    TileViewModel tile = Tiles.Where(x=>(x.PosX == element.PositionX && x.PosY == element.PositionY)).FirstOrDefault();
+            //    tile.myTileElement = element;
+
+            //    if (element is Wall)
+            //    {
+            //        tile.TileColor = Brushes.Black;
+            //    }
+            //    else if (element is Player)
+            //    {
+            //        tile.TileColor = Brushes.Yellow;
+            //    }
+            //    else if (element is Enemy)
+            //    {
+            //        tile.TileColor = Brushes.Blue;
+            //    }
+            //    else if (element is Trap)
+            //    {
+            //        tile.TileColor = Brushes.Red;
+            //    }
+            //}
         }
     }
 }

@@ -13,26 +13,23 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    class TileViewModel : INotifyPropertyChanged
+    class WallViewModel : IViewModel
     {
-        public Tile myTile { get; set; }
-        public int PosX { get { return myTile.PositionX; } }
-        public int PosY { get { return myTile.PositionY; } }
+        public Wall myWall { get; set; }
+        public int PosX { get { return myWall.PositionX; } }
+        public int PosY { get { return myWall.PositionY; } }
+        public int PosZ { get { return myWall.PositionZ; } }
         public int Size { get { return Parent.MapScale; } }
-        public BitmapImage TileSkin {
+
+        private double _myVisibility;
+        public double Visibility { get { return _myVisibility; } set { _myVisibility = value; OnPropertyChanged("Visibility"); } }
+        public BitmapImage Skin {
             get
             {
-                if (myTile.myObstacle == null) return null;
-
-                var T = myTile.myObstacle.GetType();
-
-                if (T == typeof(Wall))
-                {
-                    return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/wall.png", UriKind.RelativeOrAbsolute));
-                }
-                else return null;                   
+                return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/wall.png", UriKind.RelativeOrAbsolute));
             }
         }
+
         public MainViewModel Parent { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,9 +42,10 @@ namespace evoQuiz.ViewModel
             }
         }
 
-        public TileViewModel(Tile tile)
+        public WallViewModel(Wall wall)
         {
-            myTile = tile;
+            myWall = wall;
+            Visibility = 1;
         }
     }
 }

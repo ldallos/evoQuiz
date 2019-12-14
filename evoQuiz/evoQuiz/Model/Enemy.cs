@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace evoQuiz.Model
 {
-    public class Enemy : Obstacle
+    public class Enemy : TileElement
     {
+        public Enemy(int X, int Y) : base(X, Y)
+        {
+
+        }
+        public Enemy()
+        {
+
+        }
     }
 }

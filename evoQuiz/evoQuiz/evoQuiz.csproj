@@ -94,14 +94,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GridHelper.cs" />
     <Compile Include="MapSerializer.cs" />
     <Compile Include="Model\Enemy.cs" />
-    <Compile Include="Model\Obstacle.cs" />
+    <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\Light.cs" />
+    <Compile Include="Model\Shadow.cs" />
+    <Compile Include="Model\TileElement.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Trap.cs" />
     <Compile Include="Model\Wall.cs" />
+    <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\TileViewModel.cs" />
+    <Compile Include="ViewModel\PlayerViewModel.cs" />
+    <Compile Include="ViewModel\ShadowViewModel.cs" />
+    <Compile Include="ViewModel\WallViewModel.cs" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,7 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Map.cs" />
-    <Compile Include="Model\Tile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,7 +155,13 @@
     <Resource Include="Images\wall.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Images\char.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\light.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

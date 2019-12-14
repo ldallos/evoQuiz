@@ -8,7 +8,7 @@ namespace evoQuiz.Model
 {
     public class Map
     {
-        public List<Tile> Tiles { get; set; } = new List<Tile>();
+        public List<TileElement> TileElements { get; set; } = new List<TileElement>();
         public int SizeX { get; set; }
         public int SizeY { get; set; }
 
@@ -16,14 +16,6 @@ namespace evoQuiz.Model
         {
             SizeX = x;
             SizeY = y;
-
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    Tiles.Add(new Tile(i,j));
-                }
-            }
         }
         public Map()
         {

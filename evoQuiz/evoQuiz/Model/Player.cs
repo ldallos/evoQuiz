@@ -7,29 +7,18 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.Model
 {
-    class Player
+    public class Player: TileElement
     {
-        public int PositionX { get; set; } = 0;
-        public int PositionY { get; set; } = 0;
-
-        public enum Direction { Up, Down, Left, Right }
-        public void Move(Direction dir)
+        public Player(int X, int Y) : base(X, Y)
         {
-            switch (dir)
-            {
-                case Direction.Up:
-                    PositionY++;
-                    break;
-                case Direction.Down:
-                    PositionY--;
-                    break;
-                case Direction.Left:
-                    PositionX--;
-                    break;
-                case Direction.Right:
-                    PositionX++;
-                    break;
-            }
+            PositionZ = 3;
         }
+        public Player()
+        {
+            
+        }
+        public int VisibilityRange { get; set; }
+        //public List<Item> Inventory { get; set; }
+        public Map myMap { get; set; }
     }
 }

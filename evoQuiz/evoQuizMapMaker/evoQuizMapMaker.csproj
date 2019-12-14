@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\EnumBooleanConverter.cs" />
+    <Compile Include="GridHelper.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TileViewModel.cs" />

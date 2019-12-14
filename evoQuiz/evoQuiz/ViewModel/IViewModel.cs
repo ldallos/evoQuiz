@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace evoQuizMapMaker
+namespace evoQuiz.ViewModel
 {
-    static class Helper
+    interface IViewModel : INotifyPropertyChanged
     {
-        public enum Mode { WallMode, TrapMode, EnemyMode, PlayerMode, EreaserMode };
+
+
     }
 }

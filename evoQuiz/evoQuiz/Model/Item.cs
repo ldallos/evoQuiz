@@ -6,15 +6,7 @@ using System.Threading.Tasks;
 
 namespace evoQuiz.Model
 {
-    public class Trap : TileElement
+    abstract class Item
     {
-        public Trap(int X, int Y) : base(X, Y)
-        {
-
-        }
-        public Trap()
-        {
-
-        }
     }
 }
