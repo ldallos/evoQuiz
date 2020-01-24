@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using System.Xml.Serialization;
 
-namespace evoQuiz.Model
+namespace evoQuiz.Model.Enemies
 {
-    public class Enemy : TileElement
+    public class Skeleton:Enemy
     {
-        public Enemy(int X, int Y) : base(X, Y)
+        public Skeleton(int X, int Y) : base(X, Y)
         {
-
+            
         }
-        public Enemy()
+        public Skeleton()
         {
 
         }

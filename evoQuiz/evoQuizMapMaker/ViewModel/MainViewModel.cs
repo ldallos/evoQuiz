@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using evoQuiz;
 using evoQuiz.Model;
+using evoQuiz.Model.Enemies;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -18,6 +19,8 @@ namespace evoQuizMapMaker.ViewModel
     class MainViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<TileViewModel> Tiles { get; set; }
+        public ObservableCollection<Type> EnemyTypes { get; set; }
+        public Type SelectedEnemyType { get; set; }
         public evoQuiz.Model.Map myMap { get; set; } = new evoQuiz.Model.Map();
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
         public int MapSizeY { get { return myMap.SizeY; } set { myMap.SizeY = value; OnPropertyChanged("MapSizeY"); } }
@@ -55,6 +58,8 @@ namespace evoQuizMapMaker.ViewModel
         {
             NewMapControlVisible = false;
             Tiles = new ObservableCollection<TileViewModel>();
+
+            EnemyTypes = new ObservableCollection<Type>() {typeof(Skeleton) };
 
             SaveMapCommand = new RelayCommand(SaveMap);
             NewMapCommand = new RelayCommand(NewMap);
@@ -103,6 +108,8 @@ namespace evoQuizMapMaker.ViewModel
         private void OpenMap()
         {
             myMap = ser.DeserializeMap("map.xml");
+            MapSizeX = myMap.SizeX;
+            MapSizeY = myMap.SizeY;
             MapWidth = MapSizeX * MapScale;
             MapHeight = MapSizeY * MapScale;
             Tiles.Clear();
@@ -115,28 +122,28 @@ namespace evoQuizMapMaker.ViewModel
                 }
             }
 
-            //foreach (var element in myMap.TileElements.Where(x=>x != null))
-            //{
-            //    TileViewModel tile = Tiles.Where(x=>(x.PosX == element.PositionX && x.PosY == element.PositionY)).FirstOrDefault();
-            //    tile.myTileElement = element;
+            foreach (var element in myMap.TileElements.Where(x => x != null))
+            {
+                TileViewModel tile = Tiles.Where(x => (x.PosX == element.PositionX && x.PosY == element.PositionY)).FirstOrDefault();
+                tile.myTileElement = element;
 
-            //    if (element is Wall)
-            //    {
-            //        tile.TileColor = Brushes.Black;
-            //    }
-            //    else if (element is Player)
-            //    {
-            //        tile.TileColor = Brushes.Yellow;
-            //    }
-            //    else if (element is Enemy)
-            //    {
-            //        tile.TileColor = Brushes.Blue;
-            //    }
-            //    else if (element is Trap)
-            //    {
-            //        tile.TileColor = Brushes.Red;
-            //    }
-            //}
+                if (element is Wall)
+                {
+                    tile.TileColor = Brushes.Black;
+                }
+                else if (element is Player)
+                {
+                    tile.TileColor = Brushes.Yellow;
+                }
+                else if (element is Enemy)
+                {
+                    tile.TileColor = Brushes.Blue;
+                }
+                else if (element is Trap)
+                {
+                    tile.TileColor = Brushes.Red;
+                }
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evoQuiz"
         mc:Ignorable="d"
-        Title="evoQuiz" Height="450" Width="800" WindowState="Maximized">
+        Title="evoQuiz" WindowState="Maximized">
 
 
     <Window.InputBindings>
@@ -24,24 +24,25 @@
                         <ItemsPanelTemplate>
                             <Grid local:GridHelper.RowCount="{Binding MapSizeY}"
                                   local:GridHelper.ColumnCount="{Binding MapSizeX}"
-                                  Height="{Binding Path=MapHeight}"
-                                  Width="{Binding Path=MapWidth}"
                                   Background="Gray"
                                   ShowGridLines="False"
+                                  Margin="{Binding Offset}"
                                   />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Path=Skin}" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}"></Image>
+                            <Image Source="{Binding Path=Skin}" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     <ItemsControl.ItemContainerStyle>
                         <Style>
                             <Setter Property="Grid.Column" Value="{Binding Path=PosX}" />
                             <Setter Property="Grid.Row" Value="{Binding Path=PosY}" />
+                            <!--
                             <Setter Property="Grid.RowSpan" Value="{Binding Path=PosYspan}" />
                             <Setter Property="Grid.ColumnSpan" Value="{Binding Path=PosXspan}" />
+                            -->
                             <Setter Property="Grid.ZIndex" Value="{Binding Path=PosZ}" />
                         </Style>
                     </ItemsControl.ItemContainerStyle>

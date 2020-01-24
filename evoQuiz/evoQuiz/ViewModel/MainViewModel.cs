@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace evoQuiz.ViewModel
@@ -15,6 +16,7 @@ namespace evoQuiz.ViewModel
     {
         public ObservableCollection<IViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
+        public ShadowViewModel myShadow { get; set; }
         public Map myMap { get; set; }
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
         public int MapSizeY { get { return myMap.SizeY; } set { myMap.SizeY = value; OnPropertyChanged("MapSizeY"); } }
@@ -26,6 +28,9 @@ namespace evoQuiz.ViewModel
         public int MapHeight { get { return _myMapHeight; } set { _myMapHeight = value; OnPropertyChanged("MapHeight"); } }
 
         public int MapScale { get; set; } = 30;
+
+        public int WindowHeight { get; set; }
+        public int WindowWidth { get; set; }
 
         private MapSerializer ser = new MapSerializer();
 
@@ -56,6 +61,7 @@ namespace evoQuiz.ViewModel
             MapWidth = MapSizeX * MapScale-1;
             MapHeight = MapSizeY * MapScale-1;
 
+
             for (int i = 0; i < myMap.SizeX; i++)
             {
                 for (int j = 0; j < myMap.SizeY; j++)
@@ -78,9 +84,13 @@ namespace evoQuiz.ViewModel
                     GridItems.Add(myPlayerViewModel);
                     continue;
                 }
-            }
 
-            
+                if (element is Enemy)
+                {
+                    GridItems.Add(new EnemyViewModel(element as Enemy, this));
+                    continue;
+                }
+            }    
         }
 
         private void MoveUp()

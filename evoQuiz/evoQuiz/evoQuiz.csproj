@@ -95,20 +95,30 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GridHelper.cs" />
+    <Compile Include="Model\Quiz\Answer.cs" />
+    <Compile Include="Model\Quiz\Question.cs" />
+    <Compile Include="ViewModel\QuestionViewModel.cs" />
+    <Compile Include="WindowHandler.cs" />
     <Compile Include="MapSerializer.cs" />
+    <Compile Include="Model\Enemies\Skeleton.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\Item.cs" />
-    <Compile Include="Model\Light.cs" />
     <Compile Include="Model\Shadow.cs" />
     <Compile Include="Model\TileElement.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Trap.cs" />
     <Compile Include="Model\Wall.cs" />
+    <Compile Include="ViewModel\EnemyViewModel.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\ShadowViewModel.cs" />
     <Compile Include="ViewModel\WallViewModel.cs" />
+    <Compile Include="ViewModel\WindowViewModel.cs" />
+    <Compile Include="View\QuestionControl.xaml.cs">
+      <DependentUpon>QuestionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionControlHandler.cs" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,6 +131,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\QuestionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Map.cs" />
@@ -163,5 +177,9 @@
   <ItemGroup>
     <Resource Include="Images\light.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\skeleton.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

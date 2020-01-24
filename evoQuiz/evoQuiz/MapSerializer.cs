@@ -14,9 +14,11 @@ namespace evoQuiz
         private string MainPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\Maps\\"));
         public void SerializeMap(string path, Map data)
         {
+            File.WriteAllText(MainPath + path,"");
+
             var serializer = new XmlSerializer(typeof(Map));
             using (var sw = new StreamWriter(MainPath + path))
-            {
+            {                
                 serializer.Serialize(sw, data);
             }
         }

@@ -1,4 +1,5 @@
 ﻿using evoQuiz.Model;
+using evoQuiz.Model.Enemies;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -43,6 +44,11 @@ namespace evoQuizMapMaker.ViewModel
 
         private void SetTile()
         {
+            if (myTileElement != null && Parent.PlacementMode != Helper.Mode.EreaserMode)
+            {
+                return;
+            }
+
             switch (Parent.PlacementMode)
             {
                 case Helper.Mode.WallMode:
@@ -55,7 +61,12 @@ namespace evoQuizMapMaker.ViewModel
                     break;
                 case Helper.Mode.EnemyMode:
                     TileColor = Brushes.Blue;
-                    myTileElement = new Enemy(PosX, PosY);
+
+                    if (Parent.SelectedEnemyType == typeof(Skeleton))
+                    {
+                        myTileElement = new Skeleton(PosX, PosY);
+                    }
+                    
                     break;
                 case Helper.Mode.PlayerMode:
                     TileColor = Brushes.Yellow;

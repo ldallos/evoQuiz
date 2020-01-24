@@ -8,7 +8,21 @@ namespace evoQuiz.Model
 {
     class Shadow : TileElement
     {
-        public double Opacity { get; set; }
+        private double myOpacity;
+        public double Opacity
+        {
+            get { return myOpacity; }
+            set
+            {
+                myOpacity = value;
+                if (Visited && value<0.3)
+                {
+                    myOpacity = 0.3;
+                }
+            }
+        }
+
+        public bool Visited { get; set; } = false;
         public Shadow(int X, int Y): base(X, Y)
         {
             PositionZ = 10;

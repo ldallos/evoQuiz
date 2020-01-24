@@ -11,13 +11,14 @@ namespace evoQuiz.Model
     {
         public Player(int X, int Y) : base(X, Y)
         {
+            
             PositionZ = 3;
         }
         public Player()
         {
             
         }
-        public int VisibilityRange { get; set; }
+        public int VisibilityRange { get; set; } = 20;
         //public List<Item> Inventory { get; set; }
         public Map myMap { get; set; }
     }

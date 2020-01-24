@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
@@ -24,10 +25,11 @@ namespace evoQuiz.ViewModel
                 return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/black.png", UriKind.RelativeOrAbsolute));
             }
         }
+
         public MainViewModel Parent { get; set; }
         public ShadowViewModel(int x, int y)
         {
-            myShadow = new Shadow(x, y);
+            myShadow = new Shadow(x,y);
             Opacity = 1;
         }
 

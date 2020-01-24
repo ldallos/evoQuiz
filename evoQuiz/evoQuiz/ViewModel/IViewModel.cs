@@ -9,7 +9,9 @@ namespace evoQuiz.ViewModel
 {
     interface IViewModel : INotifyPropertyChanged
     {
-
+        int PosX { get; }
+        int PosY { get; }
+        int PosZ { get; }
 
     }
 }

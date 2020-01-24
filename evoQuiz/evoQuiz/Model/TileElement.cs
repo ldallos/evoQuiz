@@ -1,4 +1,5 @@
-﻿using System;
+﻿using evoQuiz.Model.Enemies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace evoQuiz.Model
 {
     [XmlInclude(typeof(Trap))]
     [XmlInclude(typeof(Enemy))]
+    [XmlInclude(typeof(Skeleton))]
     [XmlInclude(typeof(Wall))]
     [XmlInclude(typeof(Player))]
     public abstract class TileElement
