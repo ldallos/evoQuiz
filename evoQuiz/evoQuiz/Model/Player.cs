@@ -9,9 +9,9 @@ namespace evoQuiz.Model
 {
     public class Player: TileElement
     {
+        public int Health { get; set; } = 10;
         public Player(int X, int Y) : base(X, Y)
         {
-            
             PositionZ = 3;
         }
         public Player()

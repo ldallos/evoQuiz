@@ -17,6 +17,7 @@ namespace evoQuiz.ViewModel
         public ObservableCollection<IViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
         public QuestionViewModel myQuestionViewModel { get; set; }
+        public HealthViewModel myHealthViewModel { get; set; }
 
         public Map myMap { get; set; }
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
@@ -65,7 +66,6 @@ namespace evoQuiz.ViewModel
             MoveRightCommand = new RelayCommand(MoveRight);
 
             GridItems = new ObservableCollection<IViewModel>();
-            myQuestionViewModel = new QuestionViewModel();
 
             myMap = ser.DeserializeMap("map.xml");
             MapWidth = MapSizeX * MapScale-1;
@@ -103,6 +103,9 @@ namespace evoQuiz.ViewModel
             }
 
             SetOffset();
+
+            myQuestionViewModel = new QuestionViewModel();
+            myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
         }
 
         private void MoveUp()

@@ -183,7 +183,8 @@ namespace evoQuiz.ViewModel
                 }
 
                 ShadowViewModel shadow = Parent.GridItems.Where(i => i is ShadowViewModel).Where(i => (i as ShadowViewModel).PosX == x0 && (i as ShadowViewModel).PosY == y0).FirstOrDefault() as ShadowViewModel;
-                opacity = dist / (myPlayer.VisibilityRange);
+                opacity = Math.Pow(dist,2) / Math.Pow((myPlayer.VisibilityRange),2);
+                //opacity = dist / myPlayer.VisibilityRange;
                 if (shadow.Opacity>=opacity)
                 {
                     shadow.Opacity = opacity;
