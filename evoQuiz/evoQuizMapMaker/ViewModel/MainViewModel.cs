@@ -70,6 +70,7 @@ namespace evoQuizMapMaker.ViewModel
 
         private void SaveMap()
         {
+            myMap.TileElements.Clear();
             foreach (var tile in Tiles)
             {
                 myMap.TileElements.Add(tile.myTileElement);

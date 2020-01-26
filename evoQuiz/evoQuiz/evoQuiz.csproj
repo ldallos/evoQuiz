@@ -97,8 +97,8 @@
     <Compile Include="GridHelper.cs" />
     <Compile Include="Model\Quiz\Answer.cs" />
     <Compile Include="Model\Quiz\Question.cs" />
+    <Compile Include="SizeObserver.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
-    <Compile Include="WindowHandler.cs" />
     <Compile Include="MapSerializer.cs" />
     <Compile Include="Model\Enemies\Skeleton.cs" />
     <Compile Include="Model\Enemy.cs" />
@@ -118,7 +118,6 @@
     <Compile Include="View\QuestionControl.xaml.cs">
       <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuestionControlHandler.cs" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

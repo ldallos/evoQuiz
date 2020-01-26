@@ -561,7 +561,11 @@
       <PositionY>6</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Wall">
+      <PositionX>6</PositionX>
+      <PositionY>7</PositionY>
+      <PositionZ>1</PositionZ>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -1000,7 +1004,11 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Skeleton">
+      <PositionX>12</PositionX>
+      <PositionY>6</PositionY>
+      <PositionZ>0</PositionZ>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />

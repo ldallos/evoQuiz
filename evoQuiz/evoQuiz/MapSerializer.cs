@@ -18,7 +18,7 @@ namespace evoQuiz
 
             var serializer = new XmlSerializer(typeof(Map));
             using (var sw = new StreamWriter(MainPath + path))
-            {                
+            {
                 serializer.Serialize(sw, data);
             }
         }

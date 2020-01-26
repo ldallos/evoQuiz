@@ -45,14 +45,5 @@ namespace evoQuiz.ViewModel
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
-
-        private WindowHandler windowHandler;
-        public void StartQuiz()
-        {
-            Question question = new Question();
-
-            QuestionViewModel questionViewModel = new QuestionViewModel(question);
-            windowHandler.Show(questionViewModel);
-        }
     }
 }

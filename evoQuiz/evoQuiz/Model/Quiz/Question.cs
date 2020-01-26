@@ -10,6 +10,8 @@ namespace evoQuiz.Model.Quiz
     {
         public Answer[] Answers { get; set; } = new Answer[4];
         public string QuestionText { get; set; }
+        public Difficulty MyDifficulty { get; set; }
+        public enum Difficulty {VeryEasy, Easy, Medium, Hard, VeryHard};
         public Question()
         {
 

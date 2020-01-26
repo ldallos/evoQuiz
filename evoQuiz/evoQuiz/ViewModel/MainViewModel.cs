@@ -16,7 +16,8 @@ namespace evoQuiz.ViewModel
     {
         public ObservableCollection<IViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
-        public ShadowViewModel myShadow { get; set; }
+        public QuestionViewModel myQuestionViewModel { get; set; }
+
         public Map myMap { get; set; }
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
         public int MapSizeY { get { return myMap.SizeY; } set { myMap.SizeY = value; OnPropertyChanged("MapSizeY"); } }
@@ -31,6 +32,14 @@ namespace evoQuiz.ViewModel
 
         public int WindowHeight { get; set; }
         public int WindowWidth { get; set; }
+
+        private Thickness myOffset;
+        public Thickness Offset
+        {
+            get { return myOffset; }
+            set { myOffset = value; OnPropertyChanged("Offset"); }
+        }
+
 
         private MapSerializer ser = new MapSerializer();
 
@@ -56,6 +65,7 @@ namespace evoQuiz.ViewModel
             MoveRightCommand = new RelayCommand(MoveRight);
 
             GridItems = new ObservableCollection<IViewModel>();
+            myQuestionViewModel = new QuestionViewModel();
 
             myMap = ser.DeserializeMap("map.xml");
             MapWidth = MapSizeX * MapScale-1;
@@ -90,27 +100,40 @@ namespace evoQuiz.ViewModel
                     GridItems.Add(new EnemyViewModel(element as Enemy, this));
                     continue;
                 }
-            }    
+            }
+
+            SetOffset();
         }
 
         private void MoveUp()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Up);
+            SetOffset();
         }
 
         private void MoveDown()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Down);
+            SetOffset();
         }
 
         private void MoveLeft()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Left);
+            SetOffset();
         }
 
         private void MoveRight()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Right);
+            SetOffset();
+        }
+
+        private void SetOffset()
+        {
+            double x = (-myPlayerViewModel.PosX -0.5) * MapScale + WindowWidth / 2;
+            double y = (-myPlayerViewModel.PosY -0.5) * MapScale + WindowHeight / 2;
+            Offset = new Thickness(x, y, 0, 0);
         }
     }
 }

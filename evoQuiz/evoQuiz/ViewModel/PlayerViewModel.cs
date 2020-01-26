@@ -28,8 +28,7 @@ namespace evoQuiz.ViewModel
         {
             myPlayer = player;
             Parent = parent;
-
-            //UpdateVisibilityV2();
+            myPlayer.VisibilityRange = 10;
             Update();
         }
 
@@ -47,31 +46,37 @@ namespace evoQuiz.ViewModel
         public enum Directions { Up, Down, Left, Right };
         public void Move(Directions dir)
         {
+            if (Parent.myQuestionViewModel.QuestionControlVisible)
+            {
+                return;
+            }
+
+
             switch (dir) 
             {
                 case Directions.Up:
-                    if (CheckCollision(myPlayer.PositionX, myPlayer.PositionY - 1))
+                    if (CheckWallCollision(myPlayer.PositionX, myPlayer.PositionY - 1))
                     {
                         PosY--;
                     }
                     else return;
                     break;
                 case Directions.Down:
-                    if (CheckCollision(myPlayer.PositionX, myPlayer.PositionY + 1))
+                    if (CheckWallCollision(myPlayer.PositionX, myPlayer.PositionY + 1))
                     {
                         PosY++;
                     }
                     else return;
                     break;
                 case Directions.Left:
-                    if (CheckCollision(myPlayer.PositionX-1, myPlayer.PositionY))
+                    if (CheckWallCollision(myPlayer.PositionX-1, myPlayer.PositionY))
                     {
                         PosX--;
                     }
                     else return;
                     break;
                 case Directions.Right:
-                    if (CheckCollision(myPlayer.PositionX+1, myPlayer.PositionY))
+                    if (CheckWallCollision(myPlayer.PositionX+1, myPlayer.PositionY))
                     {
                         PosX++;
                     }
@@ -84,7 +89,7 @@ namespace evoQuiz.ViewModel
             Update();
         }
 
-        private bool CheckCollision(int newX, int newY)
+        private bool CheckWallCollision(int newX, int newY)
         {
             return !Parent.myMap.TileElements.Where(x=>x is Wall).Any(x=>x.PositionX == newX && x.PositionY == newY);
         }
@@ -150,43 +155,47 @@ namespace evoQuiz.ViewModel
         private List<ShadowViewModel> shadowsToBlend = new List<ShadowViewModel>();
         private void drawBresenham(int x0, int y0, int x1, int y1)
         {
-            float opacity = 0;
-            int dx = Math.Abs(x1 - x0);
+            double opacity = 0;
+            int saveX0 = x0;
+            int saveY0 = y0;
+            float dx = Math.Abs(x1 - x0);
             int sx = -1;
             if (x0 < x1)
             {
                 sx = 1;
             }
-            int dy = Math.Abs(y1 - y0);
+            float dy = Math.Abs(y1 - y0);
             int sy = -1;
             if (y0 < y1)
             {
                 sy = 1;
             }
             float err = -dy / 2;
-            if (dx > dy){
+            if (dx >= dy){
                 err = dx / 2;
             }
             do
             {
-                if (x0 < 0 || y0 < 0 || x0 >= Parent.MapSizeX || y0 >= Parent.MapSizeY)
+                double dist = Math.Sqrt((saveX0 - x0) * (saveX0 - x0) + (saveY0 - y0) * (saveY0 - y0));
+                if (x0 < 0 || y0 < 0 || x0 >= Parent.MapSizeX || y0 >= Parent.MapSizeY || dist > myPlayer.VisibilityRange)
                 {
                     break;
                 }
 
                 ShadowViewModel shadow = Parent.GridItems.Where(i => i is ShadowViewModel).Where(i => (i as ShadowViewModel).PosX == x0 && (i as ShadowViewModel).PosY == y0).FirstOrDefault() as ShadowViewModel;
+                opacity = dist / (myPlayer.VisibilityRange);
                 if (shadow.Opacity>=opacity)
                 {
                     shadow.Opacity = opacity;
                     shadow.myShadow.Visited = true;
+                    shadowsToBlend.Add(shadow);
                 }
-                opacity += (float)0.1;
-                shadowsToBlend.Add(shadow);
+                //shadowsToBlend.Add(shadow);
 
-                if (opacity >=1)
-                {
-                    break;
-                }
+                //if (opacity >=1)
+                //{
+                //    break;
+                //}
 
                 if (Parent.GridItems.Where(i => i is WallViewModel).Any(i => i.PosX == x0 && i.PosY == y0))
                 {
@@ -194,7 +203,7 @@ namespace evoQuiz.ViewModel
                 }
 
                 float e2 = err;
-                if (e2 > -dx)
+                if (e2 >= -dx)
                 {
                     err -= dy;
                     x0 += sx;
@@ -225,7 +234,7 @@ namespace evoQuiz.ViewModel
                     y++;
                     err += y * 2 + 1;
                 }
-                if (radius > x || err > y){
+                if (radius >= x || err >= y){
                     x++;
                     err += x * 2 + 1;
                 }
@@ -235,7 +244,18 @@ namespace evoQuiz.ViewModel
       
         private void BlendShadows()
         {
-            foreach (var shadow in shadowsToBlend)
+            //foreach (var shadow in shadowsToBlend)
+            //{
+            //    float OpacitySum = 0;
+            //    List<IViewModel> SurShadows = GetSurroundingShadows(shadow);
+            //    foreach (var s in SurShadows)
+            //    {
+            //        OpacitySum += (float)(s as ShadowViewModel).Opacity;
+            //    }
+            //    (shadow as ShadowViewModel).Opacity = OpacitySum / SurShadows.Count;
+            //}
+
+            foreach (var shadow in Parent.GridItems.Where(i => i is ShadowViewModel))
             {
                 float OpacitySum = 0;
                 List<IViewModel> SurShadows = GetSurroundingShadows(shadow);
@@ -247,12 +267,25 @@ namespace evoQuiz.ViewModel
             }
         }
 
+        private void CheckEnemy()
+        {
+            EnemyViewModel enemy = Parent.GridItems.Where(x => x is EnemyViewModel && x.PosX == this.PosX && x.PosY == this.PosY).FirstOrDefault() as EnemyViewModel;
+
+            if (enemy is null)
+            {
+                return;
+            }
+
+            Parent.myQuestionViewModel.StartQuiz(enemy.myEnemy);
+        }
+
         private void Update()
         {
             Parent.GridItems.Where(i => i is ShadowViewModel).ToList().ForEach(i => (i as ShadowViewModel).Opacity = 1);
             shadowsToBlend.Clear();
-            drawBresenhamCircle(PosX, PosY, 9);
-            //BlendShadows();
+            drawBresenhamCircle(PosX, PosY, myPlayer.VisibilityRange);
+            BlendShadows();
+            CheckEnemy();
         }
     }
 }
