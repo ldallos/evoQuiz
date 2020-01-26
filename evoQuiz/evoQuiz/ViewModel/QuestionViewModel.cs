@@ -38,6 +38,7 @@ namespace evoQuiz.ViewModel
         public QuestionViewModel()
         {
             QuestionControlVisible = false;
+            CurrentQuestion = new Question() { QuestionText = "PlaceHolder", Answers = new Answer[] { new Answer() { AnswerText = "" }, new Answer() { AnswerText = "" }, new Answer() { AnswerText = "" }, new Answer() { AnswerText = "" }}};
             GetQuestions();
         }
 

@@ -25,7 +25,7 @@
           local:SizeObserver.ObservedWidth="{Binding Path=WindowWidth, Mode=OneWayToSource}"
           Background="Gray">
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
             <Grid>
                 <ItemsControl ItemsSource="{Binding Path=GridItems}">
@@ -58,7 +58,7 @@
 
             </Grid>
         </ScrollViewer>
-        <view:QuestionControl  Visibility ="{Binding Path=myQuestionViewModel.QuestionControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}"/>
+        <view:QuestionControl DataContext="{Binding Path=myQuestionViewModel}"/>
 
     </Grid>
 </Page>
