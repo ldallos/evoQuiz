@@ -23,8 +23,12 @@
     <Grid local:SizeObserver.Observe="True"
           local:SizeObserver.ObservedHeight="{Binding Path=WindowHeight, Mode=OneWayToSource}"
           local:SizeObserver.ObservedWidth="{Binding Path=WindowWidth, Mode=OneWayToSource}"
-          Background="Gray">
-
+          >
+        
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/black.png" Stretch="Fill"/>
+        </Grid.Background>
+        
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
             <Grid>
@@ -40,7 +44,10 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                            <Grid>
+                                <Image Source="/Images/floor.png" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                                <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                            </Grid>                            
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     <ItemsControl.ItemContainerStyle>
@@ -58,6 +65,7 @@
 
             </Grid>
         </ScrollViewer>
+        
         <view:QuestionControl DataContext="{Binding Path=myQuestionViewModel}"/>
 
     </Grid>

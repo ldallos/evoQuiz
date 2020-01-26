@@ -28,7 +28,7 @@ namespace evoQuiz.ViewModel
         private int _myMapHeight;
         public int MapHeight { get { return _myMapHeight; } set { _myMapHeight = value; OnPropertyChanged("MapHeight"); } }
 
-        public int MapScale { get; set; } = 30;
+        public int MapScale { get; set; } = 40;
 
         public int WindowHeight { get; set; }
         public int WindowWidth { get; set; }
