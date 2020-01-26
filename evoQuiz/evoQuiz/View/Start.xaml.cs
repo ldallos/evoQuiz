@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace evoQuiz
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Start.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Start : Page
     {
-        public MainWindow()
+        public Start()
         {
             InitializeComponent();
-
-            MainMenu page = new MainMenu();
-            myFrame.NavigationService.Navigate(page);
         }
     }
 }

@@ -4,61 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evoQuiz"
-        xmlns:view="clr-namespace:evoQuiz.View"
         mc:Ignorable="d"
-        Title="evoQuiz" WindowState="Maximized">
+        Title="EvoQuiz" WindowState="Maximized" WindowStyle="None" Icon="..\Images/EvoQuiz.ico">
 
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
-    </Window.Resources>
-
-    <Window.InputBindings>
-        <KeyBinding Key="W" Command="{Binding MoveUpCommand}"/>
-        <KeyBinding Key="S" Command="{Binding MoveDownCommand}"/>
-        <KeyBinding Key="A" Command="{Binding MoveLeftCommand}"/>
-        <KeyBinding Key="D" Command="{Binding MoveRightCommand}"/>
-    </Window.InputBindings>
-
-    <Grid local:SizeObserver.Observe="True"
-          local:SizeObserver.ObservedHeight="{Binding Path=WindowHeight, Mode=OneWayToSource}"
-          local:SizeObserver.ObservedWidth="{Binding Path=WindowWidth, Mode=OneWayToSource}"
-          Background="Gray">
-
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-
-            <Grid>
-                <ItemsControl ItemsSource="{Binding Path=GridItems}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <Grid local:GridHelper.RowCount="{Binding MapSizeY}"
-                                  local:GridHelper.ColumnCount="{Binding MapSizeX}"
-                                  ShowGridLines="False"
-                                  Margin="{Binding Offset}"
-                                  />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="Grid.Column" Value="{Binding Path=PosX}" />
-                            <Setter Property="Grid.Row" Value="{Binding Path=PosY}" />
-                            <!--
-                            <Setter Property="Grid.RowSpan" Value="{Binding Path=PosYspan}" />
-                            <Setter Property="Grid.ColumnSpan" Value="{Binding Path=PosXspan}" />
-                            -->
-                            <Setter Property="Grid.ZIndex" Value="{Binding Path=PosZ}" />
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
-                </ItemsControl>
-
-            </Grid>
-        </ScrollViewer>
-
-        <view:QuestionControl  Visibility ="{Binding Path=myQuestionViewModel.QuestionControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}"/>
-
+    <Grid>
+        <Frame x:Name="myFrame" Content="" NavigationUIVisibility="Hidden"/>
     </Grid>
+        
 </Window>
