@@ -18,14 +18,12 @@ namespace evoQuiz
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Game : Page
     {
-        public MainWindow()
+        public Game()
         {
             InitializeComponent();
-
-            MainMenu page = new MainMenu();
-            myFrame.NavigationService.Navigate(page);
+            
         }
     }
 }

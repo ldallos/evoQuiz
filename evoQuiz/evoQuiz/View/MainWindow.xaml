@@ -5,51 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evoQuiz"
         mc:Ignorable="d"
-        Title="evoQuiz" WindowState="Maximized">
-
-
-    <Window.InputBindings>
-        <KeyBinding Key="W" Command="{Binding MoveUpCommand}"/>
-        <KeyBinding Key="S" Command="{Binding MoveDownCommand}"/>
-        <KeyBinding Key="A" Command="{Binding MoveLeftCommand}"/>
-        <KeyBinding Key="D" Command="{Binding MoveRightCommand}"/>
-    </Window.InputBindings>
+        Title="EvoQuiz" WindowState="Maximized" WindowStyle="None" Icon="..\Images/EvoQuiz.ico">
 
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-
-            <Grid>
-                <ItemsControl ItemsSource="{Binding Path=GridItems}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <Grid local:GridHelper.RowCount="{Binding MapSizeY}"
-                                  local:GridHelper.ColumnCount="{Binding MapSizeX}"
-                                  Background="Gray"
-                                  ShowGridLines="False"
-                                  Margin="{Binding Offset}"
-                                  />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Path=Skin}" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="Grid.Column" Value="{Binding Path=PosX}" />
-                            <Setter Property="Grid.Row" Value="{Binding Path=PosY}" />
-                            <!--
-                            <Setter Property="Grid.RowSpan" Value="{Binding Path=PosYspan}" />
-                            <Setter Property="Grid.ColumnSpan" Value="{Binding Path=PosXspan}" />
-                            -->
-                            <Setter Property="Grid.ZIndex" Value="{Binding Path=PosZ}" />
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
-                </ItemsControl>
-
-            </Grid>
-            
-        </ScrollViewer>
+        <Frame x:Name="myFrame" Content="" NavigationUIVisibility="Hidden"/>
     </Grid>
+        
 </Window>
