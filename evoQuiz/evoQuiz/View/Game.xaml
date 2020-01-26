@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evoQuiz"
-        mc:Ignorable="d"
+      xmlns:view="clr-namespace:evoQuiz.View"
+      mc:Ignorable="d"
         Title="evoQuiz">
 
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+    </Page.Resources>
 
     <Page.InputBindings>
         <KeyBinding Key="W" Command="{Binding MoveUpCommand}"/>
@@ -15,7 +20,11 @@
         <KeyBinding Key="D" Command="{Binding MoveRightCommand}"/>
     </Page.InputBindings>
 
-    <Grid>
+    <Grid local:SizeObserver.Observe="True"
+          local:SizeObserver.ObservedHeight="{Binding Path=WindowHeight, Mode=OneWayToSource}"
+          local:SizeObserver.ObservedWidth="{Binding Path=WindowWidth, Mode=OneWayToSource}"
+          Background="Gray">
+
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
             <Grid>
@@ -24,7 +33,6 @@
                         <ItemsPanelTemplate>
                             <Grid local:GridHelper.RowCount="{Binding MapSizeY}"
                                   local:GridHelper.ColumnCount="{Binding MapSizeX}"
-                                  Background="Gray"
                                   ShowGridLines="False"
                                   Margin="{Binding Offset}"
                                   />
@@ -32,7 +40,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Path=Skin}" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                            <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     <ItemsControl.ItemContainerStyle>
@@ -49,7 +57,8 @@
                 </ItemsControl>
 
             </Grid>
-            
         </ScrollViewer>
+        <view:QuestionControl  Visibility ="{Binding Path=myQuestionViewModel.QuestionControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}"/>
+
     </Grid>
 </Page>

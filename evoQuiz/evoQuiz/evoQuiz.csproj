@@ -102,6 +102,7 @@
     <Compile Include="Model\TileElement.cs" />
     <Compile Include="Model\Trap.cs" />
     <Compile Include="Model\Wall.cs" />
+    <Compile Include="SizeObserver.cs" />
     <Compile Include="View\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -122,8 +123,6 @@
     <Compile Include="View\QuestionControl.xaml.cs">
       <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuestionControlHandler.cs" />
-    <Compile Include="WindowHandler.cs" />
     <Page Include="View\Credits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
