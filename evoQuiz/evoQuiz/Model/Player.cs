@@ -7,12 +7,11 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.Model
 {
-    public class Player: TileElement
+    public class Player: Character
     {
-        public int Health { get; set; } = 10;
         public Player(int X, int Y) : base(X, Y)
         {
-            PositionZ = 3;
+           
         }
         public Player()
         {

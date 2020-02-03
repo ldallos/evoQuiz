@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    class PlayerViewModel : IViewModel
+    public class PlayerViewModel : IViewModel
     {
         public Player myPlayer { get; set; }
         public int PosX { get { return myPlayer.PositionX; } set { myPlayer.PositionX = value; OnPropertyChanged("PosX"); } }
@@ -277,7 +277,7 @@ namespace evoQuiz.ViewModel
                 return;
             }
 
-            Parent.myQuestionViewModel.StartQuiz(enemy.myEnemy);
+            Parent.myQuestionViewModel.StartQuiz(enemy);
         }
 
         private void Update()

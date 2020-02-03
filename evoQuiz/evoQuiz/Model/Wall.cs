@@ -10,11 +10,11 @@ namespace evoQuiz.Model
     {
         public Wall(int X, int Y) : base(X, Y)
         {
-            PositionZ = 1;
+           
         }
         public Wall()
         {
-            PositionZ = 1;
+           
         }
     }
 }

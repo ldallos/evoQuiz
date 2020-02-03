@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace evoQuiz.ViewModel
 {
-    interface IViewModel : INotifyPropertyChanged
+    public interface IViewModel : INotifyPropertyChanged
     {
         int PosX { get; }
         int PosY { get; }

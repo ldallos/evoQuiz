@@ -92,6 +92,7 @@
     </ApplicationDefinition>
     <Compile Include="GridHelper.cs" />
     <Compile Include="MapSerializer.cs" />
+    <Compile Include="Model\Character.cs" />
     <Compile Include="Model\Enemies\Skeleton.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\Item.cs" />
@@ -104,7 +105,11 @@
     <Compile Include="Model\Trap.cs" />
     <Compile Include="Model\Wall.cs" />
     <Compile Include="SizeObserver.cs" />
+    <Compile Include="ViewModel\AnswerViewModel.cs" />
     <Compile Include="ViewModel\HealthViewModel.cs" />
+    <Compile Include="View\AnswerControl.xaml.cs">
+      <DependentUpon>AnswerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HealthControl.xaml.cs">
       <DependentUpon>HealthControl.xaml</DependentUpon>
     </Compile>
@@ -128,6 +133,10 @@
     <Compile Include="View\QuestionControl.xaml.cs">
       <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AnswerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Credits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -269,7 +278,6 @@
   <ItemGroup>
     <Resource Include="Images\floor.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\HP\HP0.png" />
     <Resource Include="Images\HP\HP1.png" />

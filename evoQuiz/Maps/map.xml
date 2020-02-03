@@ -227,6 +227,7 @@
       <PositionX>2</PositionX>
       <PositionY>2</PositionY>
       <PositionZ>3</PositionZ>
+      <Health>10</Health>
       <VisibilityRange>20</VisibilityRange>
     </TileElement>
     <TileElement xsi:nil="true" />
@@ -360,7 +361,11 @@
       <PositionY>1</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Skeleton">
+      <PositionX>4</PositionX>
+      <PositionY>2</PositionY>
+      <PositionZ>0</PositionZ>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>4</PositionX>
       <PositionY>3</PositionY>

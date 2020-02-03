@@ -10,18 +10,18 @@ namespace evoQuiz.ViewModel
 {
     public class HealthViewModel: WindowViewModel
     {
-        private Player _myPlayer;
+        private Character _myCharacter;
 
-        public Player myPlayer
+        public Character myCharacter
         {
-            get { return _myPlayer; }
-            set { _myPlayer = value; OnPropertyChanged("HealthImage"); }
+            get { return _myCharacter; }
+            set { _myCharacter = value; OnPropertyChanged("HealthImage"); }
         }
         public BitmapImage HealthImage
         {
             get
             {
-                switch (myPlayer.Health)
+                switch (myCharacter.Health)
                 {
                     case 0:
                         return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/HP/HP0.png", UriKind.RelativeOrAbsolute));
@@ -51,9 +51,9 @@ namespace evoQuiz.ViewModel
                 return null;
             }
         }
-        public HealthViewModel(Player player)
+        public HealthViewModel(Character character)
         {
-            myPlayer = player;
+            myCharacter = character;
         }
     }
 }

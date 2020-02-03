@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace evoQuiz.ViewModel
 {
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<IViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
@@ -104,7 +104,7 @@ namespace evoQuiz.ViewModel
 
             SetOffset();
 
-            myQuestionViewModel = new QuestionViewModel();
+            myQuestionViewModel = new QuestionViewModel() { MyPlayer = myPlayerViewModel.myPlayer, Parent = this };
             myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
         }
 

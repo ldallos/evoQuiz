@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    class EnemyViewModel: IViewModel
+    public class EnemyViewModel: IViewModel
     {
         public Enemy myEnemy { get; set; }
         public int PosX { get { return myEnemy.PositionX; } set { myEnemy.PositionX = value; OnPropertyChanged("PosX"); } }
