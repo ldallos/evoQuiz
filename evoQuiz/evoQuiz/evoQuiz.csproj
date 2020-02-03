@@ -110,6 +110,7 @@
     <Compile Include="View\AnswerControl.xaml.cs">
       <DependentUpon>AnswerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\SoundsViewModel.cs" />
     <Compile Include="View\HealthControl.xaml.cs">
       <DependentUpon>HealthControl.xaml</DependentUpon>
     </Compile>
@@ -290,6 +291,14 @@
     <Resource Include="Images\HP\HP7.png" />
     <Resource Include="Images\HP\HP8.png" />
     <Resource Include="Images\HP\HP9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sounds\GameSong.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\MenuSong.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

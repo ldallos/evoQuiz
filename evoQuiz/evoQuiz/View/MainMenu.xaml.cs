@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Media;
+using System.Diagnostics;
 
 namespace evoQuiz
 {
@@ -22,9 +24,12 @@ namespace evoQuiz
     /// </summary>
     public partial class MainMenu : Page
     {
+
         public MainMenu()
         {
             InitializeComponent();
+
+            SoundsViewModel.StartMenuMusic();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +45,8 @@ namespace evoQuiz
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            SoundsViewModel.StopMenuMusic();
+
             Game page = new Game();
             page.DataContext = new MainViewModel();
             //page.Show();
@@ -54,7 +61,7 @@ namespace evoQuiz
 
         private void EditorButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Process.Start("D:\\evoQuiz\\evoQuiz\\evoQuizMapMaker\\obj\\Debug\\evoQuizMapMaker.exe");
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

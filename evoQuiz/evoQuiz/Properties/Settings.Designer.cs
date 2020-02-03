@@ -26,5 +26,36 @@ namespace evoQuiz.Properties
                 return defaultInstance;
             }
         }
+
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RunningGameSoundPlayerActive
+        {
+            get
+            {
+                return ((bool)(this["RunningGameSoundPlayerActive"]));
+            }
+            set
+            {
+                (this["MenuSoundPlayerActive"]) = (bool)value;
+            }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MenuSoundPlayerActive
+        {
+            get
+            {
+                return ((bool)(this["MenuSoundPlayerActive"]));
+            }
+            set
+            {
+                (this["MenuSoundPlayerActive"]) = (bool)value;
+            }
+        }
     }
 }
