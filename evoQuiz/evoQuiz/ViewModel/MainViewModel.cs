@@ -1,4 +1,5 @@
 ﻿using evoQuiz.Model;
+using evoQuiz.Model.Items;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,14 @@ using System.Windows.Input;
 
 namespace evoQuiz.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel: ViewModelBase
     {
-        public ObservableCollection<IViewModel> GridItems { get; set; }
+        public ObservableCollection<TileViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
         public QuestionViewModel myQuestionViewModel { get; set; }
         public HealthViewModel myHealthViewModel { get; set; }
+        public InventoryViewModel myInventoryViewModel { get; set; }
+
 
         public Map myMap { get; set; }
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
@@ -31,8 +34,8 @@ namespace evoQuiz.ViewModel
 
         public int MapScale { get; set; } = 40;
 
-        public int WindowHeight { get; set; }
-        public int WindowWidth { get; set; }
+        public double WindowHeight { get; set; }
+        public double WindowWidth { get; set; }
 
         private Thickness myOffset;
         public Thickness Offset
@@ -44,28 +47,22 @@ namespace evoQuiz.ViewModel
 
         private MapSerializer ser = new MapSerializer();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
         public ICommand MoveUpCommand { get; set; }
         public ICommand MoveDownCommand { get; set; }
         public ICommand MoveLeftCommand { get; set; }
         public ICommand MoveRightCommand { get; set; }
-        public MainViewModel()
+        public ICommand InventoryCommand { get; set; }
+        public MainViewModel(double windowHeight, double windowWidth)
         {
+            WindowHeight = windowHeight;
+            WindowWidth = windowWidth;
             MoveUpCommand = new RelayCommand(MoveUp);
             MoveDownCommand = new RelayCommand(MoveDown);
             MoveLeftCommand = new RelayCommand(MoveLeft);
             MoveRightCommand = new RelayCommand(MoveRight);
+            InventoryCommand = new RelayCommand(Inventory);
 
-            GridItems = new ObservableCollection<IViewModel>();
+            GridItems = new ObservableCollection<TileViewModel>();
 
             myMap = ser.DeserializeMap("map.xml");
             MapWidth = MapSizeX * MapScale-1;
@@ -92,6 +89,8 @@ namespace evoQuiz.ViewModel
                 {
                     myPlayerViewModel = new PlayerViewModel(element as Player, this);
                     GridItems.Add(myPlayerViewModel);
+                    myPlayerViewModel.myPlayer.Inventory.Add(new Potion());
+                    myPlayerViewModel.myPlayer.Inventory.Add(new Sword());
                     continue;
                 }
 
@@ -106,6 +105,7 @@ namespace evoQuiz.ViewModel
 
             myQuestionViewModel = new QuestionViewModel() { MyPlayer = myPlayerViewModel.myPlayer, Parent = this };
             myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
+            myInventoryViewModel = new InventoryViewModel(myPlayerViewModel.myPlayer, this);
         }
 
         private void MoveUp()
@@ -137,6 +137,18 @@ namespace evoQuiz.ViewModel
             double x = (-myPlayerViewModel.PosX -0.5) * MapScale + WindowWidth / 2;
             double y = (-myPlayerViewModel.PosY -0.5) * MapScale + WindowHeight / 2;
             Offset = new Thickness(x, y, 0, 0);
+        }
+
+        private void Inventory()
+        {
+            if (!myInventoryViewModel.InventoryControlVisible)
+            {
+                myInventoryViewModel.Open();
+            }
+            else
+            {
+                myInventoryViewModel.Close();
+            }
         }
     }
 }

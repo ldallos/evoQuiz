@@ -96,6 +96,8 @@
     <Compile Include="Model\Enemies\Skeleton.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\Items\Potion.cs" />
+    <Compile Include="Model\Items\Sword.cs" />
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Quiz\Answer.cs" />
@@ -107,12 +109,17 @@
     <Compile Include="SizeObserver.cs" />
     <Compile Include="ViewModel\AnswerViewModel.cs" />
     <Compile Include="ViewModel\HealthViewModel.cs" />
+    <Compile Include="ViewModel\InventoryViewModel.cs" />
+    <Compile Include="ViewModel\ItemViewModel.cs" />
     <Compile Include="View\AnswerControl.xaml.cs">
       <DependentUpon>AnswerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SoundsViewModel.cs" />
     <Compile Include="View\HealthControl.xaml.cs">
       <DependentUpon>HealthControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InverntoryControl.xaml.cs">
+      <DependentUpon>InverntoryControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
@@ -121,13 +128,13 @@
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\EnemyViewModel.cs" />
-    <Compile Include="ViewModel\IViewModel.cs" />
+    <Compile Include="ViewModel\TileViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ShadowViewModel.cs" />
     <Compile Include="ViewModel\WallViewModel.cs" />
-    <Compile Include="ViewModel\WindowViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
@@ -143,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HealthControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InverntoryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,6 +304,9 @@
     <Resource Include="Images\HP\HP9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Items\potion.png" />
+    <Resource Include="Images\Items\sword.png" />
+    <Resource Include="Images\inventory_tile.png" />
     <Content Include="Sounds\GameSong.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace evoQuiz.ViewModel
 {
-    public abstract class WindowViewModel : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {

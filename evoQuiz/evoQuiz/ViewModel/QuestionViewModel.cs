@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace evoQuiz.ViewModel
 {
-    public class QuestionViewModel : WindowViewModel
+    public class QuestionViewModel : ViewModelBase
     {
         public EnemyViewModel EnemyVM { get; set; }
         public HealthViewModel EnemyHealthViewModel { get; set; }

@@ -18,7 +18,7 @@ namespace evoQuiz.Model
             
         }
         public int VisibilityRange { get; set; }
-        //public List<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; set; }
         public Map myMap { get; set; }
     }
 }

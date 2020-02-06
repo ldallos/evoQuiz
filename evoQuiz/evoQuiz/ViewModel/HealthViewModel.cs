@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    public class HealthViewModel: WindowViewModel
+    public class HealthViewModel: ViewModelBase
     {
         private Character _myCharacter;
 

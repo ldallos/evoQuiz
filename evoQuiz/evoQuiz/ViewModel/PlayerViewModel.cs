@@ -9,14 +9,14 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    public class PlayerViewModel : IViewModel
+    public class PlayerViewModel : TileViewModel
     {
         public Player myPlayer { get; set; }
-        public int PosX { get { return myPlayer.PositionX; } set { myPlayer.PositionX = value; OnPropertyChanged("PosX"); } }
-        public int PosY { get { return myPlayer.PositionY; } set { myPlayer.PositionY = value; OnPropertyChanged("PosY"); } }
-        public int PosZ { get { return myPlayer.PositionZ; } set { myPlayer.PositionZ = value; OnPropertyChanged("PosZ"); } }
-        public int Size { get { return Parent.MapScale; } }
-        public BitmapImage Skin
+        public override int PosX { get { return myPlayer.PositionX; } set { myPlayer.PositionX = value; OnPropertyChanged("PosX"); } }
+        public override int PosY { get { return myPlayer.PositionY; } set { myPlayer.PositionY = value; OnPropertyChanged("PosY"); } }
+        public override int PosZ { get { return myPlayer.PositionZ; } set { myPlayer.PositionZ = value; OnPropertyChanged("PosZ"); } }
+        public override int Size { get { return Parent.MapScale; } set { } }
+        public override BitmapImage Skin
         {
             get
             {
@@ -30,16 +30,6 @@ namespace evoQuiz.ViewModel
             Parent = parent;
             myPlayer.VisibilityRange = 10;
             Update();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
         }
 
 
@@ -147,7 +137,7 @@ namespace evoQuiz.ViewModel
         //}
 
 
-        private List<IViewModel> GetSurroundingShadows(IViewModel shadow)
+        private List<TileViewModel> GetSurroundingShadows(TileViewModel shadow)
         {
             return Parent.GridItems.Where(x=> x is ShadowViewModel && Math.Sqrt(Math.Pow(Math.Abs(x.PosY - shadow.PosY), 2) + Math.Pow(Math.Abs(x.PosX - shadow.PosX), 2)) < 2).ToList();
         }
@@ -259,7 +249,7 @@ namespace evoQuiz.ViewModel
             foreach (var shadow in Parent.GridItems.Where(i => i is ShadowViewModel))
             {
                 float OpacitySum = 0;
-                List<IViewModel> SurShadows = GetSurroundingShadows(shadow);
+                List<TileViewModel> SurShadows = GetSurroundingShadows(shadow);
                 foreach (var s in SurShadows)
                 {
                     OpacitySum += (float)(s as ShadowViewModel).Opacity;

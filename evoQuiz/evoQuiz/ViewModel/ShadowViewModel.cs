@@ -10,15 +10,15 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    class ShadowViewModel: IViewModel
+    class ShadowViewModel: TileViewModel
     {
         public Shadow myShadow { get; set; }
-        public int PosX { get { return myShadow.PositionX; } set { myShadow.PositionX = value; OnPropertyChanged("PosX"); } }
-        public int PosY { get { return myShadow.PositionY; } set { myShadow.PositionY = value; OnPropertyChanged("PosY"); } }
-        public int PosZ { get { return myShadow.PositionZ; } set { myShadow.PositionZ = value; OnPropertyChanged("PosY"); } }
-        public int Size { get { return Parent.MapScale; } }
+        public override int PosX { get { return myShadow.PositionX; } set { myShadow.PositionX = value; OnPropertyChanged("PosX"); } }
+        public override int PosY { get { return myShadow.PositionY; } set { myShadow.PositionY = value; OnPropertyChanged("PosY"); } }
+        public override int PosZ { get { return myShadow.PositionZ; } set { myShadow.PositionZ = value; OnPropertyChanged("PosY"); } }
+        public override int Size { get { return Parent.MapScale; } set { } }
         public double Opacity { get { return myShadow.Opacity; } set { myShadow.Opacity = value; OnPropertyChanged("Opacity"); } }
-        public BitmapImage Skin
+        public override BitmapImage Skin
         {
             get
             {
@@ -32,17 +32,5 @@ namespace evoQuiz.ViewModel
             myShadow = new Shadow(x,y);
             Opacity = 1;
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
     }
 }

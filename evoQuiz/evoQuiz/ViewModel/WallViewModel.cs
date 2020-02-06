@@ -13,17 +13,17 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    class WallViewModel : IViewModel
+    class WallViewModel : TileViewModel
     {
         public Wall myWall { get; set; }
-        public int PosX { get { return myWall.PositionX; } }
-        public int PosY { get { return myWall.PositionY; } }
-        public int PosZ { get { return myWall.PositionZ; } }
-        public int Size { get { return Parent.MapScale; } }
+        public override int PosX { get { return myWall.PositionX; } set { } }
+        public override int PosY { get { return myWall.PositionY; } set { } }
+        public override int PosZ { get { return myWall.PositionZ; } set { } }
+        public override int Size { get { return Parent.MapScale; } set { } }
 
         private double _myVisibility;
         public double Visibility { get { return _myVisibility; } set { _myVisibility = value; OnPropertyChanged("Visibility"); } }
-        public BitmapImage Skin {
+        public override BitmapImage Skin {
             get
             {
                 return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/wall.png", UriKind.RelativeOrAbsolute));
@@ -31,16 +31,6 @@ namespace evoQuiz.ViewModel
         }
 
         public MainViewModel Parent { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
 
         public WallViewModel(Wall wall)
         {

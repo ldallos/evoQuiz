@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace evoQuiz.Model
 {
-    abstract class Item
+    public abstract class Item
     {
+        public string Name { get; set; }
+        abstract public void Use(); 
     }
 }

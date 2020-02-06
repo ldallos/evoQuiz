@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace evoQuiz.ViewModel
 {
-    public class AnswerViewModel : WindowViewModel
+    public class AnswerViewModel : ViewModelBase
     {
         public Answer MyAnswer { get; set; }
         public string AnswerText { get { return MyAnswer.AnswerText; } }

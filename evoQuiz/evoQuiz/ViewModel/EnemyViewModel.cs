@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    public class EnemyViewModel: IViewModel
+    public class EnemyViewModel: TileViewModel
     {
         public Enemy myEnemy { get; set; }
-        public int PosX { get { return myEnemy.PositionX; } set { myEnemy.PositionX = value; OnPropertyChanged("PosX"); } }
-        public int PosY { get { return myEnemy.PositionY; } set { myEnemy.PositionY = value; OnPropertyChanged("PosY"); } }
-        public int PosZ { get { return myEnemy.PositionZ; } set { myEnemy.PositionZ = value; OnPropertyChanged("PosZ"); } }
-        public int Size { get { return Parent.MapScale; } }
-        public BitmapImage Skin
+        public override int PosX { get { return myEnemy.PositionX; } set { myEnemy.PositionX = value; OnPropertyChanged("PosX"); } }
+        public override int PosY { get { return myEnemy.PositionY; } set { myEnemy.PositionY = value; OnPropertyChanged("PosY"); } }
+        public override int PosZ { get { return myEnemy.PositionZ; } set { myEnemy.PositionZ = value; OnPropertyChanged("PosZ"); } }
+        public override int Size { get { return Parent.MapScale; } set { } }
+        public override BitmapImage Skin
         {
             get
             {
@@ -34,16 +34,6 @@ namespace evoQuiz.ViewModel
         {
             myEnemy = enemy;
             Parent = parent;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
         }
     }
 }
