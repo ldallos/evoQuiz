@@ -18,6 +18,7 @@ namespace evoQuizQuestionMaker.ViewModel
         //a relatív útvonal
         private string MainPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\Questions\\"));
 
+
         /// <summary>
         /// a kérdés lementése
         /// </summary>
@@ -26,19 +27,41 @@ namespace evoQuizQuestionMaker.ViewModel
         /// <param name="goodanswer">a helyes válasz</param>
         public void SerializeQuestion(string question, List<string> badanswers, string goodanswer)
         {
-            //TODO: több kérdés feltöltése
-
-
-            File.WriteAllText(MainPath + "question.xml", "");
-
+            List<QuizQuestion> newQuestions = new List<QuizQuestion>(); //a friss kérdéslista
+            //az régi kérdések betöltése (ha vannak)
+            if (File.Exists(MainPath + "question.xml"))
+                newQuestions = DeserializeQuestion(); 
+            //az új kérdés létrehozása
             QuizQuestion myQuizQuestion = new QuizQuestion("ToDo", question, badanswers, goodanswer, 1);
+            //az új kérdés listába felvétele
+            newQuestions.Add(myQuizQuestion);
 
-            var mySerializer = new XmlSerializer(typeof(QuizQuestion));
-
+            //a kérdések elmentése
+            File.WriteAllText(MainPath + "question.xml", "");
+            var mySerializer = new XmlSerializer(typeof(List<QuizQuestion>));
             using (var writer = XmlWriter.Create(MainPath + "question.xml"))
             {
-                mySerializer.Serialize(writer, myQuizQuestion);
+                mySerializer.Serialize(writer, newQuestions);
             }
+        }
+
+        /// <summary>
+        /// kérdéseknek fájlból való beolvasása 
+        /// </summary>
+        /// <returns>a kérdések listája</returns>
+        public List<QuizQuestion> DeserializeQuestion()
+        {
+            //a betöltött kérdések listája
+            List<QuizQuestion> questions;
+
+            string xmlInputData = File.ReadAllText(MainPath + "question.xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(List<QuizQuestion>));
+            using (StringReader reader = new StringReader(xmlInputData))
+            {
+                questions = (List<QuizQuestion>)serializer.Deserialize(reader);
+            }
+
+            return questions;
         }
     }
 }
