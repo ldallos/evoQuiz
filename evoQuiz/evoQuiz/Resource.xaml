@@ -60,5 +60,9 @@
     <Style TargetType="TextBlock" x:Key="PixelText">
         <Setter Property="FontFamily" Value="./Font/#Retro Gaming"/>
     </Style>
-    
+
+    <Style TargetType="Button" x:Key="PixelButton">
+        <Setter Property="FontFamily" Value="./Font/#Retro Gaming"/>
+    </Style>
+
 </ResourceDictionary>

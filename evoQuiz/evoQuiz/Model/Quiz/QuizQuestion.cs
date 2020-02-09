@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace evoQuizQuestionMaker.Model
+namespace evoQuiz.Model
 {
     public class QuizQuestion
     {

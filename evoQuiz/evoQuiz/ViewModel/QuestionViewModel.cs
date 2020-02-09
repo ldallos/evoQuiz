@@ -1,5 +1,7 @@
 ﻿using evoQuiz.Model;
 using evoQuiz.Model.Quiz;
+using evoQuizQuestionMaker;
+using evoQuizQuestionMaker.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+
 
 namespace evoQuiz.ViewModel
 {
@@ -57,21 +60,21 @@ namespace evoQuiz.ViewModel
             set { myQuestionControlVisible = value; OnPropertyChanged("QuestionControlVisible"); }
         }
 
-        public Queue<Question> Questions { get; set; } = new Queue<Question>();
+        public Queue<QuizQuestion> Questions { get; set; } = new Queue<QuizQuestion>();
         public ObservableCollection<AnswerViewModel> Answers { get; set; } = new ObservableCollection<AnswerViewModel>();
 
-        private Question myCurrentQuestion;
-        public Question CurrentQuestion
+        private QuizQuestion myCurrentQuestion;
+        public QuizQuestion CurrentQuestion
         {
             get { return myCurrentQuestion; }
             set { myCurrentQuestion = value; OnPropertyChanged("QuestionText"); OnPropertyChanged("Answer1Text"); OnPropertyChanged("Answer2Text"); OnPropertyChanged("Answer3Text"); OnPropertyChanged("Answer4Text"); }
         }
-        public string QuestionText { get { return CurrentQuestion.QuestionText; } }
+        public string QuestionText { get { return CurrentQuestion.myQuestion; } }
 
         public QuestionViewModel()
         {
             QuestionControlVisible = false;
-            CurrentQuestion = new Question() { QuestionText = "PlaceHolder", Answers = new Answer[] { new Answer() { AnswerText = "" }, new Answer() { AnswerText = "" }, new Answer() { AnswerText = "" }, new Answer() { AnswerText = "" }}};
+            CurrentQuestion = new QuizQuestion();
             GetQuestions();
 
             
@@ -79,14 +82,16 @@ namespace evoQuiz.ViewModel
 
         private void GetQuestions()
         {
-            // to do.
-            //próbának jelenleg
 
-            Questions.Enqueue(new Question() { MyDifficulty = Question.Difficulty.Easy, QuestionText = "asd1", Answers = new Answer[] { new Answer() { AnswerText = "t1", IsCorrect=true}, new Answer() { AnswerText = "t2" }, new Answer() { AnswerText = "t3" }, new Answer() { AnswerText = "t4" } } });
-            Questions.Enqueue(new Question() { MyDifficulty = Question.Difficulty.Medium, QuestionText = "asd21312", Answers = new Answer[] { new Answer() { AnswerText = "t1", IsCorrect = true }, new Answer() { AnswerText = "t2" }, new Answer() { AnswerText = "t3" }, new Answer() { AnswerText = "t4" } } });
-            Questions.Enqueue(new Question() { MyDifficulty = Question.Difficulty.VeryEasy, QuestionText = "asd311111111", Answers = new Answer[] { new Answer() { AnswerText = "t1", IsCorrect = true }, new Answer() { AnswerText = "t2" }, new Answer() { AnswerText = "t3" }, new Answer() { AnswerText = "t4" } } });
-            Questions.Enqueue(new Question() { MyDifficulty = Question.Difficulty.Hard, QuestionText = "asd22224", Answers = new Answer[] { new Answer() { AnswerText = "t1", IsCorrect = true }, new Answer() { AnswerText = "t2" }, new Answer() { AnswerText = "t3" }, new Answer() { AnswerText = "t4" } } });
-            Questions.Enqueue(new Question() { MyDifficulty = Question.Difficulty.VeryHard, QuestionText = "asd533333333333333", Answers = new Answer[] { new Answer() { AnswerText = "t1", IsCorrect = true }, new Answer() { AnswerText = "t2" }, new Answer() { AnswerText = "t3" }, new Answer() { AnswerText = "t4" } } });
+
+            Questions.Enqueue(new QuizQuestion() { myQuestion ="q1", myRightAnswer = "a1", myWrongAnswers = {"a2", "a3", "a4"} });
+            Questions.Enqueue(new QuizQuestion() { myQuestion = "q2", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
+            Questions.Enqueue(new QuizQuestion() { myQuestion = "q3", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
+            Questions.Enqueue(new QuizQuestion() { myQuestion = "q4", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
+            Questions.Enqueue(new QuizQuestion() { myQuestion = "q5", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
+            Questions.Enqueue(new QuizQuestion() { myQuestion = "q6", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
+            Questions.Enqueue(new QuizQuestion() { myQuestion = "q7", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
+            Questions.Enqueue(new QuizQuestion() { myQuestion = "q8", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
         }
 
 
@@ -103,18 +108,41 @@ namespace evoQuiz.ViewModel
         {
             CurrentQuestion = Questions.Dequeue();
 
-            int[][] Pos = new int[][] { new int[] { 0, 0 }, new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 1, 1 } };
-
-            for (int i = 0; i < CurrentQuestion.Answers.Length; i++)
+            List<int[]> Positions = new List<int[]>() { new int[] { 0, 0 }, new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 1, 1 } };
+            Positions = ShuffleList(Positions);
+            Queue<int[]> PosQueue = new Queue<int[]>();
+            foreach (var pos in Positions)
             {
-                Answers.Add(new AnswerViewModel(CurrentQuestion.Answers[i], Pos[i], this));
+                PosQueue.Enqueue(pos);
+            }
+
+            Answers.Add(new AnswerViewModel(CurrentQuestion.myRightAnswer, PosQueue.Dequeue(), this));
+
+            foreach (var answer in CurrentQuestion.myWrongAnswers)
+            {
+                Answers.Add(new AnswerViewModel(answer, PosQueue.Dequeue(), this));
             }
         }
 
-
-        public void Quiz(Answer answer)
+        private List<E> ShuffleList<E>(List<E> inputList)
         {
-            if (answer.IsCorrect)
+            List<E> randomList = new List<E>();
+
+            Random r = new Random();
+            int randomIndex = 0;
+            while (inputList.Count > 0)
+            {
+                randomIndex = r.Next(0, inputList.Count); //Choose a random object in the list
+                randomList.Add(inputList[randomIndex]); //add it to the new, random list
+                inputList.RemoveAt(randomIndex); //remove to avoid duplicates
+            }
+
+            return randomList; //return the new random list
+        }
+
+        public void Quiz(string answer)
+        {
+            if (answer == CurrentQuestion.myRightAnswer)
             {
                 EnemyVM.myEnemy.Health -= MyPlayer.Damage*10;
                 EnemyHealthViewModel.Update();
@@ -146,7 +174,7 @@ namespace evoQuiz.ViewModel
         private void OpenWindow()
         {
             QuestionControlVisible = true;
-            Offset = new Thickness(0, ControlHeight, 0,0);
+            Offset = new Thickness(0, ControlHeight*0.4, 0,0);
             Fade = 0;
             ActionsToAdd.Add(FadeIn);
         }

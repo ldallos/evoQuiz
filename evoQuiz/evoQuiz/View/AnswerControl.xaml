@@ -9,6 +9,8 @@
     <Grid>
         <Button Command="{Binding AnswerClickCommand}"
                 Content="{Binding Path=AnswerText}"
+                Style="{StaticResource PixelButton}"
+                FontSize="20"
          >
             <Button.Background>
                 <ImageBrush RenderOptions.BitmapScalingMode="NearestNeighbor" ImageSource="/Images/answer.png" Stretch="Fill"/>

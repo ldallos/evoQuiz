@@ -104,6 +104,8 @@
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Quiz\Answer.cs" />
     <Compile Include="Model\Quiz\Question.cs" />
+    <Compile Include="Model\Quiz\QuestionTopic.cs" />
+    <Compile Include="Model\Quiz\QuizQuestion.cs" />
     <Compile Include="Model\Shadow.cs" />
     <Compile Include="Model\TileElement.cs" />
     <Compile Include="Model\Trap.cs" />

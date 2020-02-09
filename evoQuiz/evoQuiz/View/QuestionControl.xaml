@@ -12,9 +12,9 @@
     </UserControl.Resources>
 
 
-    <Canvas Visibility ="{Binding Path=QuestionControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}" Background="Black" Opacity="{Binding Path=Fade}">
+    <Canvas Visibility ="{Binding Path=QuestionControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}">
 
-        <Grid  Width="{Binding Path=ControlWidth}" Height="{Binding Path=ControlHeight}" >
+        <Grid  Width="{Binding Path=ControlWidth}" Height="{Binding Path=ControlHeight}"  Background="#66000000" Opacity="{Binding Path=Fade}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -40,7 +40,7 @@
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{Binding Path=QuestionText}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Grid.Row="0" Text="{Binding Path=QuestionText}" Style="{StaticResource PixelText}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center">
 
                 </TextBlock>
 
@@ -61,7 +61,7 @@
                 <Button x:Name="Answer3Button" Grid.Row="0" Grid.Column="1" Content="{Binding Path=Answer3Text}"></Button>
                 <Button x:Name="Answer4Button" Grid.Row="1" Grid.Column="1" Content="{Binding Path=Answer4Text}"></Button>
                 -->
-                    <ItemsControl ItemsSource="{Binding Path=Answers}">
+                    <ItemsControl ItemsSource="{Binding Path=Answers}" SnapsToDevicePixels="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <Grid>
@@ -80,7 +80,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <local:AnswerControl></local:AnswerControl>
+                                    <local:AnswerControl SnapsToDevicePixels="True"></local:AnswerControl>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
