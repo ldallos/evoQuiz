@@ -270,6 +270,19 @@ namespace evoQuiz.ViewModel
             Parent.myQuestionViewModel.StartQuiz(enemy);
         }
 
+        private void CheckItems()
+        {
+            ItemViewModel item = Parent.GridItems.Where(x => x is ItemViewModel && x.PosX == this.PosX && x.PosY == this.PosY).FirstOrDefault() as ItemViewModel;
+
+            if (item is null)
+            {
+                return;
+            }
+
+            myPlayer.Inventory.Add(item.MyItem);
+            Parent.GridItems.Remove(item);
+        }
+
         private void Update()
         {
             Parent.GridItems.Where(i => i is ShadowViewModel).ToList().ForEach(i => (i as ShadowViewModel).Opacity = 1);
@@ -277,6 +290,7 @@ namespace evoQuiz.ViewModel
             drawBresenhamCircle(PosX, PosY, myPlayer.VisibilityRange);
             BlendShadows();
             CheckEnemy();
+            CheckItems();
         }
     }
 }

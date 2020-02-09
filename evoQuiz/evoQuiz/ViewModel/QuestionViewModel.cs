@@ -7,11 +7,44 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
     public class QuestionViewModel : ViewModelBase
     {
+        private Thickness myOffset;
+        public Thickness Offset
+        {
+            get { return myOffset; }
+            set { myOffset = value; OnPropertyChanged("Offset"); }
+        }
+
+        private double myFade;
+        public double Fade
+        {
+            get { return myFade; }
+            set { myFade = value; OnPropertyChanged("Fade"); }
+        }
+
+        private double myMonsterFade;
+        public double MonsterFade
+        {
+            get { return myMonsterFade; }
+            set { myMonsterFade = value; OnPropertyChanged("MonsterFade"); }
+        }
+
+
+        private BitmapImage myMonsterSkin;
+        public BitmapImage MonsterSkin
+        {
+            get { return myMonsterSkin; }
+            set { myMonsterSkin = value; OnPropertyChanged("MonsterSkin"); }
+        }
+
+        public double ControlHeight { get; set; }    
+        public double ControlWidth { get; set; }
         public EnemyViewModel EnemyVM { get; set; }
         public HealthViewModel EnemyHealthViewModel { get; set; }
         public Player MyPlayer { get; set; }
@@ -60,9 +93,10 @@ namespace evoQuiz.ViewModel
         public void StartQuiz(EnemyViewModel enemy)
         {
             EnemyVM = enemy;
-            QuestionControlVisible = true;
+            MonsterSkin = EnemyVM.Skin;
             EnemyHealthViewModel = new HealthViewModel(enemy.myEnemy);
             GetCurrentQuestion();
+            OpenWindow();
         }
 
         private void GetCurrentQuestion()
@@ -82,19 +116,20 @@ namespace evoQuiz.ViewModel
         {
             if (answer.IsCorrect)
             {
-                EnemyVM.myEnemy.Health -= MyPlayer.Damage;
-
+                EnemyVM.myEnemy.Health -= MyPlayer.Damage*10;
+                EnemyHealthViewModel.Update();
+                EnemyVM.myEnemy.Ability(MyPlayer);
                 if (EnemyVM.myEnemy.Health<=0)
                 {
                     EndQuiz();
                     return;
                 }
 
-                
             }
             else
             {
                 MyPlayer.Health -= EnemyVM.myEnemy.Damage;
+                Parent.myHealthViewModel.Update();
             }
 
             GetCurrentQuestion();
@@ -104,7 +139,51 @@ namespace evoQuiz.ViewModel
         private void EndQuiz()
         {
             QuestionControlVisible = false;
+            MyPlayer.Gold += EnemyVM.myEnemy.Gold;
             Parent.GridItems.Remove(EnemyVM);
+        }
+
+        private void OpenWindow()
+        {
+            QuestionControlVisible = true;
+            Offset = new Thickness(0, ControlHeight, 0,0);
+            Fade = 0;
+            ActionsToAdd.Add(FadeIn);
+        }
+
+
+        private void SlideUp()
+        {
+            double x = Offset.Top;
+            x--;
+            Offset = new Thickness(0, x, 0, 0);
+            if (Offset.Top <=0)
+            {
+                Offset = new Thickness(0, 0, 0, 0);
+                ActionsToStop.Add(SlideUp);
+                ActionsToAdd.Add(MonsterFadeIn);
+            }
+        }
+
+        private void FadeIn()
+        {
+            Fade += 0.001;
+            if (Fade >=1)
+            {
+                Fade = 1;
+                ActionsToStop.Add(FadeIn);
+                ActionsToAdd.Add(SlideUp);
+            }
+        }
+
+        private void MonsterFadeIn()
+        {
+            MonsterFade += 0.003;
+            if (MonsterFade >= 1)
+            {
+                MonsterFade = 1;
+                ActionsToStop.Add(MonsterFadeIn);
+            }
         }
     }
 }

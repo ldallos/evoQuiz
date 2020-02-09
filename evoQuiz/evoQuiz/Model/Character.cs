@@ -10,6 +10,7 @@ namespace evoQuiz.Model
     {
         public int Health { get; set; } = 10;
         public int Damage { get; set; } = 10;
+        public int Gold { get; set; }
         public Character(int X, int Y) : base(X, Y)
         {
 

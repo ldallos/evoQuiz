@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace evoQuiz.Model
 {
-    public class Enemy : Character
+    public abstract class Enemy : Character
     {
         public Enemy(int X, int Y) : base(X, Y)
         {
@@ -18,5 +18,7 @@ namespace evoQuiz.Model
         {
             
         }
+
+        public abstract void Ability(Player player);
     }
 }

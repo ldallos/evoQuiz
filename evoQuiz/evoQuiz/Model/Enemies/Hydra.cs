@@ -3,24 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace evoQuiz.Model.Enemies
 {
-    public class Skeleton:Enemy
+    public class Hydra : Enemy
     {
-        public Skeleton(int X, int Y) : base(X, Y)
-        {
-            
-        }
-        public Skeleton()
-        {
-
-        }
-
         public override void Ability(Player player)
         {
-            return;
+            throw new NotImplementedException();
         }
     }
 }

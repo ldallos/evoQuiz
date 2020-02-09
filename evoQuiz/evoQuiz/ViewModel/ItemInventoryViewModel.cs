@@ -1,15 +1,15 @@
-﻿using System;
+﻿using evoQuiz.Model.Items;
+using evoQuiz.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using evoQuiz.Model;
-using evoQuiz.Model.Items;
 
 namespace evoQuiz.ViewModel
 {
-    public class ItemViewModel : TileViewModel
+    public class ItemInventoryViewModel : TileViewModel
     {
         private Item _myItem;
         public Item MyItem
@@ -18,11 +18,13 @@ namespace evoQuiz.ViewModel
             set { _myItem = value; OnPropertyChanged("Skin"); }
         }
 
-        public override int PosX { get { return MyItem.PositionX; } set { MyItem.PositionX = value; OnPropertyChanged("PosX"); } }
-        public override int PosY { get { return MyItem.PositionY; } set { MyItem.PositionY = value; OnPropertyChanged("PosY"); } }
-        public override int PosZ { get { return MyItem.PositionZ; } set { MyItem.PositionZ = value; OnPropertyChanged("PosZ"); } }
-        public override int Size { get { return Parent.MapScale; } set { } }
-        public MainViewModel Parent { get; set; }
+        public string ItemName { get { return MyItem.Name; } }
+        public string ItemDescription { get { return MyItem.Description; } }
+        public override int PosX { get; set; }
+        public override int PosY { get; set; }
+        public override int PosZ { get; set; }
+        public override int Size { get { return Parent.ItemSize; } set { } }
+        public InventoryViewModel Parent { get; set; }
         public override BitmapImage Skin
         {
             get
@@ -40,10 +42,9 @@ namespace evoQuiz.ViewModel
             }
         }
 
-        public ItemViewModel(Item item, MainViewModel parent)
+        public ItemInventoryViewModel(Item item)
         {
             MyItem = item;
-            Parent = parent;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using evoQuiz.Model;
 using evoQuiz.Model.Enemies;
+using evoQuiz.Model.Items;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -65,8 +66,24 @@ namespace evoQuizMapMaker.ViewModel
                     if (Parent.SelectedEnemyType == typeof(Skeleton))
                     {
                         myTileElement = new Skeleton(PosX, PosY);
-                    }
+                    }                    
+                    break;
+                case Helper.Mode.ItemMode:
                     
+
+                    if (Parent.SelectedItemType == typeof(Potion))
+                    {
+                        TileColor = Brushes.Magenta;
+                        myTileElement = new Potion(PosX, PosY);
+                        break;
+                    }
+                    if (Parent.SelectedItemType == typeof(Sword))
+                    {
+                        TileColor = Brushes.Silver;
+                        myTileElement = new Sword(PosX, PosY);
+                        break;
+                    }
+
                     break;
                 case Helper.Mode.PlayerMode:
                     TileColor = Brushes.Yellow;

@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace evoQuiz.Model.Enemies
 {
-    public class Skeleton:Enemy
+    public class Thief : Enemy
     {
-        public Skeleton(int X, int Y) : base(X, Y)
-        {
-            
-        }
-        public Skeleton()
+        public Thief(int X, int Y) : base(X, Y)
         {
 
         }
+        public Thief()
+        {
+
+        }
+
 
         public override void Ability(Player player)
         {
-            return;
+            int goldToSteal = (int)(player.Gold * 0.1);
+            this.Gold += goldToSteal;
+            player.Gold -= goldToSteal;
         }
     }
 }

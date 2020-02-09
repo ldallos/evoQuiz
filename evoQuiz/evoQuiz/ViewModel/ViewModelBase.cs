@@ -18,5 +18,17 @@ namespace evoQuiz.ViewModel
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        public void Update()
+        {
+            Actions = ActionsToAdd.Except(ActionsToStop).ToList();
+            foreach (var action in Actions)
+            {
+                action();
+            }
+        }
+        protected List<Action> Actions = new List<Action>();
+        protected List<Action> ActionsToStop = new List<Action>();
+        protected List<Action> ActionsToAdd = new List<Action>();
     }
 }

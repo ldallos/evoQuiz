@@ -10,29 +10,42 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
     </UserControl.Resources>
-    
-    <Grid  Visibility ="{Binding Path=QuestionControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1" Opacity="0.8">
-                <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="Transparent" Offset="4"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="4*"/>
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="20">
+
+    <Canvas Visibility ="{Binding Path=QuestionControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}" Background="Black" Opacity="{Binding Path=Fade}">
+
+        <Grid  Width="{Binding Path=ControlWidth}" Height="{Binding Path=ControlHeight}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Image Grid.Column="0" Source="/Images/chains.png" Stretch="Uniform" Height="{Binding Path=ControlHeight}" HorizontalAlignment="Left"></Image>
+            <Image Grid.Column="1" Source="/Images/chains.png" Stretch="Uniform" Height="{Binding Path=ControlHeight}" HorizontalAlignment="Right"></Image>
+
+            <Image Grid.Column="1" Source="{Binding Path=MonsterSkin}" Stretch="Uniform" Height="{Binding Path=ControlHeight}" HorizontalAlignment="Right" Opacity="{Binding Path=MonsterFade}"></Image>
+        </Grid>
+    
+        <Grid Margin="{Binding Path=Offset}" Width="{Binding Path=ControlWidth}" Height="{Binding Path=ControlHeight}" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="7*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding Path=QuestionText}"></TextBlock>
+            <Image Grid.Row="1" Source="/Images/questionbackground.png" Stretch="Fill"></Image>
 
-            <Grid Grid.Row="1">
-                <!--
+            <Grid Grid.Row="1" Margin="50,20,50,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="7*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{Binding Path=QuestionText}" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                </TextBlock>
+
+                <Grid Grid.Row="1">
+                    <!--
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
@@ -48,70 +61,71 @@
                 <Button x:Name="Answer3Button" Grid.Row="0" Grid.Column="1" Content="{Binding Path=Answer3Text}"></Button>
                 <Button x:Name="Answer4Button" Grid.Row="1" Grid.Column="1" Content="{Binding Path=Answer4Text}"></Button>
                 -->
-                <ItemsControl ItemsSource="{Binding Path=Answers}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
+                    <ItemsControl ItemsSource="{Binding Path=Answers}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                            </Grid>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <local:AnswerControl></local:AnswerControl>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="Grid.Column" Value="{Binding Path=PosX}" />
-                            <Setter Property="Grid.Row" Value="{Binding Path=PosY}" />
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
-                </ItemsControl>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <local:AnswerControl></local:AnswerControl>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Grid.Column" Value="{Binding Path=PosX}" />
+                                <Setter Property="Grid.Row" Value="{Binding Path=PosY}" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>
 
 
+                </Grid>
+            </Grid>
+
+
+            <!--UI grid-->
+            <Grid ShowGridLines="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <local:HealthControl Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" DataContext="{Binding Path=EnemyHealthViewModel}"></local:HealthControl>
             </Grid>
         </Grid>
-
-
-        <!--UI grid-->
-        <Grid ShowGridLines="False">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <local:HealthControl Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" DataContext="{Binding Path=EnemyHealthViewModel}"></local:HealthControl>
-        </Grid>
-    </Grid>
+    </Canvas>
 </UserControl>

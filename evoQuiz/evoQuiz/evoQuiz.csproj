@@ -93,7 +93,9 @@
     <Compile Include="GridHelper.cs" />
     <Compile Include="MapSerializer.cs" />
     <Compile Include="Model\Character.cs" />
+    <Compile Include="Model\Enemies\Hydra.cs" />
     <Compile Include="Model\Enemies\Skeleton.cs" />
+    <Compile Include="Model\Enemies\Thief.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Items\Potion.cs" />
@@ -108,13 +110,18 @@
     <Compile Include="Model\Wall.cs" />
     <Compile Include="SizeObserver.cs" />
     <Compile Include="ViewModel\AnswerViewModel.cs" />
+    <Compile Include="ViewModel\GoldViewModel.cs" />
     <Compile Include="ViewModel\HealthViewModel.cs" />
     <Compile Include="ViewModel\InventoryViewModel.cs" />
+    <Compile Include="ViewModel\ItemInventoryViewModel.cs" />
     <Compile Include="ViewModel\ItemViewModel.cs" />
     <Compile Include="View\AnswerControl.xaml.cs">
       <DependentUpon>AnswerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SoundsViewModel.cs" />
+    <Compile Include="View\GoldControl.xaml.cs">
+      <DependentUpon>GoldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HealthControl.xaml.cs">
       <DependentUpon>HealthControl.xaml</DependentUpon>
     </Compile>
@@ -146,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Credits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GoldControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +230,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Resource Include="Font\Retro Gaming.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -307,6 +319,11 @@
     <Resource Include="Images\Items\potion.png" />
     <Resource Include="Images\Items\sword.png" />
     <Resource Include="Images\inventory_tile.png" />
+    <Resource Include="Images\answer.png" />
+    <Resource Include="Images\question.png" />
+    <Resource Include="Images\goldcounter.png" />
+    <Resource Include="Images\questionbackground.png" />
+    <Resource Include="Images\chains.png" />
     <Content Include="Sounds\GameSong.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

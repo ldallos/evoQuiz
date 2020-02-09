@@ -26,7 +26,7 @@
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Button x:Name="StartButton" Content="Start" Grid.Column="0" Grid.Row="2" Click="StartButton_Click" Style="{StaticResource mainMenuButton}"/>
         <Button x:Name="EditorButton" Content="Editor" Grid.Column="0" Grid.Row="3" Click="EditorButton_Click" Style="{StaticResource mainMenuButton}"/>
         <Button x:Name="OptionsButton" Content="Options" Grid.Column="0" Grid.Row="4" Click="OptionsButton_Click" Style="{StaticResource mainMenuButton}"/>

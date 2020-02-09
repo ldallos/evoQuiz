@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using evoQuiz;
 using evoQuiz.Model;
+using evoQuiz.Model.Items;
 using evoQuiz.Model.Enemies;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -20,7 +21,9 @@ namespace evoQuizMapMaker.ViewModel
     {
         public ObservableCollection<TileViewModel> Tiles { get; set; }
         public ObservableCollection<Type> EnemyTypes { get; set; }
+        public ObservableCollection<Type> ItemTypes { get; set; }
         public Type SelectedEnemyType { get; set; }
+        public Type SelectedItemType { get; set; }
         public evoQuiz.Model.Map myMap { get; set; } = new evoQuiz.Model.Map();
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
         public int MapSizeY { get { return myMap.SizeY; } set { myMap.SizeY = value; OnPropertyChanged("MapSizeY"); } }
@@ -59,7 +62,8 @@ namespace evoQuizMapMaker.ViewModel
             NewMapControlVisible = false;
             Tiles = new ObservableCollection<TileViewModel>();
 
-            EnemyTypes = new ObservableCollection<Type>() {typeof(Skeleton) };
+            EnemyTypes = new ObservableCollection<Type>() { typeof(Skeleton), typeof(Thief), typeof(Hydra) };
+            ItemTypes = new ObservableCollection<Type>() { typeof(Potion), typeof(Sword) };
 
             SaveMapCommand = new RelayCommand(SaveMap);
             NewMapCommand = new RelayCommand(NewMap);
@@ -143,6 +147,14 @@ namespace evoQuizMapMaker.ViewModel
                 else if (element is Trap)
                 {
                     tile.TileColor = Brushes.Red;
+                }
+                else if (element is Potion)
+                {
+                    tile.TileColor = Brushes.Magenta;
+                }
+                else if (element is Sword)
+                {
+                    tile.TileColor = Brushes.Silver;
                 }
             }
         }

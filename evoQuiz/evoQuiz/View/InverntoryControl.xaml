@@ -25,8 +25,16 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Image Source="/Images/inventory_tile.png" SnapsToDevicePixels="True"  Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
-                        <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                        <Image Source="/Images/inventory_tile.png" SnapsToDevicePixels="True"  Width="{Binding Path=ItemSize}" Height="{Binding Path=ItemSize}" ></Image>
+                        <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Width="{Binding Path=ItemSize}" Height="{Binding Path=ItemSize}" >
+                            <Image.ToolTip>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path=ItemName}" Style="{StaticResource PixelText}" FontSize="18"></TextBlock>
+                                    <TextBlock Text="{Binding Path=ItemDescription}" Style="{StaticResource PixelText}" FontSize="18" ></TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
+                        
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -156,9 +156,21 @@
       <PositionY>0</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
+    <TileElement xsi:type="Potion">
+      <PositionX>1</PositionX>
+      <PositionY>1</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Élet Bájital</Name>
+      <Description>Visszatölt 2 életpontot.</Description>
+    </TileElement>
     <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Sword">
+      <PositionX>1</PositionX>
+      <PositionY>3</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Kristály Kard</Name>
+      <Description>Elpusztít két válaszlehetőséget egy adott kérdésnél.</Description>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>1</PositionX>
       <PositionY>4</PositionY>
@@ -169,7 +181,13 @@
       <PositionY>5</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Potion">
+      <PositionX>1</PositionX>
+      <PositionY>6</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Élet Bájital</Name>
+      <Description>Visszatölt 2 életpontot.</Description>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -228,7 +246,10 @@
       <PositionY>2</PositionY>
       <PositionZ>3</PositionZ>
       <Health>10</Health>
+      <Damage>2</Damage>
+      <Gold>0</Gold>
       <VisibilityRange>20</VisibilityRange>
+      <Inventory />
     </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -250,7 +271,13 @@
       <PositionY>10</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Sword">
+      <PositionX>2</PositionX>
+      <PositionY>11</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Kristály Kard</Name>
+      <Description>Elpusztít két válaszlehetőséget egy adott kérdésnél.</Description>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -365,6 +392,9 @@
       <PositionX>4</PositionX>
       <PositionY>2</PositionY>
       <PositionZ>0</PositionZ>
+      <Health>10</Health>
+      <Damage>2</Damage>
+      <Gold>0</Gold>
     </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>4</PositionX>
@@ -720,7 +750,13 @@
       <PositionY>0</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Sword">
+      <PositionX>8</PositionX>
+      <PositionY>1</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Kristály Kard</Name>
+      <Description>Elpusztít két válaszlehetőséget egy adott kérdésnél.</Description>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -753,7 +789,13 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Potion">
+      <PositionX>8</PositionX>
+      <PositionY>18</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Élet Bájital</Name>
+      <Description>Visszatölt 2 életpontot.</Description>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>8</PositionX>
       <PositionY>19</PositionY>
@@ -1013,6 +1055,9 @@
       <PositionX>12</PositionX>
       <PositionY>6</PositionY>
       <PositionZ>0</PositionZ>
+      <Health>10</Health>
+      <Damage>2</Damage>
+      <Gold>0</Gold>
     </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -1066,7 +1111,13 @@
       <PositionY>0</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Potion">
+      <PositionX>13</PositionX>
+      <PositionY>1</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Élet Bájital</Name>
+      <Description>Visszatölt 2 életpontot.</Description>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>13</PositionX>
       <PositionY>2</PositionY>
@@ -1213,7 +1264,13 @@
       <PositionY>15</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Sword">
+      <PositionX>15</PositionX>
+      <PositionY>16</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Kristály Kard</Name>
+      <Description>Elpusztít két válaszlehetőséget egy adott kérdésnél.</Description>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -1543,7 +1600,13 @@
       <PositionY>3</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Potion">
+      <PositionX>20</PositionX>
+      <PositionY>4</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Élet Bájital</Name>
+      <Description>Visszatölt 2 életpontot.</Description>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>20</PositionX>
       <PositionY>5</PositionY>
@@ -2220,7 +2283,13 @@
       <PositionY>0</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Sword">
+      <PositionX>28</PositionX>
+      <PositionY>1</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Kristály Kard</Name>
+      <Description>Elpusztít két válaszlehetőséget egy adott kérdésnél.</Description>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -2258,7 +2327,13 @@
       <PositionY>14</PositionY>
       <PositionZ>1</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Potion">
+      <PositionX>28</PositionX>
+      <PositionY>15</PositionY>
+      <PositionZ>0</PositionZ>
+      <Name>Élet Bájital</Name>
+      <Description>Visszatölt 2 életpontot.</Description>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>28</PositionX>
       <PositionY>16</PositionY>
