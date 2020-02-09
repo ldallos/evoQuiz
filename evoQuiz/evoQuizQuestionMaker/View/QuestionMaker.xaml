@@ -1,0 +1,30 @@
+﻿<Page x:Class="evoQuizQuestionMaker.View.QuestionMaker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:evoQuizQuestionMaker.View"
+        mc:Ignorable="d"
+        Title="QuestionMaker">
+    <Grid>
+        <Label Content="Kérdés:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="26" Width="200"/>
+        <TextBox x:Name="Question" HorizontalAlignment="Left" Height="26" Margin="20,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <Label Content="Helyes válasz:" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top" Height="26" Width="200"/>
+        <TextBox x:Name="Good_Answer" HorizontalAlignment="Left" Height="26" Margin="20,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        
+        <Label Content="Témakör:" HorizontalAlignment="Left" Margin="20,179,0,0" VerticalAlignment="Top" Height="26" Width="200"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="20,210,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label Content="Nehézség:" HorizontalAlignment="Left" Margin="20,262,0,0" VerticalAlignment="Top" Height="26" Width="200"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="20,293,0,0" VerticalAlignment="Top" Width="200"/>
+        
+        <Label Content="Rossz válaszok:" HorizontalAlignment="Left" Margin="242,25,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Bad_Answer" HorizontalAlignment="Left" Height="26" Margin="242,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" />
+        <Button Content="-&gt;" HorizontalAlignment="Left" Margin="347,51,0,0" VerticalAlignment="Top" Width="26" Click="Add_BadAnswer" Height="26"/>
+        <ListBox x:Name="Bad_Answer_List" HorizontalAlignment="Left" Height="268" Margin="378,51,0,0" VerticalAlignment="Top" Width="120"/>
+        
+        <Button Content="Del" HorizontalAlignment="Left" Height="26" Margin="321,293,0,0" VerticalAlignment="Top" Width="52" Click="Del_BadAnswer"/>
+
+        <Button Content="Ok" HorizontalAlignment="Left" Height="26" Margin="730,383,0,0" VerticalAlignment="Top" Width="52" Click="Create_Question"/>
+        
+    </Grid>
+</Page>
