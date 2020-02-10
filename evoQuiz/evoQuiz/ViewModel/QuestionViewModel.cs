@@ -161,6 +161,11 @@ namespace evoQuiz.ViewModel
             {
                 MyPlayer.Health -= EnemyVM.myEnemy.Damage;
                 Parent.myHealthViewModel.Update();
+
+                if (MyPlayer.Health==0)
+                {
+                    Parent.GameOver();
+                }
             }
 
             GetCurrentQuestion();
@@ -181,7 +186,6 @@ namespace evoQuiz.ViewModel
             Fade = 0;
             Actions.Add(FadeIn);
         }
-
 
         private void SlideUp()
         {
@@ -245,7 +249,10 @@ namespace evoQuiz.ViewModel
             void DeleteItem(ItemInventoryViewModel itemToDelete)
             {
                 MyPlayer.Inventory.Remove(itemToDelete.MyItem);
+                int x = itemToDelete.PosX;
+                int y = itemToDelete.PosY;
                 myInventoryViewModel.Items.Remove(itemToDelete);
+                myInventoryViewModel.Items.Add(new ItemInventoryViewModel(null, myInventoryViewModel) { PosX = x, PosY = y });
             }
         }
     }

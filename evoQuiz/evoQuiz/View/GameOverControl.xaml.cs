@@ -1,5 +1,4 @@
 ﻿using System;
-using evoQuiz.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,23 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
-using System.Media;
 
-namespace evoQuiz
+namespace evoQuiz.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GameOverControl.xaml
     /// </summary>
-    public partial class Game : Page
+    public partial class GameOverControl : UserControl
     {
-
-        public Game()
+        public GameOverControl()
         {
             InitializeComponent();
-            Focusable = true;
-            Loaded += (s, e) => Keyboard.Focus(this);
-            SoundsViewModel.InGameMusic();
         }
     }
 }

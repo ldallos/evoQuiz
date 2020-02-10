@@ -112,6 +112,7 @@
     <Compile Include="Model\Wall.cs" />
     <Compile Include="SizeObserver.cs" />
     <Compile Include="ViewModel\AnswerViewModel.cs" />
+    <Compile Include="ViewModel\GameOverViewModel.cs" />
     <Compile Include="ViewModel\GoldViewModel.cs" />
     <Compile Include="ViewModel\HealthViewModel.cs" />
     <Compile Include="ViewModel\InventoryViewModel.cs" />
@@ -122,6 +123,9 @@
       <DependentUpon>AnswerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SoundsViewModel.cs" />
+    <Compile Include="View\GameOverControl.xaml.cs">
+      <DependentUpon>GameOverControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GoldControl.xaml.cs">
       <DependentUpon>GoldControl.xaml</DependentUpon>
     </Compile>
@@ -156,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Credits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameOverControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

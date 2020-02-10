@@ -24,6 +24,7 @@ namespace evoQuiz.ViewModel
         public HealthViewModel myHealthViewModel { get; set; }
         public InventoryViewModel myInventoryViewModel { get; set; }
         public GoldViewModel myGoldViewModel { get; set; }
+        public GameOverViewModel myGameOverViewModel { get; set; }
         private List<ViewModelBase> ViewModels = new List<ViewModelBase>();
 
         public Map myMap { get; set; }
@@ -117,8 +118,9 @@ namespace evoQuiz.ViewModel
             myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
             myInventoryViewModel = new InventoryViewModel(myPlayerViewModel.myPlayer, this);
             myGoldViewModel = new GoldViewModel(myPlayerViewModel.myPlayer);
+            myGameOverViewModel = new GameOverViewModel(myPlayerViewModel.myPlayer);
 
-
+            ViewModels.Add(myGameOverViewModel);
             ViewModels.Add(myQuestionViewModel);
             ViewModels.Add(myHealthViewModel);
             ViewModels.Add(myInventoryViewModel);
@@ -172,6 +174,12 @@ namespace evoQuiz.ViewModel
             }
         }
 
+        public void GameOver()
+        {
+            myQuestionViewModel.QuestionControlVisible = false;
+            myGameOverViewModel.Open();
+
+        }
 
         private void StartOtherThread()
         {

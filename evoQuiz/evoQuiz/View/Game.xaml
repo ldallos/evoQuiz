@@ -110,5 +110,6 @@
         </Grid>
 
         <view:InverntoryControl VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Path=myInventoryViewModel}"/>
+        <view:GameOverControl  DataContext="{Binding Path=myGameOverViewModel}"></view:GameOverControl>
     </Grid>
 </Page>
