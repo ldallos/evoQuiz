@@ -20,7 +20,7 @@ namespace evoQuizQuestionMaker.ViewModel
 
 
         /// <summary>
-        /// a kérdés lementése
+        /// egy új kérdés lementése
         /// </summary>
         /// <param name="question">a megválaszolandó kérdés</param>
         /// <param name="badanswers">rossz válaszok listája</param>
@@ -37,12 +37,35 @@ namespace evoQuizQuestionMaker.ViewModel
             newQuestions.Add(myQuizQuestion);
 
             //a kérdések elmentése
+            SerializeQuestionList(newQuestions);
+        }
+
+        /// <summary>
+        /// kérdéslista lementése
+        /// </summary>
+        /// <param name="questions"></param>
+        public void SerializeQuestionList(List<QuizQuestion> questions)
+        {
+            //a kérdések elmentése
             File.WriteAllText(MainPath + "question.xml", "");
             var mySerializer = new XmlSerializer(typeof(List<QuizQuestion>));
             using (var writer = XmlWriter.Create(MainPath + "question.xml"))
             {
-                mySerializer.Serialize(writer, newQuestions);
+                mySerializer.Serialize(writer, questions);
             }
+        }
+
+        /// <summary>
+        /// a mentett listából kitörli az adott kérdést
+        /// </summary>
+        /// <param name="questionToDelete">törlendő kérdés</param>
+        public void DeleteQuestion(QuizQuestion questionToDelete)
+        {
+            List<QuizQuestion> questions = new List<QuizQuestion>();
+            questions = DeserializeQuestion();
+            questions.Remove(questionToDelete);
+            SerializeQuestionList(questions);
+
         }
 
         /// <summary>
