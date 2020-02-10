@@ -1,18 +1,14 @@
 ﻿using evoQuiz.Model;
 using evoQuiz.Model.Items;
-using evoQuiz.Model.Quiz;
-using evoQuizQuestionMaker;
-using evoQuizQuestionMaker.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-
+using evoQuizQuestionMaker.View;
+using evoQuizQuestionMaker.ViewModel;
+using evoQuizQuestionMaker.Model;
 
 namespace evoQuiz.ViewModel
 {
@@ -63,6 +59,7 @@ namespace evoQuiz.ViewModel
             set { myQuestionControlVisible = value; OnPropertyChanged("QuestionControlVisible"); }
         }
 
+        public List<QuizQuestion> AllQuestions { get; set; } = new List<QuizQuestion>();
         public Queue<QuizQuestion> Questions { get; set; } = new Queue<QuizQuestion>();
         public ObservableCollection<AnswerViewModel> Answers { get; set; } = new ObservableCollection<AnswerViewModel>();
 
@@ -79,23 +76,25 @@ namespace evoQuiz.ViewModel
             MyPlayer = player;
             QuestionControlVisible = false;
             CurrentQuestion = new QuizQuestion();
+            LoadQuestions();
             GetQuestions();
 
             myInventoryViewModel = new InventoryViewModel(MyPlayer, this);         
         }
 
+        private void LoadQuestions()
+        {
+            QuestionCreator questionCreator = new QuestionCreator();
+            AllQuestions = questionCreator.DeserializeQuestion();
+        }
+
         private void GetQuestions()
         {
-
-
-            Questions.Enqueue(new QuizQuestion() { myQuestion ="q1", myRightAnswer = "a1", myWrongAnswers = {"a2", "a3", "a4"} });
-            Questions.Enqueue(new QuizQuestion() { myQuestion = "q2", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
-            Questions.Enqueue(new QuizQuestion() { myQuestion = "q3", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
-            Questions.Enqueue(new QuizQuestion() { myQuestion = "q4", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
-            Questions.Enqueue(new QuizQuestion() { myQuestion = "q5", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
-            Questions.Enqueue(new QuizQuestion() { myQuestion = "q6", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
-            Questions.Enqueue(new QuizQuestion() { myQuestion = "q7", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
-            Questions.Enqueue(new QuizQuestion() { myQuestion = "q8", myRightAnswer = "a1", myWrongAnswers = { "a2", "a3", "a4" } });
+            AllQuestions = ShuffleList(AllQuestions);
+            foreach (var question in AllQuestions)
+            {
+                Questions.Enqueue(question);
+            }
         }
 
 
@@ -104,12 +103,16 @@ namespace evoQuiz.ViewModel
             EnemyVM = enemy;
             MonsterSkin = EnemyVM.Skin;
             EnemyHealthViewModel = new HealthViewModel(enemy.myEnemy);
-            GetCurrentQuestion();
             OpenWindow();
         }
 
         private void GetCurrentQuestion()
         {
+            if (Questions.Count ==0)
+            {
+                GetQuestions();
+            }
+
             CurrentQuestion = Questions.Dequeue();
 
             List<int[]> Positions = new List<int[]>() { new int[] { 0, 0 }, new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 1, 1 } };
@@ -197,7 +200,7 @@ namespace evoQuiz.ViewModel
                 Offset = new Thickness(0, 0, 0, 0);
                 ActionsToStop.Add(SlideUp);
                 Actions.Add(MonsterFadeIn);
-
+                GetCurrentQuestion();
                 myInventoryViewModel.Open();
             }
         }

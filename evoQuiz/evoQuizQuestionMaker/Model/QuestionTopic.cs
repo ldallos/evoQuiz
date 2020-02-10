@@ -1,5 +1,4 @@
-﻿using evoQuiz.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace evoQuizQuestionMaker.Model
 {
-    class QuestionTopic
+    public class QuestionTopic
     {
         /// <summary>
         /// A szörnyek a típusukkal megegyező kérdések közül fognak válogatni

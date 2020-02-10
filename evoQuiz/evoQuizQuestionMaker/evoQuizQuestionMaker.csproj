@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\QuestionTopic.cs" />
+    <Compile Include="Model\QuizQuestion.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\QuestionCreator.cs" />
     <Compile Include="View\QuestionMaker.xaml.cs">
@@ -111,14 +113,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\evoQuiz\evoQuiz.csproj">
-      <Project>{4aec2c94-4242-4a03-bbd6-2f17b886e7ad}</Project>
-      <Name>evoQuiz</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

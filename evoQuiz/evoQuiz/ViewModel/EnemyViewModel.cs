@@ -1,12 +1,6 @@
 ﻿using evoQuiz.Model;
 using evoQuiz.Model.Enemies;
-using evoQuiz.Model.Quiz;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
