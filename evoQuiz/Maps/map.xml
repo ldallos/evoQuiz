@@ -245,6 +245,7 @@
       <PositionX>2</PositionX>
       <PositionY>2</PositionY>
       <PositionZ>3</PositionZ>
+      <MaxHealth>10</MaxHealth>
       <Health>10</Health>
       <Damage>2</Damage>
       <Gold>0</Gold>
@@ -392,6 +393,7 @@
       <PositionX>4</PositionX>
       <PositionY>2</PositionY>
       <PositionZ>0</PositionZ>
+      <MaxHealth>10</MaxHealth>
       <Health>10</Health>
       <Damage>2</Damage>
       <Gold>0</Gold>
@@ -1055,6 +1057,7 @@
       <PositionX>12</PositionX>
       <PositionY>6</PositionY>
       <PositionZ>0</PositionZ>
+      <MaxHealth>10</MaxHealth>
       <Health>10</Health>
       <Damage>2</Damage>
       <Gold>0</Gold>

@@ -11,7 +11,7 @@ namespace evoQuiz.Model
     {
         public Player(int X, int Y) : base(X, Y)
         {
-           
+            PositionZ = 5;
         }
         public Player()
         {

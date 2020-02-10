@@ -32,6 +32,7 @@
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
+            <local:InverntoryControl Grid.Row="0" DataContext="{Binding Path=myInventoryViewModel}" VerticalAlignment="Bottom" HorizontalAlignment="Left"></local:InverntoryControl>
             <Image Grid.Row="1" Source="/Images/questionbackground.png" Stretch="Fill"></Image>
 
             <Grid Grid.Row="1" Margin="50,20,50,20">

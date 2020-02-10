@@ -12,7 +12,7 @@ namespace evoQuiz.Model
     {
         public Enemy(int X, int Y) : base(X, Y)
         {
-
+            PositionZ = 5;
         }
         public Enemy()
         {

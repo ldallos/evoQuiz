@@ -16,7 +16,7 @@ using System.Windows.Threading;
 
 namespace evoQuiz.ViewModel
 {
-    public class MainViewModel: ViewModelBase
+    public class MainViewModel: WindowViewModel
     {
         public ObservableCollection<TileViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
@@ -113,7 +113,7 @@ namespace evoQuiz.ViewModel
 
             SetOffset();
 
-            myQuestionViewModel = new QuestionViewModel() { MyPlayer = myPlayerViewModel.myPlayer, Parent = this, ControlHeight= WindowHeight, ControlWidth = WindowWidth };
+            myQuestionViewModel = new QuestionViewModel(myPlayerViewModel.myPlayer) { Parent = this, ControlHeight= WindowHeight, ControlWidth = WindowWidth };
             myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
             myInventoryViewModel = new InventoryViewModel(myPlayerViewModel.myPlayer, this);
             myGoldViewModel = new GoldViewModel(myPlayerViewModel.myPlayer);
@@ -123,6 +123,7 @@ namespace evoQuiz.ViewModel
             ViewModels.Add(myHealthViewModel);
             ViewModels.Add(myInventoryViewModel);
             ViewModels.Add(myGoldViewModel);
+            ViewModels.Add(myPlayerViewModel);
 
 
             StartOtherThread();
@@ -195,6 +196,11 @@ namespace evoQuiz.ViewModel
                     }
                 }
                 );
+        }
+
+        public override void ItemUsed(ItemInventoryViewModel itemVM)
+        {
+            throw new NotImplementedException();
         }
 
         private int mySpeed = 1;

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace evoQuiz.ViewModel
 {
@@ -41,10 +43,18 @@ namespace evoQuiz.ViewModel
                 return null;
             }
         }
+        public ICommand UseItemCommand { get; set; }
 
-        public ItemInventoryViewModel(Item item)
+        public ItemInventoryViewModel(Item item, InventoryViewModel parent)
         {
             MyItem = item;
+            Parent = parent;
+            UseItemCommand = new RelayCommand(Use);
+        }
+
+        private void Use()
+        {
+            Parent.Parent.ItemUsed(this);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using evoQuiz.Model;
+using evoQuiz.Model.Items;
 using evoQuiz.Model.Quiz;
 using evoQuizQuestionMaker;
 using evoQuizQuestionMaker.Model;
@@ -15,8 +16,9 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    public class QuestionViewModel : ViewModelBase
+    public class QuestionViewModel : WindowViewModel
     {
+        Random r = new Random();
         private Thickness myOffset;
         public Thickness Offset
         {
@@ -52,6 +54,7 @@ namespace evoQuiz.ViewModel
         public HealthViewModel EnemyHealthViewModel { get; set; }
         public Player MyPlayer { get; set; }
         public MainViewModel Parent { get; set; }
+        public InventoryViewModel myInventoryViewModel { get; set; }
 
         private bool myQuestionControlVisible;
         public bool QuestionControlVisible
@@ -71,13 +74,14 @@ namespace evoQuiz.ViewModel
         }
         public string QuestionText { get { return CurrentQuestion.myQuestion; } }
 
-        public QuestionViewModel()
+        public QuestionViewModel(Player player)
         {
+            MyPlayer = player;
             QuestionControlVisible = false;
             CurrentQuestion = new QuizQuestion();
             GetQuestions();
 
-            
+            myInventoryViewModel = new InventoryViewModel(MyPlayer, this);         
         }
 
         private void GetQuestions()
@@ -128,16 +132,15 @@ namespace evoQuiz.ViewModel
         {
             List<E> randomList = new List<E>();
 
-            Random r = new Random();
             int randomIndex = 0;
             while (inputList.Count > 0)
             {
-                randomIndex = r.Next(0, inputList.Count); //Choose a random object in the list
-                randomList.Add(inputList[randomIndex]); //add it to the new, random list
-                inputList.RemoveAt(randomIndex); //remove to avoid duplicates
+                randomIndex = r.Next(0, inputList.Count);
+                randomList.Add(inputList[randomIndex]); 
+                inputList.RemoveAt(randomIndex); 
             }
 
-            return randomList; //return the new random list
+            return randomList; 
         }
 
         public void Quiz(string answer)
@@ -176,7 +179,7 @@ namespace evoQuiz.ViewModel
             QuestionControlVisible = true;
             Offset = new Thickness(0, ControlHeight*0.4, 0,0);
             Fade = 0;
-            ActionsToAdd.Add(FadeIn);
+            Actions.Add(FadeIn);
         }
 
 
@@ -189,7 +192,9 @@ namespace evoQuiz.ViewModel
             {
                 Offset = new Thickness(0, 0, 0, 0);
                 ActionsToStop.Add(SlideUp);
-                ActionsToAdd.Add(MonsterFadeIn);
+                Actions.Add(MonsterFadeIn);
+
+                myInventoryViewModel.Open();
             }
         }
 
@@ -200,7 +205,7 @@ namespace evoQuiz.ViewModel
             {
                 Fade = 1;
                 ActionsToStop.Add(FadeIn);
-                ActionsToAdd.Add(SlideUp);
+                Actions.Add(SlideUp);
             }
         }
 
@@ -211,6 +216,36 @@ namespace evoQuiz.ViewModel
             {
                 MonsterFade = 1;
                 ActionsToStop.Add(MonsterFadeIn);
+            }
+        }
+
+        public override void ItemUsed(ItemInventoryViewModel itemVM)
+        {
+            if (itemVM.MyItem is Potion)
+            {
+                MyPlayer.Health += 2;
+                Parent.myHealthViewModel.Update();
+                DeleteItem(itemVM);
+                return;
+            }
+
+            if (itemVM.MyItem is Sword)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    int index = r.Next(myCurrentQuestion.myWrongAnswers.Count - 1);
+                    Answers.Remove(Answers.Single(x => x.AnswerText == myCurrentQuestion.myWrongAnswers[index]));
+                    CurrentQuestion.myWrongAnswers.RemoveAt(index);
+                }
+                DeleteItem(itemVM);
+                return;
+            }
+
+
+            void DeleteItem(ItemInventoryViewModel itemToDelete)
+            {
+                MyPlayer.Inventory.Remove(itemToDelete.MyItem);
+                myInventoryViewModel.Items.Remove(itemToDelete);
             }
         }
     }

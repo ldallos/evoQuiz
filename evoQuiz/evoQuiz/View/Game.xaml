@@ -69,7 +69,12 @@
         </ScrollViewer>
 
        
-        <view:InverntoryControl VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Path=myInventoryViewModel}"/>
+
+
+
+        <Canvas>
+            <view:QuestionControl DataContext="{Binding Path=myQuestionViewModel}"/>
+        </Canvas>
 
         <!--UI grid-->
         <Grid ShowGridLines="False">
@@ -100,13 +105,10 @@
 
 
             <view:HealthControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" DataContext="{Binding Path=myHealthViewModel}"></view:HealthControl>
-            <view:GoldControl Grid.Column="0" Grid.Row="1" Margin="5" DataContext="{Binding Path=myGoldViewModel}"></view:GoldControl>
-
+            <view:GoldControl Grid.Column="2"  Grid.Row="0" Margin="10" DataContext="{Binding Path=myGoldViewModel}"></view:GoldControl>
+           
         </Grid>
 
-        <Canvas>
-            <view:QuestionControl DataContext="{Binding Path=myQuestionViewModel}"/>
-        </Canvas>
-
+        <view:InverntoryControl VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Path=myInventoryViewModel}"/>
     </Grid>
 </Page>

@@ -5,13 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:evoQuiz.View"
              xmlns:l="clr-namespace:evoQuiz"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
     </UserControl.Resources>
-    
+
     <Grid Visibility ="{Binding Path=InventoryControlVisible,  Converter={StaticResource booleanToVisibilityConverter}}" >
         
         <ItemsControl ItemsSource="{Binding Path=Items}">
@@ -25,8 +27,14 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Image Source="/Images/inventory_tile.png" SnapsToDevicePixels="True"  Width="{Binding Path=ItemSize}" Height="{Binding Path=ItemSize}" ></Image>
-                        <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Width="{Binding Path=ItemSize}" Height="{Binding Path=ItemSize}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <command:EventToCommand Command="{Binding UseItemCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        
+                        <Image Source="/Images/inventory_tile.png" SnapsToDevicePixels="True"  Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                        <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Width="{Binding Path=Size}" Height="{Binding Path=Size}">
                             <Image.ToolTip>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Path=ItemName}" Style="{StaticResource PixelText}" FontSize="18"></TextBlock>

@@ -7,6 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="{Binding Path=GoldCount}"></TextBlock>    
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Image Source="/Images/goldcounter.png" Stretch="Fill" Grid.RowSpan="2"></Image>
+        <TextBlock Style="{StaticResource PixelText}" Text="{Binding Path=GoldCount}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"></TextBlock>    
     </Grid>
 </UserControl>

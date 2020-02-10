@@ -21,14 +21,19 @@ namespace evoQuiz.ViewModel
 
         public void Update()
         {
-            Actions = ActionsToAdd.Except(ActionsToStop).ToList();
-            foreach (var action in Actions)
+            Actions = Actions.Except(ActionsToStop).ToList();
+            ActionsToStop.Clear();
+            for (int i = 0; i < Actions.Count; i++)
             {
-                action();
+                Actions[i]();
             }
+
+            //foreach (var action in Actions)
+            //{
+            //    action();
+            //}
         }
         protected List<Action> Actions = new List<Action>();
         protected List<Action> ActionsToStop = new List<Action>();
-        protected List<Action> ActionsToAdd = new List<Action>();
     }
 }

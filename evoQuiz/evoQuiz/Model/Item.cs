@@ -13,7 +13,7 @@ namespace evoQuiz.Model
         abstract public void Use();
         public Item(int X, int Y):base(X,Y)
         {
-
+            PositionZ = 5;
         }
         public Item()
         {

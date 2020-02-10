@@ -29,7 +29,7 @@ namespace evoQuiz.ViewModel
             myPlayer = player;
             Parent = parent;
             myPlayer.VisibilityRange = 10;
-            Update();
+            Updat();
         }
 
 
@@ -76,7 +76,7 @@ namespace evoQuiz.ViewModel
                     break;
             }
             //UpdateVisibilityV2();
-            Update();
+            Updat();
         }
 
         private bool CheckWallCollision(int newX, int newY)
@@ -173,7 +173,7 @@ namespace evoQuiz.ViewModel
                 }
 
                 ShadowViewModel shadow = Parent.GridItems.Where(i => i is ShadowViewModel).Where(i => (i as ShadowViewModel).PosX == x0 && (i as ShadowViewModel).PosY == y0).FirstOrDefault() as ShadowViewModel;
-                opacity = Math.Pow(dist,2) / Math.Pow((myPlayer.VisibilityRange),2);
+                opacity = Math.Pow(dist,3) / Math.Pow((myPlayer.VisibilityRange),3);
                 //opacity = dist / myPlayer.VisibilityRange;
                 if (shadow.Opacity>=opacity)
                 {
@@ -283,14 +283,21 @@ namespace evoQuiz.ViewModel
             Parent.GridItems.Remove(item);
         }
 
-        private void Update()
+        private void Updat()
+        {
+            CheckEnemy();
+            CheckItems();
+            Actions.Add(UpdateLights);
+        }
+
+        private void UpdateLights()
         {
             Parent.GridItems.Where(i => i is ShadowViewModel).ToList().ForEach(i => (i as ShadowViewModel).Opacity = 1);
             shadowsToBlend.Clear();
             drawBresenhamCircle(PosX, PosY, myPlayer.VisibilityRange);
             BlendShadows();
-            CheckEnemy();
-            CheckItems();
+
+            ActionsToStop.Add(UpdateLights);
         }
     }
 }
