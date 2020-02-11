@@ -27,24 +27,30 @@ namespace evoQuiz.ViewModel
 
         public static void StartMenuMusic()
         {
-            //if (!global::evoQuiz.Properties.Settings.Default.MenuSoundPlayerActive)
-            //{
-            //    menuSoundPlayer.SoundLocation = path + "MenuSong.wav";
-            //    menuSoundPlayer.PlayLooping();
-            //    global::evoQuiz.Properties.Settings.Default.MenuSoundPlayerActive = true;
-            //}
+            if (!global::evoQuiz.Properties.Settings.Default.MenuSoundPlayerActive)
+            {
+                menuSoundPlayer.SoundLocation = path + "MenuSong.wav";
+                menuSoundPlayer.PlayLooping();
+                global::evoQuiz.Properties.Settings.Default.MenuSoundPlayerActive = true;
+            }
         }
 
         public static void StopMenuMusic()
         {
-            //menuSoundPlayer.Stop();
-            //global::evoQuiz.Properties.Settings.Default.MenuSoundPlayerActive = false;
+            menuSoundPlayer.Stop();
+            global::evoQuiz.Properties.Settings.Default.MenuSoundPlayerActive = false;
         }
 
         public static void InGameMusic()
         {
-            return;
-            Play(path + "MenuSong.wav");
+            Play(path + "GameSong.wav");
+            global::evoQuiz.Properties.Settings.Default.RunningGameSoundPlayerActive = true;
+        }
+
+        public static void StopGameMusic()
+        {
+            soundPlayer.Stop();
+            global::evoQuiz.Properties.Settings.Default.RunningGameSoundPlayerActive = false;
         }
 
         static void Play(string audioPath)
