@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evoQuizQuestionMaker.View"
         mc:Ignorable="d"
-        Title="QuestionMaker">
+        Title="QuestionMaker" Height="450">
     <Grid>
         <Label Content="Kérdés:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="26" Width="200"/>
         <TextBox x:Name="Question" HorizontalAlignment="Left" Height="26" Margin="20,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
@@ -24,7 +24,10 @@
         
         <Button Content="Del" HorizontalAlignment="Left" Height="26" Margin="321,293,0,0" VerticalAlignment="Top" Width="52" Click="Del_BadAnswer"/>
 
-        <Button Content="Ok" HorizontalAlignment="Left" Height="26" Margin="730,383,0,0" VerticalAlignment="Top" Width="52" Click="Create_Question"/>
+        <Button Content="Ok" HorizontalAlignment="Left" Height="26" Margin="446,324,0,0" VerticalAlignment="Top" Width="52" Click="Create_Question"/>
         
+        
+        <Label x:Name="Message" Content="" HorizontalAlignment="Left" Margin="20,355,0,0"/>
+
     </Grid>
 </Page>
