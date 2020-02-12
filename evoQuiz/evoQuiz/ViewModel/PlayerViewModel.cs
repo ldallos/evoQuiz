@@ -84,12 +84,6 @@ namespace evoQuiz.ViewModel
             return !Parent.myMap.TileElements.Where(x=>x is Wall).Any(x=>x.PositionX == newX && x.PositionY == newY);
         }
 
-        //private void UpdateVisibility()
-        //{
-        //    Parent.GridItems.Where(x => x is ShadowViewModel).Where(x => Math.Sqrt(Math.Pow(Math.Abs((x as ShadowViewModel).PosY - this.PosY),2) + Math.Pow(Math.Abs((x as ShadowViewModel).PosX - this.PosX),2)) <= 6).ToList().ForEach(x => (x as ShadowViewModel).Opacity = 0.8);
-        //    Parent.GridItems.Where(x => x is ShadowViewModel).Where(x => Math.Sqrt(Math.Pow(Math.Abs((x as ShadowViewModel).PosY - this.PosY), 2) + Math.Pow(Math.Abs((x as ShadowViewModel).PosX - this.PosX), 2)) <= 5).ToList().ForEach(x => (x as ShadowViewModel).Opacity = 0.5);
-        //    Parent.GridItems.Where(x => x is ShadowViewModel).Where(x => Math.Sqrt(Math.Pow(Math.Abs((x as ShadowViewModel).PosY - this.PosY), 2) + Math.Pow(Math.Abs((x as ShadowViewModel).PosX - this.PosX), 2)) <= 3).ToList().ForEach(x => (x as ShadowViewModel).Opacity = 0);
-        //}
 
         //private void UpdateVisibilityV2()
         //{
@@ -174,7 +168,6 @@ namespace evoQuiz.ViewModel
 
                 ShadowViewModel shadow = Parent.GridItems.Where(i => i is ShadowViewModel).Where(i => (i as ShadowViewModel).PosX == x0 && (i as ShadowViewModel).PosY == y0).FirstOrDefault() as ShadowViewModel;
                 opacity = Math.Pow(dist,3) / Math.Pow((myPlayer.VisibilityRange),3);
-                //opacity = dist / myPlayer.VisibilityRange;
                 if (shadow.Opacity>=opacity)
                 {
                     shadow.Opacity = opacity;
@@ -246,7 +239,7 @@ namespace evoQuiz.ViewModel
             //    (shadow as ShadowViewModel).Opacity = OpacitySum / SurShadows.Count;
             //}
 
-            foreach (var shadow in Parent.GridItems.Where(i => i is ShadowViewModel))
+            foreach (var shadow in Parent.GridItems.Where(x => x is ShadowViewModel && Math.Sqrt(Math.Pow(Math.Abs(x.PosY - PosY), 2) + Math.Pow(Math.Abs(x.PosX - PosX), 2)) <= myPlayer.VisibilityRange))
             {
                 float OpacitySum = 0;
                 List<TileViewModel> SurShadows = GetSurroundingShadows(shadow);

@@ -142,20 +142,37 @@ namespace evoQuizMapMaker.ViewModel
                 }
                 else if (element is Enemy)
                 {
-                    tile.TileColor = Brushes.Blue;
+                    tile.TileColor = Brushes.Red;
+                    if (element is Thief)
+                    {
+                        tile.Name = "T";
+                    }
+                    else if (element is Skeleton)
+                    {
+                        tile.Name = "S";
+                    }
+                    else if (element is Hydra)
+                    {
+                        tile.Name = "H";
+                    }
                 }
                 else if (element is Trap)
                 {
                     tile.TileColor = Brushes.Red;
                 }
-                else if (element is Potion)
+                else if (element is Item)
                 {
                     tile.TileColor = Brushes.Magenta;
+                    if (element is Potion)
+                    {
+                        tile.Name = "P";
+                    }
+                    else if (element is Sword)
+                    {
+                        tile.Name = "S";
+                    }
                 }
-                else if (element is Sword)
-                {
-                    tile.TileColor = Brushes.Silver;
-                }
+                
             }
         }
     }

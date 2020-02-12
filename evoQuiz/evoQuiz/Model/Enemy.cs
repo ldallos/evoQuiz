@@ -19,6 +19,8 @@ namespace evoQuiz.Model
             
         }
 
-        public abstract void Ability(Player player);
+        public abstract void AbilityAfterQuestion(Player player);
+        public abstract void AbilityRight(Player player);
+        public abstract void AbilityWrong(Player player);
     }
 }

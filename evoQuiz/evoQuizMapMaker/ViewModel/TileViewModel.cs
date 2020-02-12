@@ -22,6 +22,14 @@ namespace evoQuizMapMaker.ViewModel
         public ICommand SetTileCommand { get; set; }
         public MainViewModel Parent { get; set; }
 
+        private string myName;
+        public string Name
+        {
+            get { return myName; }
+            set { myName = value; OnPropertyChanged("Name"); }
+        }
+
+
         private Brush _myTileColor;
         public Brush TileColor { get { return _myTileColor; } set { _myTileColor = value; OnPropertyChanged("TileColor"); } }
 
@@ -57,29 +65,45 @@ namespace evoQuizMapMaker.ViewModel
                     myTileElement = new Wall(PosX, PosY);
                     break;
                 case Helper.Mode.TrapMode:
-                    TileColor = Brushes.Red;
+                    TileColor = Brushes.Blue;
                     myTileElement = new Trap(PosX, PosY);
                     break;
                 case Helper.Mode.EnemyMode:
-                    TileColor = Brushes.Blue;
+                    TileColor = Brushes.Red;
 
                     if (Parent.SelectedEnemyType == typeof(Skeleton))
                     {
+                        Name = "S";
                         myTileElement = new Skeleton(PosX, PosY);
-                    }                    
+                        break;
+                    }
+                    if (Parent.SelectedEnemyType == typeof(Thief))
+                    {
+                        Name = "T";
+                        myTileElement = new Thief(PosX, PosY);
+                        break;
+                    }
+                    if (Parent.SelectedEnemyType == typeof(Hydra))
+                    {
+                        Name = "H";
+                        myTileElement = new Hydra(PosX, PosY);
+                        break;
+                    }
                     break;
                 case Helper.Mode.ItemMode:
                     
 
                     if (Parent.SelectedItemType == typeof(Potion))
                     {
+                        Name = "P";
                         TileColor = Brushes.Magenta;
                         myTileElement = new Potion(PosX, PosY);
                         break;
                     }
                     if (Parent.SelectedItemType == typeof(Sword))
                     {
-                        TileColor = Brushes.Silver;
+                        Name = "S";
+                        TileColor = Brushes.Magenta;
                         myTileElement = new Sword(PosX, PosY);
                         break;
                     }

@@ -49,6 +49,7 @@
                                     <Grid Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
                             Width="{Binding Path=Size}" Height="{Binding Path=Size}"  
                             Background="{Binding Path=TileColor}">
+                                        <TextBlock Text="{Binding Path=Name}" Foreground="White"/>
 
                                         <Border Background="Transparent" BorderBrush="Black" BorderThickness="1">
                                             <i:Interaction.Triggers>

@@ -29,11 +29,27 @@ namespace evoQuiz.ViewModel
         public HealthViewModel(Character character)
         {
             myCharacter = character;
-            Update();
+            Actions.Add(UpdateHealth);
+        }
+        public HealthViewModel()
+        {
+            Actions.Add(UpdateHealth);
         }
 
-        public void Update()
+        int TempHealth;
+        private void UpdateHealth()
         {
+            if (myCharacter is null)
+            {
+                return;
+            }
+            if (myCharacter.Health == TempHealth)
+            {
+                return;
+            }
+
+            TempHealth = myCharacter.Health;
+
             switch (myCharacter.Health)
             {
                 case 0:

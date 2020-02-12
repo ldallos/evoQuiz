@@ -20,6 +20,10 @@ namespace evoQuiz.ViewModel
                 {
                     return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/skeleton.png", UriKind.RelativeOrAbsolute));
                 }
+                if (myEnemy is Thief)
+                {
+                    return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/thief.png", UriKind.RelativeOrAbsolute));
+                }
                 else return null;
             }
         }

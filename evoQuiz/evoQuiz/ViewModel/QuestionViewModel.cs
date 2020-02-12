@@ -79,7 +79,10 @@ namespace evoQuiz.ViewModel
             LoadQuestions();
             GetQuestions();
 
-            myInventoryViewModel = new InventoryViewModel(MyPlayer, this);         
+            myInventoryViewModel = new InventoryViewModel(MyPlayer, this);
+            EnemyHealthViewModel = new HealthViewModel();
+            ChildViews.Add(EnemyHealthViewModel);
+            ChildViews.Add(myInventoryViewModel);
         }
 
         private void LoadQuestions()
@@ -102,7 +105,8 @@ namespace evoQuiz.ViewModel
         {
             EnemyVM = enemy;
             MonsterSkin = EnemyVM.Skin;
-            EnemyHealthViewModel = new HealthViewModel(enemy.myEnemy);
+            EnemyHealthViewModel.myCharacter = enemy.myEnemy;
+
             OpenWindow();
         }
 
@@ -150,9 +154,8 @@ namespace evoQuiz.ViewModel
         {
             if (answer == CurrentQuestion.myRightAnswer)
             {
-                EnemyVM.myEnemy.Health -= MyPlayer.Damage*10;
-                EnemyHealthViewModel.Update();
-                EnemyVM.myEnemy.Ability(MyPlayer);
+                EnemyVM.myEnemy.Health -= MyPlayer.Damage;               
+                EnemyVM.myEnemy.AbilityRight(MyPlayer);
                 if (EnemyVM.myEnemy.Health<=0)
                 {
                     EndQuiz();
@@ -163,14 +166,14 @@ namespace evoQuiz.ViewModel
             else
             {
                 MyPlayer.Health -= EnemyVM.myEnemy.Damage;
-                Parent.myHealthViewModel.Update();
-
+                EnemyVM.myEnemy.AbilityWrong(MyPlayer);
                 if (MyPlayer.Health==0)
                 {
                     Parent.GameOver();
                 }
             }
 
+            EnemyVM.myEnemy.AbilityAfterQuestion(MyPlayer);
             GetCurrentQuestion();
         }
 
@@ -187,6 +190,7 @@ namespace evoQuiz.ViewModel
             QuestionControlVisible = true;
             Offset = new Thickness(0, ControlHeight*0.4, 0,0);
             Fade = 0;
+            MonsterFade = 0;
             Actions.Add(FadeIn);
         }
 

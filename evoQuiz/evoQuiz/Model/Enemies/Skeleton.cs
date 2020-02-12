@@ -11,16 +11,28 @@ namespace evoQuiz.Model.Enemies
     {
         public Skeleton(int X, int Y) : base(X, Y)
         {
-            
+            Damage = 2;
+            Gold = 300;
         }
         public Skeleton()
         {
 
         }
 
-        public override void Ability(Player player)
+ 
+        public override void AbilityAfterQuestion(Player player)
         {
-            return;
+            
+        }
+
+        public override void AbilityRight(Player player)
+        {
+            
+        }
+
+        public override void AbilityWrong(Player player)
+        {
+            
         }
     }
 }

@@ -11,7 +11,14 @@ namespace evoQuiz.ViewModel
     {
         public Player MyPlayer { get; set; }
         public MainViewModel Parent { get; set; }
-        public int Score { get; set; }
+
+        private int myScore;
+
+        public int Score
+        {
+            get { return myScore; }
+            set { myScore = value; OnPropertyChanged("Score"); }
+        }
 
         private bool myGameOverControlVisible;
         public bool GameOverControlVisible

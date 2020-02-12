@@ -46,22 +46,6 @@
                 </TextBlock>
 
                 <Grid Grid.Row="1">
-                    <!--
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button x:Name="Answer1Button" Grid.Row="0" Grid.Column="0" Content="{Binding Path=Answer1Text}"></Button>
-                <Button x:Name="Answer2Button" Grid.Row="1" Grid.Column="0" Content="{Binding Path=Answer2Text}"></Button>
-                <Button x:Name="Answer3Button" Grid.Row="0" Grid.Column="1" Content="{Binding Path=Answer3Text}"></Button>
-                <Button x:Name="Answer4Button" Grid.Row="1" Grid.Column="1" Content="{Binding Path=Answer4Text}"></Button>
-                -->
                     <ItemsControl ItemsSource="{Binding Path=Answers}" SnapsToDevicePixels="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -96,37 +80,35 @@
 
                 </Grid>
             </Grid>
+        </Grid>
+        <!--UI grid-->
+        <Grid  Width="{Binding Path=ControlWidth}" Height="{Binding Path=ControlHeight}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
-
-            <!--UI grid-->
-            <Grid ShowGridLines="False">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <local:HealthControl Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" DataContext="{Binding Path=EnemyHealthViewModel}"></local:HealthControl>
-            </Grid>
+            <local:HealthControl Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" DataContext="{Binding Path=EnemyHealthViewModel}" Opacity="{Binding Path=MonsterFade}"></local:HealthControl>
         </Grid>
     </Canvas>
 </UserControl>

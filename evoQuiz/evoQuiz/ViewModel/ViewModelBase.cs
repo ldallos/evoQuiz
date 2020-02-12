@@ -28,12 +28,14 @@ namespace evoQuiz.ViewModel
                 Actions[i]();
             }
 
-            //foreach (var action in Actions)
-            //{
-            //    action();
-            //}
+            foreach (var child in ChildViews)
+            {
+                child.Update();
+            }
         }
         protected List<Action> Actions = new List<Action>();
         protected List<Action> ActionsToStop = new List<Action>();
+
+        protected List<ViewModelBase> ChildViews { get; set; } = new List<ViewModelBase>();
     }
 }

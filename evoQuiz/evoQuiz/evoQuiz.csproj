@@ -332,6 +332,7 @@
     <Resource Include="Images\goldcounter.png" />
     <Resource Include="Images\questionbackground.png" />
     <Resource Include="Images\chains.png" />
+    <Resource Include="Images\thief.png" />
     <Content Include="Sounds\GameSong.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

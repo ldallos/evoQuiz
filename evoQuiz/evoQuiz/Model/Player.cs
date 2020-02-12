@@ -11,6 +11,7 @@ namespace evoQuiz.Model
     {
         public Player(int X, int Y) : base(X, Y)
         {
+            Damage = 3;
             PositionZ = 5;
         }
         public Player()

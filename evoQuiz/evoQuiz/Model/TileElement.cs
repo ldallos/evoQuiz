@@ -12,6 +12,8 @@ namespace evoQuiz.Model
     [XmlInclude(typeof(Trap))]
     [XmlInclude(typeof(Enemy))]
     [XmlInclude(typeof(Skeleton))]
+    [XmlInclude(typeof(Thief))]
+    [XmlInclude(typeof(Hydra))]
     [XmlInclude(typeof(Wall))]
     [XmlInclude(typeof(Player))]
     [XmlInclude(typeof(Potion))]
