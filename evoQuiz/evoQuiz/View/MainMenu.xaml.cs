@@ -53,15 +53,14 @@ namespace evoQuiz
             this.NavigationService.Navigate(page);
         }
 
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        private void QuestionEditorButton_Click(object sender, RoutedEventArgs e)
         {
-            Options page = new Options();
-            this.NavigationService.Navigate(page);
+            Process.Start(@"D:\evoQuiz\evoQuiz\evoQuizQuestionMaker\bin\Release\evoQuizQuestionMaker.exe");
         }
 
-        private void EditorButton_Click(object sender, RoutedEventArgs e)
+        private void MapEditorButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("D:\\evoQuiz\\evoQuiz\\evoQuizMapMaker\\obj\\Debug\\evoQuizMapMaker.exe");
+            Process.Start(@"D:\evoQuiz\evoQuiz\evoQuizMapMaker\bin\Release\evoQuizMapMaker.exe");
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
