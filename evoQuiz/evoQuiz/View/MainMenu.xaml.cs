@@ -6,16 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Media;
 using System.Diagnostics;
+using System.IO;
 
 namespace evoQuiz
 {
@@ -24,11 +18,12 @@ namespace evoQuiz
     /// </summary>
     public partial class MainMenu : Page
     {
+        private string MainPath;
 
         public MainMenu()
         {
             InitializeComponent();
-
+            MainPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory + "..\\..\\..\\..\\"));
             SoundsViewModel.StartMenuMusic();
         }
 
@@ -55,12 +50,13 @@ namespace evoQuiz
 
         private void QuestionEditorButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"D:\evoQuiz\evoQuiz\evoQuizQuestionMaker\bin\Release\evoQuizQuestionMaker.exe");
+            Process.Start(Path.GetFullPath(Path.Combine(MainPath +"evoQuizQuestionMaker\\bin\\Release\\evoQuizQuestionMaker.exe")));
         }
 
         private void MapEditorButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"D:\evoQuiz\evoQuiz\evoQuizMapMaker\bin\Release\evoQuizMapMaker.exe");
+            string asd = Path.GetFullPath(Path.Combine(MainPath + "evoQuizMapMaker\\bin\\Release\\evoQuizMapMaker.exe"));
+            Process.Start(asd);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
