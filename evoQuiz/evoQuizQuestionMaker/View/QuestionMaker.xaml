@@ -25,6 +25,11 @@
         <Button Content="Del" HorizontalAlignment="Left" Height="26" Margin="321,293,0,0" VerticalAlignment="Top" Width="52" Click="Del_BadAnswer"/>
 
         <Button Content="Ok" HorizontalAlignment="Left" Height="26" Margin="730,383,0,0" VerticalAlignment="Top" Width="52" Click="Create_Question"/>
+
+        <ListBox x:Name="Questions" HorizontalAlignment="Left" Height="268" Margin="628,51,0,0" VerticalAlignment="Top" Width="141"/>
+        <Button x:Name="Modify" Content="Modify" HorizontalAlignment="Left" Margin="548,164,0,0" VerticalAlignment="Top" Width="75" Click="Modify_Click"/>
+        <Button x:Name="Load" Content="Load" HorizontalAlignment="Left" Margin="548,221,0,0" VerticalAlignment="Top" Width="75" Click="Load_Click"/>
+        <Button x:Name="DeleteQuestion" Content="Del" HorizontalAlignment="Left" Margin="548,296,0,0" VerticalAlignment="Top" Width="75" Click="DeleteQuestion_Click"/>
         
     </Grid>
 </Page>
