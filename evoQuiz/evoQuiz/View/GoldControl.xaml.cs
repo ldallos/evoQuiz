@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace evoQuiz
+namespace evoQuiz.View
 {
     /// <summary>
-    /// Interaction logic for Options.xaml
+    /// Interaction logic for GoldControl.xaml
     /// </summary>
-    public partial class Options : Page
+    public partial class GoldControl : UserControl
     {
-        public Options()
+        public GoldControl()
         {
             InitializeComponent();
         }

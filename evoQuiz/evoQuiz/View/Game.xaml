@@ -21,15 +21,16 @@
         <KeyBinding Key="I" Command="{Binding InventoryCommand}"/>
     </Page.InputBindings>
 
+
     <Grid local:SizeObserver.Observe="True"
           local:SizeObserver.ObservedHeight="{Binding Path=WindowHeight, Mode=OneWayToSource}"
           local:SizeObserver.ObservedWidth="{Binding Path=WindowWidth, Mode=OneWayToSource}"
           >
-        
+
         <Grid.Background>
             <ImageBrush ImageSource="/Images/black.png" Stretch="Fill"/>
         </Grid.Background>
-        
+
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
             <Grid>
@@ -46,9 +47,9 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Image Source="/Images/floor.png" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
-                                <Image Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
-                            </Grid>                            
+                                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Source="/Images/floor.png" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Source="{Binding Path=Skin}" SnapsToDevicePixels="True" Opacity="{Binding Path=Opacity}" Width="{Binding Path=Size}" Height="{Binding Path=Size}" ></Image>
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     <ItemsControl.ItemContainerStyle>
@@ -66,9 +67,14 @@
 
             </Grid>
         </ScrollViewer>
-        
-        <view:QuestionControl DataContext="{Binding Path=myQuestionViewModel}"/>
-        <view:InverntoryControl VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Path=myInventoryViewModel}"/>
+
+       
+
+
+
+        <Canvas>
+            <view:QuestionControl DataContext="{Binding Path=myQuestionViewModel}"/>
+        </Canvas>
 
         <!--UI grid-->
         <Grid ShowGridLines="False">
@@ -97,12 +103,13 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            
+
             <view:HealthControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" DataContext="{Binding Path=myHealthViewModel}"></view:HealthControl>
-            
+            <view:GoldControl Grid.Column="2"  Grid.Row="0" Margin="10" DataContext="{Binding Path=myGoldViewModel}"></view:GoldControl>
+           
         </Grid>
 
-        
-        
+        <view:InverntoryControl VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Path=myInventoryViewModel}"/>
+        <view:GameOverControl  DataContext="{Binding Path=myGameOverViewModel}"></view:GameOverControl>
     </Grid>
 </Page>

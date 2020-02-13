@@ -11,10 +11,11 @@ namespace evoQuiz.ViewModel
     public class InventoryViewModel : ViewModelBase
     {
         public Player MyPlayer { get; set; }
-        public ObservableCollection<ItemViewModel> Items { get; set; } = new ObservableCollection<ItemViewModel>();
-        public MainViewModel Parent { get; set; }
+        public ObservableCollection<ItemInventoryViewModel> Items { get; set; } = new ObservableCollection<ItemInventoryViewModel>();
+        public WindowViewModel Parent { get; set; }
         public int InventorySizeX { get; set; } = 5;
         public int InventorySizeY { get; set; } = 5;
+        public int ItemSize { get; set; } = 50;
 
         private bool myInventoryControlVisible;
         public bool InventoryControlVisible
@@ -23,13 +24,13 @@ namespace evoQuiz.ViewModel
             set { myInventoryControlVisible = value; OnPropertyChanged("InventoryControlVisible"); }
         }
 
-        public InventoryViewModel(Player player, MainViewModel parent)
+        public InventoryViewModel(Player player, WindowViewModel parent)
         {
             for (int i = 0; i < InventorySizeY; i++)
             {
                 for (int j = 0; j < InventorySizeX; j++)
                 {
-                    Items.Add(new ItemViewModel(null) { PosX = j, PosY = i, Parent = this });
+                    Items.Add(new ItemInventoryViewModel(null, this) { PosX = j, PosY = i});
                 }
             }
             InventoryControlVisible = false;
@@ -45,7 +46,7 @@ namespace evoQuiz.ViewModel
             {
                 int x = Items[i].PosX;
                 int y = Items[i].PosY;
-                Items[i] = new ItemViewModel( MyPlayer.Inventory[i]) { PosX = x, PosY = y, Parent = this };
+                Items[i] = new ItemInventoryViewModel( MyPlayer.Inventory[i], this) { PosX = x, PosY = y};
             }
         }
 

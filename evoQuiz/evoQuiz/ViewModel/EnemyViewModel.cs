@@ -1,12 +1,6 @@
 ﻿using evoQuiz.Model;
 using evoQuiz.Model.Enemies;
-using evoQuiz.Model.Quiz;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
@@ -25,6 +19,10 @@ namespace evoQuiz.ViewModel
                 if (myEnemy is Skeleton)
                 {
                     return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/skeleton.png", UriKind.RelativeOrAbsolute));
+                }
+                if (myEnemy is Thief)
+                {
+                    return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/thief.png", UriKind.RelativeOrAbsolute));
                 }
                 else return null;
             }

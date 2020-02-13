@@ -49,6 +49,7 @@
                                     <Grid Grid.Column="{Binding Path=PosX}" Grid.Row="{Binding Path=PosY}" 
                             Width="{Binding Path=Size}" Height="{Binding Path=Size}"  
                             Background="{Binding Path=TileColor}">
+                                        <TextBlock Text="{Binding Path=Name}" Foreground="White"/>
 
                                         <Border Background="Transparent" BorderBrush="Black" BorderThickness="1">
                                             <i:Interaction.Triggers>
@@ -82,6 +83,9 @@
                         <RadioButton GroupName="Obs" Content="Wall" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=WallMode}" />
                         <RadioButton GroupName="Obs" Content="Enemy" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=EnemyMode}" />
                         <ComboBox ItemsSource="{Binding Path=EnemyTypes}" SelectedItem="{Binding Path=SelectedEnemyType}">
+                        </ComboBox>
+                        <RadioButton GroupName="Obs" Content="Item" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=ItemMode}" />
+                        <ComboBox ItemsSource="{Binding Path=ItemTypes}" SelectedItem="{Binding Path=SelectedItemType}">
                         </ComboBox>
                         <RadioButton GroupName="Obs" Content="Trap" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=TrapMode}" />
                         <RadioButton GroupName="Obs" Content="Player" IsChecked="{Binding Path=PlacementMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=PlayerMode}" />

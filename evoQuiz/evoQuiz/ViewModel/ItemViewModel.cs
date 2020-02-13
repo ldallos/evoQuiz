@@ -18,11 +18,11 @@ namespace evoQuiz.ViewModel
             set { _myItem = value; OnPropertyChanged("Skin"); }
         }
 
-        public override int PosX { get; set; }
-        public override int PosY { get; set; }
-        public override int PosZ { get; set; }
-        public override int Size { get { return Parent.Parent.MapScale; } set { } }
-        public InventoryViewModel Parent { get; set; }
+        public override int PosX { get { return MyItem.PositionX; } set { MyItem.PositionX = value; OnPropertyChanged("PosX"); } }
+        public override int PosY { get { return MyItem.PositionY; } set { MyItem.PositionY = value; OnPropertyChanged("PosY"); } }
+        public override int PosZ { get { return MyItem.PositionZ; } set { MyItem.PositionZ = value; OnPropertyChanged("PosZ"); } }
+        public override int Size { get { return Parent.MapScale; } set { } }
+        public MainViewModel Parent { get; set; }
         public override BitmapImage Skin
         {
             get
@@ -40,9 +40,10 @@ namespace evoQuiz.ViewModel
             }
         }
 
-        public ItemViewModel(Item item)
+        public ItemViewModel(Item item, MainViewModel parent)
         {
             MyItem = item;
+            Parent = parent;
         }
     }
 }

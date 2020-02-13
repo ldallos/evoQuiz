@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace evoQuizQuestionMaker.Model
 {
-    class QuestionTopic
+    public class QuestionTopic
     {
         /// <summary>
         /// A szörnyek a típusukkal megegyező kérdések közül fognak válogatni

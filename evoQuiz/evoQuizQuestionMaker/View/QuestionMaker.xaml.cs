@@ -44,6 +44,7 @@ namespace evoQuizQuestionMaker.View
             tempbadanswers.Add(Bad_Answer.Text);
             Bad_Answer_List.ItemsSource = tempbadanswers;
             Bad_Answer_List.Items.Refresh();
+            Bad_Answer.Clear();
         }
 
         /// <summary>
@@ -67,6 +68,17 @@ namespace evoQuizQuestionMaker.View
             questionstrings = QuestionCreator.getQuestions();
             Questions.ItemsSource = questionstrings;
             Questions.Items.Refresh();
+            
+            Message.Content = "A kérdés '" + Question.Text + "' sikeresen elmentve!";
+
+            //ablakok ürítése
+            tempbadanswers.Clear();
+            Bad_Answer_List.ItemsSource = tempbadanswers;
+            Bad_Answer_List.Items.Refresh();
+
+            Question.Clear();
+            Good_Answer.Clear();
+            Bad_Answer.Clear();
         }
 
         #endregion

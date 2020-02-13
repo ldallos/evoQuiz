@@ -1,26 +1,31 @@
 ﻿using evoQuiz.Model;
 using evoQuiz.Model.Items;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace evoQuiz.ViewModel
 {
-    public class MainViewModel: ViewModelBase
+    public class MainViewModel: WindowViewModel
     {
         public ObservableCollection<TileViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
         public QuestionViewModel myQuestionViewModel { get; set; }
         public HealthViewModel myHealthViewModel { get; set; }
         public InventoryViewModel myInventoryViewModel { get; set; }
-
+        public GoldViewModel myGoldViewModel { get; set; }
+        public GameOverViewModel myGameOverViewModel { get; set; }
+        private List<ViewModelBase> ViewModels = new List<ViewModelBase>();
 
         public Map myMap { get; set; }
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
@@ -89,8 +94,8 @@ namespace evoQuiz.ViewModel
                 {
                     myPlayerViewModel = new PlayerViewModel(element as Player, this);
                     GridItems.Add(myPlayerViewModel);
-                    myPlayerViewModel.myPlayer.Inventory.Add(new Potion());
-                    myPlayerViewModel.myPlayer.Inventory.Add(new Sword());
+                    //myPlayerViewModel.myPlayer.Inventory.Add(new Potion());
+                    //myPlayerViewModel.myPlayer.Inventory.Add(new Sword());
                     continue;
                 }
 
@@ -99,13 +104,31 @@ namespace evoQuiz.ViewModel
                     GridItems.Add(new EnemyViewModel(element as Enemy, this));
                     continue;
                 }
+
+                if (element is Item)
+                {
+                    GridItems.Add(new ItemViewModel(element as Item, this));
+                    continue;
+                }
             }
 
             SetOffset();
 
-            myQuestionViewModel = new QuestionViewModel() { MyPlayer = myPlayerViewModel.myPlayer, Parent = this };
+            myQuestionViewModel = new QuestionViewModel(myPlayerViewModel.myPlayer) { Parent = this, ControlHeight= WindowHeight, ControlWidth = WindowWidth };
             myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
             myInventoryViewModel = new InventoryViewModel(myPlayerViewModel.myPlayer, this);
+            myGoldViewModel = new GoldViewModel(myPlayerViewModel.myPlayer);
+            myGameOverViewModel = new GameOverViewModel(myPlayerViewModel.myPlayer);
+
+            ViewModels.Add(myGameOverViewModel);
+            ViewModels.Add(myQuestionViewModel);
+            ViewModels.Add(myHealthViewModel);
+            ViewModels.Add(myInventoryViewModel);
+            ViewModels.Add(myGoldViewModel);
+            ViewModels.Add(myPlayerViewModel);
+
+
+            StartOtherThread();
         }
 
         private void MoveUp()
@@ -150,5 +173,47 @@ namespace evoQuiz.ViewModel
                 myInventoryViewModel.Close();
             }
         }
+
+        public void GameOver()
+        {
+            myQuestionViewModel.QuestionControlVisible = false;
+            myGameOverViewModel.Open();
+
+        }
+
+        private void StartOtherThread()
+        {
+            DispatcherHelper.Initialize();
+            int loopIndex = 0;
+            ThreadPool.QueueUserWorkItem(
+                o =>
+                {
+                    while (true)
+                    {
+                        DispatcherHelper.CheckBeginInvokeOnUI(
+                          () =>
+                          {
+                              loopIndex++;
+
+                              foreach (var vm in ViewModels)
+                              {
+                                  vm.Update();
+                              }
+                          });
+                        Thread.Sleep(mySpeed);
+                    }
+                }
+                );
+        }
+
+        public override void ItemUsed(ItemInventoryViewModel itemVM)
+        {
+            throw new NotImplementedException();
+        }
+
+        private int mySpeed = 1;
+
+
+      
     }
 }

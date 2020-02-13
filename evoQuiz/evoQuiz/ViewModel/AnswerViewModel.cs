@@ -1,27 +1,20 @@
-﻿using evoQuiz.Model.Quiz;
-using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 
 namespace evoQuiz.ViewModel
 {
     public class AnswerViewModel : ViewModelBase
     {
-        public Answer MyAnswer { get; set; }
-        public string AnswerText { get { return MyAnswer.AnswerText; } }
+        public string AnswerText { get; set; }
         public int PosX { get; set; }
         public int PosY { get; set; }
         public QuestionViewModel Parent { get; set; }
         public ICommand AnswerClickCommand { get; set; }
-        public AnswerViewModel(Answer answer, int[] pos, QuestionViewModel parent)
+        public AnswerViewModel(string answer, int[] pos, QuestionViewModel parent)
         {
             AnswerClickCommand = new RelayCommand(SubmitAnswer);
 
-            MyAnswer = answer;
+            AnswerText = answer;
             PosX = pos[0];
             PosY = pos[1];
             Parent = parent;
@@ -29,7 +22,7 @@ namespace evoQuiz.ViewModel
 
         private void SubmitAnswer()
         {
-            Parent.Quiz(this.MyAnswer);
+            Parent.Quiz(this.AnswerText);
         }
     }
 }

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace evoQuiz
+namespace evoQuiz.View
 {
     /// <summary>
-    /// Interaction logic for Start.xaml
+    /// Interaction logic for GameOverControl.xaml
     /// </summary>
-    public partial class Start : Page
+    public partial class GameOverControl : UserControl
     {
-        public Start()
+        public GameOverControl()
         {
             InitializeComponent();
         }

@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace evoQuiz.Model.Items
 {
-    class Sword : Item
+    public class Sword : Item
     {
+        public override string Name { get; set; } = "Kristály Kard";
+        public override string Description { get; set; } = "Elpusztít két válaszlehetőséget egy adott kérdésnél.";
+        public Sword(int X, int Y) : base(X, Y)
+        {
+
+        }
+        public Sword()
+        {
+
+        }
         public override void Use()
         {
             throw new NotImplementedException();

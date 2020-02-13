@@ -8,15 +8,19 @@ using System.Xml.Serialization;
 
 namespace evoQuiz.Model
 {
-    public class Enemy : Character
+    public abstract class Enemy : Character
     {
         public Enemy(int X, int Y) : base(X, Y)
         {
-
+            PositionZ = 5;
         }
         public Enemy()
         {
             
         }
+
+        public abstract void AbilityAfterQuestion(Player player);
+        public abstract void AbilityRight(Player player);
+        public abstract void AbilityWrong(Player player);
     }
 }

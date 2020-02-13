@@ -27,7 +27,6 @@ namespace evoQuiz.ViewModel
 
         public static void StartMenuMusic()
         {
-            return;
             if (!global::evoQuiz.Properties.Settings.Default.MenuSoundPlayerActive)
             {
                 menuSoundPlayer.SoundLocation = path + "MenuSong.wav";
@@ -44,8 +43,14 @@ namespace evoQuiz.ViewModel
 
         public static void InGameMusic()
         {
-            return;
-            Play(path + "MenuSong.wav");
+            Play(path + "GameSong.wav");
+            global::evoQuiz.Properties.Settings.Default.RunningGameSoundPlayerActive = true;
+        }
+
+        public static void StopGameMusic()
+        {
+            soundPlayer.Stop();
+            global::evoQuiz.Properties.Settings.Default.RunningGameSoundPlayerActive = false;
         }
 
         static void Play(string audioPath)

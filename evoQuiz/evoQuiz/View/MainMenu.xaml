@@ -26,10 +26,10 @@
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Button x:Name="StartButton" Content="Start" Grid.Column="0" Grid.Row="2" Click="StartButton_Click" Style="{StaticResource mainMenuButton}"/>
-        <Button x:Name="EditorButton" Content="Editor" Grid.Column="0" Grid.Row="3" Click="EditorButton_Click" Style="{StaticResource mainMenuButton}"/>
-        <Button x:Name="OptionsButton" Content="Options" Grid.Column="0" Grid.Row="4" Click="OptionsButton_Click" Style="{StaticResource mainMenuButton}"/>
+        <Button x:Name="MapEditorButton" Content="Map editor" Grid.Column="0" Grid.Row="3" Click="MapEditorButton_Click" Style="{StaticResource mainMenuButton}"/>
+        <Button x:Name="QuestionEditorButton" Content="Question editor" Grid.Column="0" Grid.Row="4" Click="QuestionEditorButton_Click" Style="{StaticResource mainMenuButton}"/>
         <Button x:Name="CreditsButton" Content="Credits" Grid.Column="0" Grid.Row="5" Click="CreditsButton_Click" Style="{StaticResource mainMenuButton}"/>
         <Button x:Name="ExitButton" Content="Exit" Grid.Column="0" Grid.Row="6" Click="ExitButton_Click" Style="{StaticResource mainMenuButton}"/>
     </Grid>

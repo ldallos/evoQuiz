@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>evoQuiz</RootNamespace>
     <AssemblyName>evoQuiz</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -29,6 +29,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -93,39 +94,43 @@
     <Compile Include="GridHelper.cs" />
     <Compile Include="MapSerializer.cs" />
     <Compile Include="Model\Character.cs" />
+    <Compile Include="Model\Enemies\Hydra.cs" />
     <Compile Include="Model\Enemies\Skeleton.cs" />
+    <Compile Include="Model\Enemies\Thief.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Items\Potion.cs" />
     <Compile Include="Model\Items\Sword.cs" />
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\Player.cs" />
-    <Compile Include="Model\Quiz\Answer.cs" />
-    <Compile Include="Model\Quiz\Question.cs" />
     <Compile Include="Model\Shadow.cs" />
     <Compile Include="Model\TileElement.cs" />
     <Compile Include="Model\Trap.cs" />
     <Compile Include="Model\Wall.cs" />
     <Compile Include="SizeObserver.cs" />
     <Compile Include="ViewModel\AnswerViewModel.cs" />
+    <Compile Include="ViewModel\GameOverViewModel.cs" />
+    <Compile Include="ViewModel\GoldViewModel.cs" />
     <Compile Include="ViewModel\HealthViewModel.cs" />
     <Compile Include="ViewModel\InventoryViewModel.cs" />
+    <Compile Include="ViewModel\ItemInventoryViewModel.cs" />
     <Compile Include="ViewModel\ItemViewModel.cs" />
+    <Compile Include="ViewModel\WindowViewModel.cs" />
     <Compile Include="View\AnswerControl.xaml.cs">
       <DependentUpon>AnswerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SoundsViewModel.cs" />
+    <Compile Include="View\GameOverControl.xaml.cs">
+      <DependentUpon>GameOverControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GoldControl.xaml.cs">
+      <DependentUpon>GoldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HealthControl.xaml.cs">
       <DependentUpon>HealthControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InverntoryControl.xaml.cs">
       <DependentUpon>InverntoryControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Options.xaml.cs">
-      <DependentUpon>Options.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Start.xaml.cs">
-      <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\EnemyViewModel.cs" />
     <Compile Include="ViewModel\TileViewModel.cs" />
@@ -146,6 +151,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Credits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameOverControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GoldControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,15 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Options.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Start.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +224,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Resource Include="Font\Retro Gaming.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -307,12 +313,27 @@
     <Resource Include="Images\Items\potion.png" />
     <Resource Include="Images\Items\sword.png" />
     <Resource Include="Images\inventory_tile.png" />
+    <Resource Include="Images\answer.png" />
+    <Resource Include="Images\question.png" />
+    <Resource Include="Images\goldcounter.png" />
+    <Resource Include="Images\questionbackground.png" />
+    <Resource Include="Images\chains.png" />
+    <Resource Include="Images\thief.png" />
     <Content Include="Sounds\GameSong.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\MenuSong.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Quiz\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\evoQuizQuestionMaker\evoQuizQuestionMaker.csproj">
+      <Project>{f58d0639-967c-4d4c-89e4-6e875e7acf90}</Project>
+      <Name>evoQuizQuestionMaker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

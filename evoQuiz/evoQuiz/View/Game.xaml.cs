@@ -27,7 +27,8 @@ namespace evoQuiz
         public Game()
         {
             InitializeComponent();
-
+            Focusable = true;
+            Loaded += (s, e) => Keyboard.Focus(this);
             SoundsViewModel.InGameMusic();
         }
     }

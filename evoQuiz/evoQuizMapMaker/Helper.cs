@@ -8,6 +8,6 @@ namespace evoQuizMapMaker
 {
     static class Helper
     {
-        public enum Mode { WallMode, TrapMode, EnemyMode, PlayerMode, EreaserMode };
+        public enum Mode { WallMode, TrapMode, EnemyMode, PlayerMode, ItemMode, EreaserMode };
     }
 }

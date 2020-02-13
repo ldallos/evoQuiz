@@ -1,4 +1,5 @@
-﻿using evoQuizQuestionMaker.Model;
+﻿using evoQuizQuestionMaker;
+using evoQuizQuestionMaker.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,7 @@ namespace evoQuizQuestionMaker.ViewModel
     /// <summary>
     /// VievModel a kérdések példányosítására, a kérdések mentése módosításe itt történik
     /// </summary>
-    class QuestionCreator
+    public class QuestionCreator
     {
         //a relatív útvonal
         private static string MainPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\Questions\\"));
