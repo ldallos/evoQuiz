@@ -17,16 +17,16 @@ namespace evoQuizQuestionMaker.ViewModel
     public class QuestionCreator
     {
         //a relatív útvonal
-        private string MainPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\Questions\\"));
+        private static string MainPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\Questions\\"));
 
 
         /// <summary>
-        /// a kérdés lementése
+        /// egy új kérdés lementése
         /// </summary>
         /// <param name="question">a megválaszolandó kérdés</param>
         /// <param name="badanswers">rossz válaszok listája</param>
         /// <param name="goodanswer">a helyes válasz</param>
-        public void SerializeQuestion(string question, List<string> badanswers, string goodanswer)
+        public static void SerializeQuestion(string question, List<string> badanswers, string goodanswer)
         {
             List<QuizQuestion> newQuestions = new List<QuizQuestion>(); //a friss kérdéslista
             //az régi kérdések betöltése (ha vannak)
@@ -38,19 +38,65 @@ namespace evoQuizQuestionMaker.ViewModel
             newQuestions.Add(myQuizQuestion);
 
             //a kérdések elmentése
+            SerializeQuestionList(newQuestions);
+        }
+
+        /// <summary>
+        /// kérdéslista lementése
+        /// </summary>
+        /// <param name="questions"></param>
+        public static void SerializeQuestionList(List<QuizQuestion> questions)
+        {
+            //a kérdések elmentése
             File.WriteAllText(MainPath + "question.xml", "");
             var mySerializer = new XmlSerializer(typeof(List<QuizQuestion>));
             using (var writer = XmlWriter.Create(MainPath + "question.xml"))
             {
-                mySerializer.Serialize(writer, newQuestions);
+                mySerializer.Serialize(writer, questions);
             }
+        }
+
+        /// <summary>
+        /// a mentett listából kitörli az adott kérdést
+        /// </summary>
+        /// <param name="questionToDelete">törlendő kérdés</param>
+        public static void DeleteQuestion(QuizQuestion questionToDelete)
+        {
+            List<QuizQuestion> questions = new List<QuizQuestion>();
+            questions = DeserializeQuestion();
+            questions.Remove(questionToDelete);
+            SerializeQuestionList(questions);
+
+        }
+        public static void DeleteQuestion(string questionToDelete)
+        {
+            List<QuizQuestion> questions = new List<QuizQuestion>();
+            questions = DeserializeQuestion();
+            questions.Remove(questions.Find(x=>x.myQuestion == questionToDelete));
+            SerializeQuestionList(questions);
+
+        }
+
+        /// <summary>
+        /// az elmentett kérdések listáját betölti
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> getQuestions()
+        {
+            List<QuizQuestion> myquestions = DeserializeQuestion();
+            List<string> questionstoget = new List<string>();
+            foreach (QuizQuestion question in myquestions)
+            {
+                questionstoget.Add(question.myQuestion);
+            }
+            return questionstoget;
         }
 
         /// <summary>
         /// kérdéseknek fájlból való beolvasása 
         /// </summary>
         /// <returns>a kérdések listája</returns>
-        public List<QuizQuestion> DeserializeQuestion()
+        public static List<QuizQuestion> DeserializeQuestion()
         {
             //a betöltött kérdések listája
             List<QuizQuestion> questions;

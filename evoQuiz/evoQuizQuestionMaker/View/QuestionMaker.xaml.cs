@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using evoQuizQuestionMaker.Model;   //a betöltéshez 
 
 namespace evoQuizQuestionMaker.View
 {
@@ -22,10 +23,14 @@ namespace evoQuizQuestionMaker.View
     {
         List<string> tempbadanswers;
         QuestionCreator question;
+        List<string> questionstrings;
         public QuestionMaker()
         {
             InitializeComponent();
             tempbadanswers = new List<string>();
+
+            questionstrings = QuestionCreator.getQuestions();
+            Questions.ItemsSource = questionstrings;
 
         }
 
@@ -39,6 +44,7 @@ namespace evoQuizQuestionMaker.View
             tempbadanswers.Add(Bad_Answer.Text);
             Bad_Answer_List.ItemsSource = tempbadanswers;
             Bad_Answer_List.Items.Refresh();
+            Bad_Answer.Clear();
         }
 
         /// <summary>
@@ -56,12 +62,71 @@ namespace evoQuizQuestionMaker.View
         /// </summary>
         private void Create_Question(object sender, RoutedEventArgs e)
         {
-            question = new QuestionCreator();
-            question.SerializeQuestion(Question.Text, tempbadanswers, Good_Answer.Text);
+            QuestionCreator.SerializeQuestion(Question.Text, tempbadanswers, Good_Answer.Text);
             
+            //frissíti a létező kérdések listáját
+            questionstrings = QuestionCreator.getQuestions();
+            Questions.ItemsSource = questionstrings;
+            Questions.Items.Refresh();
+            
+            Message.Content = "A kérdés '" + Question.Text + "' sikeresen elmentve!";
+
+            //ablakok ürítése
+            tempbadanswers.Clear();
+            Bad_Answer_List.ItemsSource = tempbadanswers;
+            Bad_Answer_List.Items.Refresh();
+
+            Question.Clear();
+            Good_Answer.Clear();
+            Bad_Answer.Clear();
         }
 
         #endregion
+
+        /// <summary>
+        /// betölti a megváltoztatandó kérdés paramétereit, majd törli a régi kérdést
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Modify_Click(object sender, RoutedEventArgs e)
+        {
+            Load_Click(sender, e);
+            DeleteQuestion_Click(sender, e);
+        }
+
+        /// <summary>
+        /// betölti a kiválasztott kérdés paramétereit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+
+            List<QuizQuestion> myquestions = QuestionCreator.DeserializeQuestion();
+            QuizQuestion myquestion = myquestions.Find(x => x.myQuestion == Questions.SelectedItem.ToString());
+
+            Question.Text = myquestion.myQuestion;
+            Good_Answer.Text = myquestion.myRightAnswer;
+
+            tempbadanswers = myquestion.myWrongAnswers;
+            Bad_Answer_List.ItemsSource = tempbadanswers;
+            Bad_Answer_List.Items.Refresh();
+        }
+
+        /// <summary>
+        /// kitörli a kiválasztott kérdést
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            QuestionCreator.DeleteQuestion(Questions.SelectedItem.ToString());
+
+            //frissíti a létező kérdések listáját
+            questionstrings = QuestionCreator.getQuestions();
+            Questions.ItemsSource = questionstrings;
+            Questions.Items.Refresh();
+        }
 
     }
 }
