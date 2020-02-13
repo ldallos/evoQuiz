@@ -26,21 +26,28 @@ namespace evoQuiz.ViewModel
 
         public InventoryViewModel(Player player, WindowViewModel parent)
         {
-            for (int i = 0; i < InventorySizeY; i++)
-            {
-                for (int j = 0; j < InventorySizeX; j++)
-                {
-                    Items.Add(new ItemInventoryViewModel(null, this) { PosX = j, PosY = i});
-                }
-            }
+            ClearInventory();
             InventoryControlVisible = false;
             MyPlayer = player;
             Parent = parent;
         }
 
+        private void ClearInventory()
+        {
+            Items.Clear();
+            for (int i = 0; i < InventorySizeY; i++)
+            {
+                for (int j = 0; j < InventorySizeX; j++)
+                {
+                    Items.Add(new ItemInventoryViewModel(null, this) { PosX = j, PosY = i });
+                }
+            }
+        }
+
         public void Open()
         {
             InventoryControlVisible = true;
+            ClearInventory();
             
             for (int i = 0; i < MyPlayer.Inventory.Count; i++)
             {

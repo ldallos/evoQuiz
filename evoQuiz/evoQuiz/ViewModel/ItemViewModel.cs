@@ -35,6 +35,10 @@ namespace evoQuiz.ViewModel
                 {
                     return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/Items/potion.png", UriKind.RelativeOrAbsolute));
                 }
+                else if (MyItem is Chest)
+                {
+                    return new BitmapImage(new Uri(@"pack://application:,,,/evoQuiz;component/Images/Items/chest.png", UriKind.RelativeOrAbsolute));
+                }
 
                 return null;
             }

@@ -99,6 +99,7 @@
     <Compile Include="Model\Enemies\Thief.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\Items\Chest.cs" />
     <Compile Include="Model\Items\Potion.cs" />
     <Compile Include="Model\Items\Sword.cs" />
     <Compile Include="Model\Map.cs" />
@@ -319,6 +320,8 @@
     <Resource Include="Images\questionbackground.png" />
     <Resource Include="Images\chains.png" />
     <Resource Include="Images\thief.png" />
+    <Resource Include="Images\hydra.png" />
+    <Resource Include="Images\Items\chest.png" />
     <Content Include="Sounds\GameSong.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

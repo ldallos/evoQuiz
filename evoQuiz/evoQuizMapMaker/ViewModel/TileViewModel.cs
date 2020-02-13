@@ -107,6 +107,13 @@ namespace evoQuizMapMaker.ViewModel
                         myTileElement = new Sword(PosX, PosY);
                         break;
                     }
+                    if (Parent.SelectedItemType == typeof(Chest))
+                    {
+                        Name = "C";
+                        TileColor = Brushes.Magenta;
+                        myTileElement = new Chest(PosX, PosY);
+                        break;
+                    }
 
                     break;
                 case Helper.Mode.PlayerMode:

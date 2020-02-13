@@ -67,9 +67,16 @@ namespace evoQuiz.ViewModel
         public QuizQuestion CurrentQuestion
         {
             get { return myCurrentQuestion; }
-            set { myCurrentQuestion = value; OnPropertyChanged("QuestionText"); OnPropertyChanged("Answer1Text"); OnPropertyChanged("Answer2Text"); OnPropertyChanged("Answer3Text"); OnPropertyChanged("Answer4Text"); }
+            set { myCurrentQuestion = value; if (!(CurrentQuestion is null)) { QuestionText = CurrentQuestion.myQuestion; } else { QuestionText = null; } }
         }
-        public string QuestionText { get { return CurrentQuestion.myQuestion; } }
+
+        private string myQuestionText;
+
+        public string QuestionText
+        {
+            get { return myQuestionText; }
+            set { myQuestionText = value; OnPropertyChanged("QuestionText"); }
+        }
 
         public QuestionViewModel(Player player)
         {
@@ -117,6 +124,7 @@ namespace evoQuiz.ViewModel
                 GetQuestions();
             }
 
+            Answers.Clear();
             CurrentQuestion = Questions.Dequeue();
 
             List<int[]> Positions = new List<int[]>() { new int[] { 0, 0 }, new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 1, 1 } };
@@ -180,9 +188,11 @@ namespace evoQuiz.ViewModel
 
         private void EndQuiz()
         {
+            Answers.Clear();
+            CurrentQuestion = null;
             QuestionControlVisible = false;
             MyPlayer.Gold += EnemyVM.myEnemy.Gold;
-            Parent.GridItems.Remove(EnemyVM);
+            EnemyVM.Die();
         }
 
         private void OpenWindow()

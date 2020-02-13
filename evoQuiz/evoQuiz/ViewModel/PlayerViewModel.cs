@@ -1,4 +1,5 @@
 ﻿using evoQuiz.Model;
+using evoQuiz.Model.Items;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,7 +76,7 @@ namespace evoQuiz.ViewModel
                 default:       
                     break;
             }
-            //UpdateVisibilityV2();
+
             Updat();
         }
 
@@ -224,21 +225,9 @@ namespace evoQuiz.ViewModel
                 }
             } while (x < 0);
         }
-
       
         private void BlendShadows()
         {
-            //foreach (var shadow in shadowsToBlend)
-            //{
-            //    float OpacitySum = 0;
-            //    List<IViewModel> SurShadows = GetSurroundingShadows(shadow);
-            //    foreach (var s in SurShadows)
-            //    {
-            //        OpacitySum += (float)(s as ShadowViewModel).Opacity;
-            //    }
-            //    (shadow as ShadowViewModel).Opacity = OpacitySum / SurShadows.Count;
-            //}
-
             foreach (var shadow in Parent.GridItems.Where(x => x is ShadowViewModel && Math.Sqrt(Math.Pow(Math.Abs(x.PosY - PosY), 2) + Math.Pow(Math.Abs(x.PosX - PosX), 2)) <= myPlayer.VisibilityRange))
             {
                 float OpacitySum = 0;
@@ -251,18 +240,6 @@ namespace evoQuiz.ViewModel
             }
         }
 
-        private void CheckEnemy()
-        {
-            EnemyViewModel enemy = Parent.GridItems.Where(x => x is EnemyViewModel && x.PosX == this.PosX && x.PosY == this.PosY).FirstOrDefault() as EnemyViewModel;
-
-            if (enemy is null)
-            {
-                return;
-            }
-
-            Parent.myQuestionViewModel.StartQuiz(enemy);
-        }
-
         private void CheckItems()
         {
             ItemViewModel item = Parent.GridItems.Where(x => x is ItemViewModel && x.PosX == this.PosX && x.PosY == this.PosY).FirstOrDefault() as ItemViewModel;
@@ -272,13 +249,20 @@ namespace evoQuiz.ViewModel
                 return;
             }
 
+            if (item.MyItem is Chest)
+            {
+                myPlayer.Gold += 500;
+                Parent.GridItems.Remove(item);
+                return;
+            }
+
             myPlayer.Inventory.Add(item.MyItem);
             Parent.GridItems.Remove(item);
         }
 
         private void Updat()
         {
-            CheckEnemy();
+            //CheckEnemy();
             CheckItems();
             Actions.Add(UpdateLights);
         }

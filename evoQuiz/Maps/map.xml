@@ -300,15 +300,7 @@
     </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Thief">
-      <PositionX>2</PositionX>
-      <PositionY>3</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>3</Damage>
-      <Gold>500</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -795,7 +787,15 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Hydra">
+      <PositionX>7</PositionX>
+      <PositionY>4</PositionY>
+      <PositionZ>5</PositionZ>
+      <MaxHealth>10</MaxHealth>
+      <Health>10</Health>
+      <Damage>5</Damage>
+      <Gold>850</Gold>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
       <PositionX>7</PositionX>
@@ -1088,15 +1088,7 @@
       <PositionY>2</PositionY>
       <PositionZ>0</PositionZ>
     </TileElement>
-    <TileElement xsi:type="Skeleton">
-      <PositionX>9</PositionX>
-      <PositionY>3</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -2105,7 +2097,11 @@
       <PositionY>7</PositionY>
       <PositionZ>0</PositionZ>
     </TileElement>
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Chest">
+      <PositionX>18</PositionX>
+      <PositionY>8</PositionY>
+      <PositionZ>5</PositionZ>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -2361,7 +2357,11 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Chest">
+      <PositionX>20</PositionX>
+      <PositionY>22</PositionY>
+      <PositionZ>5</PositionZ>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>20</PositionX>
       <PositionY>23</PositionY>
@@ -3491,7 +3491,11 @@
       <Description>Elpusztít két válaszlehetőséget egy adott kérdésnél.</Description>
     </TileElement>
     <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Chest">
+      <PositionX>30</PositionX>
+      <PositionY>10</PositionY>
+      <PositionZ>5</PositionZ>
+    </TileElement>
     <TileElement xsi:type="Wall">
       <PositionX>30</PositionX>
       <PositionY>11</PositionY>
@@ -3608,14 +3612,14 @@
       <PositionZ>0</PositionZ>
     </TileElement>
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Thief">
+    <TileElement xsi:type="Hydra">
       <PositionX>31</PositionX>
       <PositionY>9</PositionY>
       <PositionZ>5</PositionZ>
       <MaxHealth>10</MaxHealth>
       <Health>10</Health>
-      <Damage>3</Damage>
-      <Gold>500</Gold>
+      <Damage>5</Damage>
+      <Gold>850</Gold>
     </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -4323,17 +4327,21 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Thief">
+    <TileElement xsi:type="Hydra">
       <PositionX>37</PositionX>
       <PositionY>34</PositionY>
       <PositionZ>5</PositionZ>
       <MaxHealth>10</MaxHealth>
       <Health>10</Health>
-      <Damage>3</Damage>
-      <Gold>500</Gold>
+      <Damage>5</Damage>
+      <Gold>850</Gold>
     </TileElement>
     <TileElement xsi:nil="true" />
-    <TileElement xsi:nil="true" />
+    <TileElement xsi:type="Chest">
+      <PositionX>37</PositionX>
+      <PositionY>36</PositionY>
+      <PositionZ>5</PositionZ>
+    </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
       <PositionX>37</PositionX>

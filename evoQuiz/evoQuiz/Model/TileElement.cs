@@ -18,6 +18,7 @@ namespace evoQuiz.Model
     [XmlInclude(typeof(Player))]
     [XmlInclude(typeof(Potion))]
     [XmlInclude(typeof(Sword))]
+    [XmlInclude(typeof(Chest))]
     public abstract class TileElement
     {
         public int PositionX { get; set; }

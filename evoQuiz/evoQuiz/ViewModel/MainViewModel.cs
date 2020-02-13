@@ -126,7 +126,10 @@ namespace evoQuiz.ViewModel
             ViewModels.Add(myInventoryViewModel);
             ViewModels.Add(myGoldViewModel);
             ViewModels.Add(myPlayerViewModel);
-
+            foreach (var enemy in GridItems.Where(x=>x is EnemyViewModel).ToList())
+            {
+                ViewModels.Add(enemy);
+            }
 
             StartOtherThread();
         }
@@ -184,7 +187,7 @@ namespace evoQuiz.ViewModel
         private void StartOtherThread()
         {
             DispatcherHelper.Initialize();
-            int loopIndex = 0;
+            
             ThreadPool.QueueUserWorkItem(
                 o =>
                 {
@@ -193,7 +196,7 @@ namespace evoQuiz.ViewModel
                         DispatcherHelper.CheckBeginInvokeOnUI(
                           () =>
                           {
-                              loopIndex++;
+                              IterationNumber++;
 
                               foreach (var vm in ViewModels)
                               {
@@ -212,8 +215,7 @@ namespace evoQuiz.ViewModel
         }
 
         private int mySpeed = 1;
+        public int IterationNumber = 0;
 
-
-      
     }
 }

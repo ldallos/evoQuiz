@@ -29,7 +29,7 @@ namespace evoQuiz.Model.Enemies
 
         public override void AbilityWrong(Player player)
         {
-           
+            Health = MaxHealth;
         }
     }
 }

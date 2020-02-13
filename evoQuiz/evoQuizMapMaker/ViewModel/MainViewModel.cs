@@ -63,7 +63,7 @@ namespace evoQuizMapMaker.ViewModel
             Tiles = new ObservableCollection<TileViewModel>();
 
             EnemyTypes = new ObservableCollection<Type>() { typeof(Skeleton), typeof(Thief), typeof(Hydra) };
-            ItemTypes = new ObservableCollection<Type>() { typeof(Potion), typeof(Sword) };
+            ItemTypes = new ObservableCollection<Type>() { typeof(Potion), typeof(Sword), typeof(Chest) };
 
             SaveMapCommand = new RelayCommand(SaveMap);
             NewMapCommand = new RelayCommand(NewMap);
@@ -170,6 +170,10 @@ namespace evoQuizMapMaker.ViewModel
                     else if (element is Sword)
                     {
                         tile.Name = "S";
+                    }
+                    else if (element is Chest)
+                    {
+                        tile.Name = "C";
                     }
                 }
                 
