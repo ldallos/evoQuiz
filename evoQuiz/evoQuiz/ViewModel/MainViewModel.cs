@@ -213,7 +213,7 @@ namespace evoQuiz.ViewModel
 
         public override void ItemUsed(ItemInventoryViewModel itemVM)
         {
-            throw new NotImplementedException();
+        
         }
 
         private int mySpeed = 1;
