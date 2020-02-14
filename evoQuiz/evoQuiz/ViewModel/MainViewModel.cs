@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -18,6 +19,8 @@ namespace evoQuiz.ViewModel
 {
     public class MainViewModel: WindowViewModel
     {
+        public Page MyPage { get; set; } //nincs időm rendesen MVVMesen xd
+        public Page HomePage { get; set; }
         public ObservableCollection<TileViewModel> GridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
         public QuestionViewModel myQuestionViewModel { get; set; }
@@ -25,7 +28,7 @@ namespace evoQuiz.ViewModel
         public InventoryViewModel myInventoryViewModel { get; set; }
         public GoldViewModel myGoldViewModel { get; set; }
         public GameOverViewModel myGameOverViewModel { get; set; }
-        private List<ViewModelBase> ViewModels = new List<ViewModelBase>();
+        public List<ViewModelBase> ViewModels = new List<ViewModelBase>();
 
         public Map myMap { get; set; }
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
@@ -118,7 +121,7 @@ namespace evoQuiz.ViewModel
             myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
             myInventoryViewModel = new InventoryViewModel(myPlayerViewModel.myPlayer, this);
             myGoldViewModel = new GoldViewModel(myPlayerViewModel.myPlayer);
-            myGameOverViewModel = new GameOverViewModel(myPlayerViewModel.myPlayer);
+            myGameOverViewModel = new GameOverViewModel(myPlayerViewModel.myPlayer) { Parent = this };
 
             ViewModels.Add(myGameOverViewModel);
             ViewModels.Add(myQuestionViewModel);
@@ -181,7 +184,6 @@ namespace evoQuiz.ViewModel
         {
             myQuestionViewModel.QuestionControlVisible = false;
             myGameOverViewModel.Open();
-
         }
 
         private void StartOtherThread()

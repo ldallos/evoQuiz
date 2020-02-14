@@ -23,7 +23,16 @@
             <Image Grid.Column="0" Source="/Images/chains.png" Stretch="Uniform" Height="{Binding Path=ControlHeight}" HorizontalAlignment="Left"></Image>
             <Image Grid.Column="1" Source="/Images/chains.png" Stretch="Uniform" Height="{Binding Path=ControlHeight}" HorizontalAlignment="Right"></Image>
 
-            <Image Grid.Column="1" Source="{Binding Path=MonsterSkin}" Stretch="Uniform" Height="{Binding Path=ControlHeight}" HorizontalAlignment="Right" Opacity="{Binding Path=MonsterFade}"></Image>
+
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" Source="{Binding Path=MonsterSkin}" Stretch="Uniform" Height="{Binding Path=ControlHeight}" HorizontalAlignment="Right" Opacity="{Binding Path=MonsterFade}"></Image>
+            </Grid>
+           
         </Grid>
     
         <Grid Margin="{Binding Path=Offset}" Width="{Binding Path=ControlWidth}" Height="{Binding Path=ControlHeight}" >

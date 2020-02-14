@@ -43,7 +43,7 @@ namespace evoQuiz
             SoundsViewModel.StopMenuMusic();
 
             Game page = new Game();
-            page.DataContext = new MainViewModel(this.ActualHeight, this.ActualWidth);
+            page.DataContext = new MainViewModel(this.ActualHeight, this.ActualWidth) { MyPage = page, HomePage = this };
             //page.Show();
             this.NavigationService.Navigate(page);
         }

@@ -94,8 +94,7 @@ namespace evoQuiz.ViewModel
 
         private void LoadQuestions()
         {
-            QuestionCreator questionCreator = new QuestionCreator();
-            AllQuestions = questionCreator.DeserializeQuestion();
+            AllQuestions = QuestionCreator.DeserializeQuestion();
         }
 
         private void GetQuestions()

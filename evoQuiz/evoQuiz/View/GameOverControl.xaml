@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:evoQuiz.View"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -12,6 +14,12 @@
     </UserControl.Resources>
 
     <Grid Background="#7F210101" Visibility="{Binding Path=GameOverControlVisible, Converter={StaticResource booleanToVisibilityConverter}}">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <command:EventToCommand Command="{Binding GoBackCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        
         <StackPanel VerticalAlignment="Center">
             <TextBlock Style="{StaticResource PixelText}" Foreground="White" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Game Over"></TextBlock>
             <TextBlock Style="{StaticResource PixelText}" Foreground="White" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Score:"></TextBlock>
