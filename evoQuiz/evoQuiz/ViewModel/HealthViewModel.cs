@@ -11,23 +11,37 @@ namespace evoQuiz.ViewModel
     public class HealthViewModel: ViewModelBase
     {
         private Character _myCharacter;
-
         public Character myCharacter
         {
             get { return _myCharacter; }
-            set { _myCharacter = value; OnPropertyChanged("HealthImage"); }
+            set { _myCharacter = value; OnPropertyChanged("HealthImage");}
         }
 
         private BitmapImage _myHealthImage;
-
         public BitmapImage HealthImage
         {
             get { return _myHealthImage; }
             set { _myHealthImage = value; OnPropertyChanged("HealthImage"); }
         }
 
+        private double myHitOpacity;
+        public double HitOverlayOpacity
+        {
+            get { return myHitOpacity; }
+            set { myHitOpacity = value; OnPropertyChanged("HitOverlayOpacity"); }
+        }
+
+        private double myHealOpacity;
+        public double HealOverlayOpacity
+        {
+            get { return myHealOpacity; }
+            set { myHealOpacity = value; OnPropertyChanged("HealOverlayOpacity"); }
+        }
+
         public HealthViewModel(Character character)
         {
+            HitOverlayOpacity = 0;
+            HealOverlayOpacity = 0;
             myCharacter = character;
             Actions.Add(UpdateHealth);
         }
@@ -46,6 +60,16 @@ namespace evoQuiz.ViewModel
             if (myCharacter.Health == TempHealth)
             {
                 return;
+            }
+
+            if (myCharacter.Health < TempHealth)
+            {
+                Hit();
+            }
+
+            if (myCharacter.Health > TempHealth)
+            {
+                Heal();
             }
 
             TempHealth = myCharacter.Health;
@@ -88,6 +112,66 @@ namespace evoQuiz.ViewModel
                 default:
                     break;
             }
+
+         
+        }
+
+        private void Hit()
+        {
+            Actions.Add(Show);
+
+            void Show()
+            {
+                HitOverlayOpacity += 0.005;
+
+                if (HitOverlayOpacity >= 1)
+                {
+                    HitOverlayOpacity = 1;
+                    ActionsToStop.Add(Show);
+                    Actions.Add(Hide);
+                }
+            }
+
+            void Hide()
+            {
+                HitOverlayOpacity -= 0.005;
+
+                if (HitOverlayOpacity <= 0)
+                {
+                    HitOverlayOpacity = 0;
+                    ActionsToStop.Add(Hide);     
+                }
+            }
+            
+        }
+
+        private void Heal()
+        {
+            Actions.Add(Show);
+
+            void Show()
+            {
+                HealOverlayOpacity += 0.005;
+
+                if (HealOverlayOpacity >= 1)
+                {
+                    HealOverlayOpacity = 1;
+                    ActionsToStop.Add(Show);
+                    Actions.Add(Hide);
+                }
+            }
+
+            void Hide()
+            {
+                HealOverlayOpacity -= 0.005;
+
+                if (HealOverlayOpacity <= 0)
+                {
+                    HealOverlayOpacity = 0;
+                    ActionsToStop.Add(Hide);
+                }
+            }
+
         }
     }
 }

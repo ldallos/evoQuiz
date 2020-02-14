@@ -322,6 +322,8 @@
     <Resource Include="Images\thief.png" />
     <Resource Include="Images\hydra.png" />
     <Resource Include="Images\Items\chest.png" />
+    <Resource Include="Images\healthOverlay.png" />
+    <Resource Include="Images\healOverlay.png" />
     <Content Include="Sounds\GameSong.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

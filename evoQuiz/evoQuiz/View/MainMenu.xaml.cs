@@ -10,6 +10,7 @@ using System.Windows.Media.Animation;
 using System.Media;
 using System.Diagnostics;
 using System.IO;
+using evoQuiz.View;
 
 namespace evoQuiz
 {
@@ -44,7 +45,6 @@ namespace evoQuiz
 
             Game page = new Game();
             page.DataContext = new MainViewModel(this.ActualHeight, this.ActualWidth) { MyPage = page, HomePage = this };
-            //page.Show();
             this.NavigationService.Navigate(page);
         }
 
