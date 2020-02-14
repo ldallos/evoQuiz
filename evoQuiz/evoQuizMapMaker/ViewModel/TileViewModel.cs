@@ -135,7 +135,7 @@ namespace evoQuizMapMaker.ViewModel
                 case Helper.Mode.EreaserMode:
                     TileColor = null;
                     myTileElement= null;
-                    
+                    Name = null;
                     break;
                 default:
                     break;

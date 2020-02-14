@@ -247,15 +247,7 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Skeleton">
-      <PositionX>1</PositionX>
-      <PositionY>14</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -765,15 +757,7 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Skeleton">
-      <PositionX>6</PositionX>
-      <PositionY>38</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
       <PositionX>6</PositionX>
       <PositionY>39</PositionY>
@@ -1516,11 +1500,7 @@
       <PositionY>14</PositionY>
       <PositionZ>0</PositionZ>
     </TileElement>
-    <TileElement xsi:type="Wall">
-      <PositionX>13</PositionX>
-      <PositionY>15</PositionY>
-      <PositionZ>0</PositionZ>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -1629,15 +1609,7 @@
     </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Skeleton">
-      <PositionX>14</PositionX>
-      <PositionY>10</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -1754,15 +1726,7 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Thief">
-      <PositionX>15</PositionX>
-      <PositionY>15</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>3</Damage>
-      <Gold>500</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -2304,15 +2268,7 @@
     </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Skeleton">
-      <PositionX>20</PositionX>
-      <PositionY>3</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
@@ -3118,15 +3074,7 @@
     </TileElement>
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Skeleton">
-      <PositionX>26</PositionX>
-      <PositionY>33</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -3163,15 +3111,7 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Skeleton">
-      <PositionX>27</PositionX>
-      <PositionY>18</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
@@ -3793,15 +3733,7 @@
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
-    <TileElement xsi:type="Skeleton">
-      <PositionX>33</PositionX>
-      <PositionY>4</PositionY>
-      <PositionZ>5</PositionZ>
-      <MaxHealth>10</MaxHealth>
-      <Health>10</Health>
-      <Damage>2</Damage>
-      <Gold>300</Gold>
-    </TileElement>
+    <TileElement xsi:nil="true" />
     <TileElement xsi:nil="true" />
     <TileElement xsi:type="Wall">
       <PositionX>33</PositionX>
