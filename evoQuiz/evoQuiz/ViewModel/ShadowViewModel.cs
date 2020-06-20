@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace evoQuiz.ViewModel
 {
-    class ShadowViewModel: TileViewModel
+    public class ShadowViewModel: TileViewModel
     {
         public Shadow myShadow { get; set; }
         public override int PosX { get { return myShadow.PositionX; } set { myShadow.PositionX = value; OnPropertyChanged("PosX"); } }

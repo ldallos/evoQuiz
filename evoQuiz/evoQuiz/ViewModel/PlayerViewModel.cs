@@ -134,10 +134,9 @@ namespace evoQuiz.ViewModel
 
         private List<TileViewModel> GetSurroundingShadows(TileViewModel shadow)
         {
-            return Parent.GridItems.Where(x=> x is ShadowViewModel && Math.Sqrt(Math.Pow(Math.Abs(x.PosY - shadow.PosY), 2) + Math.Pow(Math.Abs(x.PosX - shadow.PosX), 2)) < 2).ToList();
+            return Parent.Shadows.Where(x=> Math.Sqrt(Math.Pow(Math.Abs(x.PosY - shadow.PosY), 2) + Math.Pow(Math.Abs(x.PosX - shadow.PosX), 2)) < 2).ToList();
         }
 
-        private List<ShadowViewModel> shadowsToBlend = new List<ShadowViewModel>();
         private void drawBresenham(int x0, int y0, int x1, int y1)
         {
             double opacity = 0;
@@ -167,22 +166,14 @@ namespace evoQuiz.ViewModel
                     break;
                 }
 
-                ShadowViewModel shadow = Parent.GridItems.Where(i => i is ShadowViewModel).Where(i => (i as ShadowViewModel).PosX == x0 && (i as ShadowViewModel).PosY == y0).FirstOrDefault() as ShadowViewModel;
+                ShadowViewModel shadow = Parent.Shadows.Where(i => i.PosX == x0 && i.PosY == y0).FirstOrDefault() as ShadowViewModel;
                 opacity = Math.Pow(dist,3) / Math.Pow((myPlayer.VisibilityRange),3);
                 if (shadow.Opacity>=opacity)
                 {
                     shadow.Opacity = opacity;
-                    shadow.myShadow.Visited = true;
-                    shadowsToBlend.Add(shadow);
                 }
-                //shadowsToBlend.Add(shadow);
 
-                //if (opacity >=1)
-                //{
-                //    break;
-                //}
-
-                if (Parent.GridItems.Where(i => i is WallViewModel).Any(i => i.PosX == x0 && i.PosY == y0))
+                if (Parent.LoadedGridItems.Where(i => i is WallViewModel).Any(i => i.PosX == x0 && i.PosY == y0))
                 {
                     break;
                 }
@@ -228,21 +219,22 @@ namespace evoQuiz.ViewModel
       
         private void BlendShadows()
         {
-            foreach (var shadow in Parent.GridItems.Where(x => x is ShadowViewModel && Math.Sqrt(Math.Pow(Math.Abs(x.PosY - PosY), 2) + Math.Pow(Math.Abs(x.PosX - PosX), 2)) <= myPlayer.VisibilityRange))
+            foreach (var shadow in Parent.Shadows)
             {
+                ShadowViewModel shad = shadow as ShadowViewModel;
                 float OpacitySum = 0;
-                List<TileViewModel> SurShadows = GetSurroundingShadows(shadow);
+                List<TileViewModel> SurShadows = GetSurroundingShadows(shad);
                 foreach (var s in SurShadows)
                 {
                     OpacitySum += (float)(s as ShadowViewModel).Opacity;
                 }
-                (shadow as ShadowViewModel).Opacity = OpacitySum / SurShadows.Count;
+                shad.Opacity = OpacitySum / SurShadows.Count;
             }
         }
 
         private void CheckItems()
         {
-            ItemViewModel item = Parent.GridItems.Where(x => x is ItemViewModel && x.PosX == this.PosX && x.PosY == this.PosY).FirstOrDefault() as ItemViewModel;
+            ItemViewModel item = Parent.LoadedGridItems.Where(x => x is ItemViewModel && x.PosX == this.PosX && x.PosY == this.PosY).FirstOrDefault() as ItemViewModel;
 
             if (item is null)
             {
@@ -262,15 +254,13 @@ namespace evoQuiz.ViewModel
 
         private void Updat()
         {
-            //CheckEnemy();
             CheckItems();
             Actions.Add(UpdateLights);
         }
 
         private void UpdateLights()
         {
-            Parent.GridItems.Where(i => i is ShadowViewModel).ToList().ForEach(i => (i as ShadowViewModel).Opacity = 1);
-            shadowsToBlend.Clear();
+            Parent.Shadows.ForEach(i => (i as ShadowViewModel).Opacity = 0.97);
             drawBresenhamCircle(PosX, PosY, myPlayer.VisibilityRange);
             BlendShadows();
 

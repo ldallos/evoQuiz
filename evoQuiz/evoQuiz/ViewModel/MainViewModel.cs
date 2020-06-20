@@ -19,9 +19,10 @@ namespace evoQuiz.ViewModel
 {
     public class MainViewModel: WindowViewModel
     {
-        public Page MyPage { get; set; } //nincs időm rendesen MVVMesen xd
+        public Page MyPage { get; set; }
         public Page HomePage { get; set; }
-        public ObservableCollection<TileViewModel> GridItems { get; set; }
+        public List<TileViewModel> GridItems { get; set; }
+        public ObservableCollection<TileViewModel> LoadedGridItems { get; set; }
         public PlayerViewModel myPlayerViewModel { get; set; }
         public QuestionViewModel myQuestionViewModel { get; set; }
         public HealthViewModel myHealthViewModel { get; set; }
@@ -29,8 +30,9 @@ namespace evoQuiz.ViewModel
         public GoldViewModel myGoldViewModel { get; set; }
         public GameOverViewModel myGameOverViewModel { get; set; }
         public List<ViewModelBase> ViewModels = new List<ViewModelBase>();
-
+        public List<TileViewModel> Shadows = new List<TileViewModel>();
         public Map myMap { get; set; }
+        
         public int MapSizeX { get { return myMap.SizeX; } set { myMap.SizeX = value; OnPropertyChanged("MapSizeX"); } }
         public int MapSizeY { get { return myMap.SizeY; } set { myMap.SizeY = value; OnPropertyChanged("MapSizeY"); } }
 
@@ -52,7 +54,6 @@ namespace evoQuiz.ViewModel
             set { myOffset = value; OnPropertyChanged("Offset"); }
         }
 
-
         private MapSerializer ser = new MapSerializer();
 
         public ICommand MoveUpCommand { get; set; }
@@ -70,7 +71,8 @@ namespace evoQuiz.ViewModel
             MoveRightCommand = new RelayCommand(MoveRight);
             InventoryCommand = new RelayCommand(Inventory);
 
-            GridItems = new ObservableCollection<TileViewModel>();
+            GridItems = new List<TileViewModel>();
+            LoadedGridItems = new ObservableCollection<TileViewModel>();
 
             myMap = ser.DeserializeMap("map.xml");
             MapWidth = MapSizeX * MapScale-1;
@@ -97,8 +99,6 @@ namespace evoQuiz.ViewModel
                 {
                     myPlayerViewModel = new PlayerViewModel(element as Player, this);
                     GridItems.Add(myPlayerViewModel);
-                    //myPlayerViewModel.myPlayer.Inventory.Add(new Potion());
-                    //myPlayerViewModel.myPlayer.Inventory.Add(new Sword());
                     continue;
                 }
 
@@ -116,6 +116,7 @@ namespace evoQuiz.ViewModel
             }
 
             SetOffset();
+            LoadSurroundingMap();
 
             myQuestionViewModel = new QuestionViewModel(myPlayerViewModel.myPlayer) { Parent = this, ControlHeight= WindowHeight, ControlWidth = WindowWidth };
             myHealthViewModel = new HealthViewModel(myPlayerViewModel.myPlayer);
@@ -137,34 +138,59 @@ namespace evoQuiz.ViewModel
             StartOtherThread();
         }
 
+        private void LoadSurroundingMap()
+        {
+            List<TileViewModel> InRange = GridItems.Where(x=> Math.Sqrt(Math.Pow((x.PosY - myPlayerViewModel.PosY), 2) + Math.Pow((x.PosX - myPlayerViewModel.PosX), 2)) < myPlayerViewModel.myPlayer.VisibilityRange + 2).ToList<TileViewModel>();
+            List<TileViewModel> Exept1 = LoadedGridItems.Except(InRange).ToList();
+            foreach (var item in Exept1)
+            {
+                LoadedGridItems.Remove(item);
+            }
+            List<TileViewModel> Exept2 = InRange.Except(LoadedGridItems).ToList();
+            foreach (var item in Exept2)
+            {
+                LoadedGridItems.Add(item);
+            }
+
+            //foreach (var item in GridItems)
+            //{
+            //    if (Math.Sqrt(Math.Pow(Math.Abs(item.PosY - myPlayerViewModel.PosY), 2) + Math.Pow(Math.Abs(item.PosX - myPlayerViewModel.PosX), 2)) < myPlayerViewModel.myPlayer.VisibilityRange+2)
+            //    {
+            //        LoadedGridItems.Add(item);
+            //    }      
+            //}
+
+            Shadows = LoadedGridItems.Where(x => x is ShadowViewModel).ToList();
+        }
+
         private void MoveUp()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Up);
-            SetOffset();
+            LoadSurroundingMap();
         }
 
         private void MoveDown()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Down);
-            SetOffset();
+            LoadSurroundingMap();
         }
 
         private void MoveLeft()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Left);
-            SetOffset();
+            LoadSurroundingMap();
         }
 
         private void MoveRight()
         {
             myPlayerViewModel.Move(PlayerViewModel.Directions.Right);
-            SetOffset();
+            LoadSurroundingMap();
         }
 
         private void SetOffset()
         {
-            double x = (-myPlayerViewModel.PosX -0.5) * MapScale + WindowWidth / 2;
-            double y = (-myPlayerViewModel.PosY -0.5) * MapScale + WindowHeight / 2;
+            double x = ((-(double)myPlayerViewModel.myPlayer.VisibilityRange*2+1)/2 * MapScale) + WindowWidth / 2;
+            double y = ((-(double)myPlayerViewModel.myPlayer.VisibilityRange * 2 + 1) / 2 * MapScale) + WindowHeight / 2;
             Offset = new Thickness(x, y, 0, 0);
         }
 
